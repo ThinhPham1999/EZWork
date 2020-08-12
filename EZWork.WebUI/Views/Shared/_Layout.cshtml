@@ -1,44 +1,164 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+﻿@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
+
+
+<!doctype html>
+<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+ <!--<![endif]-->
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BootStrap HTML5 CSS3 Theme</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    @Styles.Render("~/Content/Theme/FreelancerTheme/css")
+</head>
+<body class="wt-login">
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Preloader Start -->
+    <div class="preloader-outer">
+        <div class="loader"></div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Wrapper Start -->
+    <div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+        <!-- Content Wrapper Start -->
+        <div class="wt-contentwrapper">
+            @Html.Partial("_PartialHeader")
+            <!--Home Banner Start-->
+            <div class="wt-haslayout wt-bannerholder">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                            <div class="wt-bannerimages">
+                                <figure class="wt-bannermanimg" data-tilt>
+                                    <img src="~/App_Themes/FreelancerTheme/images/bannerimg/img-01.png" alt="img description">
+                                    <img src="~/App_Themes/FreelancerTheme/images/bannerimg/img-02.png" class="wt-bannermanimgone" alt="img description">
+                                    <img src="~/App_Themes/FreelancerTheme/images/bannerimg/img-03.png" class="wt-bannermanimgtwo" alt="img description">
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                            <div class="wt-bannercontent">
+                                <div class="wt-bannerhead">
+                                    <div class="wt-title">
+                                        <h1><span>Hire expert freelancers</span> for any job, Online</h1>
+                                    </div>
+                                    <div class="wt-description">
+                                        <p>Consectetur adipisicing elit sed dotem eiusmod tempor incuntes ut labore etdolore maigna aliqua enim.</p>
+                                    </div>
+                                </div>
+                                <form class="wt-formtheme wt-formbanner">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input type="text" name="fullname" class="form-control" placeholder="I’m looking for">
+                                            <div class="wt-formoptions">
+                                                <div class="wt-dropdown">
+                                                    <span>In: <em class="selected-search-type">Freelancers </em><i class="lnr lnr-chevron-down"></i></span>
+                                                </div>
+                                                <div class="wt-radioholder">
+                                                    <span class="wt-radio">
+                                                        <input id="wt-freelancers" data-title="Freelancers" type="radio" name="searchtype" value="freelancer" checked>
+                                                        <label for="wt-freelancers">Freelancers</label>
+                                                    </span>
+                                                    <span class="wt-radio">
+                                                        <input id="wt-jobs" data-title="Jobs" type="radio" name="searchtype" value="job">
+                                                        <label for="wt-jobs">Jobs</label>
+                                                    </span>
+                                                    <span class="wt-radio">
+                                                        <input id="wt-company" data-title="Companies" type="radio" name="searchtype" value="job">
+                                                        <label for="wt-company">Companies</label>
+                                                    </span>
+                                                </div>
+                                                <a href="userlisting.html" class="wt-searchbtn"><i class="lnr lnr-magnifier"></i></a>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                                <div class="wt-videoholder">
+                                    <div class="wt-videoshow">
+                                        <a data-rel="prettyPhoto[video]" href="https://www.youtube.com/watch?v=J37W6DjqT3Q"><i class="fa fa-play"></i></a>
+                                    </div>
+                                    <div class="wt-videocontent">
+                                        <span>See For Yourself!<em>How it works &amp; experience the ultimate joy.</em></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Home Banner End-->
+            <!--Main Start-->
+            <main id="wt-main" class="wt-main wt-haslayout">
+                <!--Categories Start-->
+                @Html.Action("GetMenu", "Career")
+                <!--Categories End-->
+                <!--Join Company Info Start-->
+                @RenderBody()
+                <!--Join Company Info End-->
+                <!--Skills Start-->
+                @Html.Action("GetSkill", "Skill")
+                <!--Skills Start End-->
+            </main>
+            <!--Main End-->
+            @Html.Partial("_PartialFooter")
+        </div>
+        <!--Content Wrapper End-->
+    </div>
+    <!--Wrapper End-->
+    @Scripts.Render("~/Content/Theme/FreelancerTheme/js")
 </body>
+
 </html>
