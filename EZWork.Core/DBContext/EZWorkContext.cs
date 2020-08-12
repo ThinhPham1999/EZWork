@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EZWork.Core.DBContext
 {
-    class EZWorkContext
+    public class EZWorkContext
     {
     }
 }
