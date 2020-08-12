@@ -41,11 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBContext\EZWorkContext.cs" />
+    <Compile Include="DBContext\EZWorkInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
-    <Folder Include="DBContext\" />
     <Folder Include="Entities\" />
     <Folder Include="Repository\" />
   </ItemGroup>
