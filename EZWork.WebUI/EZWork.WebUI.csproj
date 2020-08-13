@@ -168,8 +168,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\TestController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Models\Test.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ListAccountViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CareerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -631,10 +633,11 @@
     <Content Include="App_Themes\AdminTheme\assets\fonts\themify-icons.ttf" />
     <Content Include="App_Themes\AdminTheme\assets\fonts\themify-icons.woff" />
     <Content Include="App_Themes\AdminTheme\assets\fonts\themify-iconsd41d.eot" />
-    <Content Include="Areas\Admin\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SideBarPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_TopBarPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Listing.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

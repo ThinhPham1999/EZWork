@@ -7,30 +7,31 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EZWork.WebUI.Models;
+using EZWork.Core.Repository;
 
 namespace EZWork.WebUI.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
-        private EZSignInManager _signInManager;
-        private EZUserManager _userManager;
+        private SignInRepository _signInManager;
+        private AccountRepository _userManager;
 
         public ManageController()
         {
         }
 
-        public ManageController(EZUserManager userManager, EZSignInManager signInManager)
+        public ManageController(AccountRepository userManager, SignInRepository signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-        public EZSignInManager SignInManager
+        public SignInRepository SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<EZSignInManager>();
+                return _signInManager ?? HttpContext.GetOwinContext().Get<SignInRepository>();
             }
             private set 
             { 
@@ -38,11 +39,11 @@ namespace EZWork.WebUI.Controllers
             }
         }
 
-        public EZUserManager UserManager
+        public AccountRepository UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<EZUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<AccountRepository>();
             }
             private set
             {

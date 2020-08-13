@@ -17,7 +17,8 @@ namespace EZWork.WebUI.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "EZWork.WebUI.Areas.Admin.Controllers" }
             );
         }
     }

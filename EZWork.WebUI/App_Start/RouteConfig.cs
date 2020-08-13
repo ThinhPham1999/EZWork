@@ -17,6 +17,7 @@ namespace EZWork.WebUI
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                , new[] { "EZWork.WebUI.Controllers" }
             );
         }
     }
