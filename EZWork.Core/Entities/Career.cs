@@ -18,5 +18,6 @@ namespace EZWork.Core.Entities
         public string Description { get; set; }
         [StringLength(255)]
         public string UrlSlug { get; set; }
+        public virtual IList<Skill> Skills { get; set; }
     }
 }

@@ -21,5 +21,6 @@ namespace EZWork.Core.Entities
         public int Level { get; set; }
         [StringLength(255)]
         public string UrlSlug { get; set; }
+        public virtual IList<SellerMapSkill> SellerMapSkills { get; set; }
     }
 }
