@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EZWork.WebUI.Models;
 using EZWork.Core.Entities;
+using EZWork.Core.DBContext;
 
 namespace EZWork.WebUI.Controllers
 {
@@ -18,7 +19,7 @@ namespace EZWork.WebUI.Controllers
     {
         private EZSignInManager _signInManager;
         private EZUserManager _userManager;
-
+        private EZWorkDbContext db = new EZWorkDbContext();
         public AccountController()
         {
         }
@@ -73,7 +74,6 @@ namespace EZWork.WebUI.Controllers
             {
                 return View(model);
             }
-
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -152,18 +152,24 @@ namespace EZWork.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new EZAccount { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var account = new EZAccount { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(account, model.Password);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (result.Succeeded)
                 {
+                    db.EZUsers.Add(new EZUser
+                    {
+                        Id = user.Id,
+                        CreateAt = DateTime.Now.ToString(),
+                        
+                    }) ;
+                    db.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                 
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -172,7 +178,18 @@ namespace EZWork.WebUI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        //[NonAction]
+        //public async Task<ActionResult> SendEmail()
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
+        //        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
+        //        await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+        //        return View();
+        //    }
+        //    return RedirectToAction("Login", "Account");
+        //}
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -209,13 +226,12 @@ namespace EZWork.WebUI.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
