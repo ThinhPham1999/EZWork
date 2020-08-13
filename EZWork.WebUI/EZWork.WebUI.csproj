@@ -632,6 +632,9 @@
     <Content Include="App_Themes\AdminTheme\assets\fonts\themify-icons.woff" />
     <Content Include="App_Themes\AdminTheme\assets\fonts\themify-iconsd41d.eot" />
     <Content Include="Areas\Admin\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SideBarPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_TopBarPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_FooterPartial.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
