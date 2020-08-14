@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EZWork.WebUI.Models;
 using EZWork.Core.Entities;
+using EZWork.Core.Repository;
+using EZWork.Core.DBContext;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EZWork.WebUI.Controllers
 {
@@ -18,15 +21,17 @@ namespace EZWork.WebUI.Controllers
     {
         private SignInRepository _signInManager;
         private AccountRepository _userManager;
-
+        private RoleRepository _roleManager;
+        private EZWorkDbContext db = new EZWorkDbContext();
         public AccountController()
         {
         }
 
-        public AccountController(AccountRepository userManager, SignInRepository signInManager )
+        public AccountController(AccountRepository userManager, SignInRepository signInManager, RoleRepository roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
 
         public SignInRepository SignInManager
@@ -52,7 +57,17 @@ namespace EZWork.WebUI.Controllers
                 _userManager = value;
             }
         }
-
+        public RoleRepository RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<RoleRepository>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -76,9 +91,18 @@ namespace EZWork.WebUI.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindByEmailAsync(model.Email);
+           var adminRole=  await RoleManager.FindByNameAsync("Admin");
+            IdentityUserRole isAdmin=null;
+            if (adminRole != null) {
+             isAdmin = (IdentityUserRole)user.Roles.Where(x=>x.RoleId.Equals(adminRole.Id)).FirstOrDefault();
+            }
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (isAdmin!=null) {
+                        return RedirectToAction("Index","Account",new { area="Admin"});
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -168,7 +192,7 @@ namespace EZWork.WebUI.Controllers
                     // Send an email with this link
                      string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                 
+                  await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                 
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

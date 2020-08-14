@@ -20,6 +20,10 @@
     @Styles.Render("~/Content/Theme/FreelancerTheme/css")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body class="wt-login">
     <!--[if lt IE 8]>
@@ -41,8 +45,7 @@
         <!--Content Wrapper End-->
     </div>
     <!--Wrapper End-->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+  
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/Content/Theme/FreelancerTheme/js")
 </body>

@@ -1,33 +1,30 @@
-﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListAccountViewModel
+﻿
 @if (Model != null && Model.EZAccounts!= null && Model.EZAccounts.Count > 0)
 {
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">CategoryName</th>
-                <th scope="col">Description</th>
-               
+                <th scope="col">Email</th>
+                <th scope="col">LockoutEnabled</th>              
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var item in Model.Categories)
+            @foreach (var item in Model.EZAccounts)
             {
                 <tr>
-                    <th>@item.ID</th>
-                    <td>@item.CategoryName</td>
-                    <td>@item.Description</td>
-                    <td>@item.Products.Count</td>
-                    @if (item.Pictures != null && item.Pictures.Count > 0)
-                    {
-                        <td><img src="~/Images/@item.Pictures[0].URL" style="width:60px;height:60px" /></td>
-                    }
+                    <th>@item.Id</th>                
+                    <td>@item.Email</td>
+                    @{ var lockOut = item.LockoutEnabled ? "UnLock" : "Lock";}
+                    <td>@lockOut</td>
                     <td>
-                        <button id="" data-href="@Url.Action("Action","Category",new { ID=item.ID })" class="btn btn-primary createBtn" data-toggle="modal" data-target="#exampleModal">Edit</button>
-                        <button id="" data-href="@Url.Action("Delete","Category",new { ID=item.ID })" class="btn btn-danger deleteBtn">Delete</button>
+                        <button id="" data-href="@Url.Action("Detail","Account",new { ID=item.Id })" class="btn btn-primary createBtn" data-toggle="modal" data-target="#exampleModal">Detail</button>
+                        <button id="" data-href="@Url.Action("DetailRole","Account",new { ID=item.Id })" class="btn btn-info createBtn" data-toggle="modal" data-target="#exampleModal">ActionRole</button>
+                        <button id="" data-href="@Url.Action("LockUser","Account",new { ID=item.Id,status="lock" })" class="btn btn-danger lockBtn">Lock Account</button>
+                        <button id="" data-href="@Url.Action("LockUser","Account",new { ID=item.Id ,status="unlock" })" class="btn btn-danger lockBtn">UnLock Account</button>
                     </td>
                 </tr>
-            }*@
+            }
         </tbody>
     </table>
 
@@ -38,12 +35,12 @@
                 @if (Model.Pager.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", "Category")">
+                        <a class="page-link" href="@Url.Action("Index", "Account")">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", "Category", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                        <a class="page-link" href="@Url.Action("Index", "Account", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
                             <i class="fas fa-angle-left"></i>
                         </a>
                     </li>
@@ -52,18 +49,18 @@
                 @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                 {
                     <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("Index", "Category", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                        <a class="page-link" href="@Url.Action("Index", "Account", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
                     </li>
                 }
                 @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", "Category", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                        <a class="page-link" href="@Url.Action("Index", "Account", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
                             <i class="fas fa-angle-right"></i>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("Index", "Category", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                        <a class="page-link" href="@Url.Action("Index", "Account", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
                             <i class="fas fa-angle-double-right"></i>
                         </a>
                     </li>
