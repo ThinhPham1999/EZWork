@@ -107,11 +107,18 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 //  result = await UserManager.DeleteAsync(user);
                 if (status.ToLower().Equals("lock"))
                 {
-                    result = await UserManager.SetLockoutEnabledAsync(user.Id, true);
+                    user.LockoutEnabled = true;
+                    user.LockoutEndDateUtc= DateTime.UtcNow.AddMinutes(10000);
+                   result= await UserManager.UpdateAsync(user);
+                    // result = await UserManager.SetLockoutEnabledAsync(user.Id, true);
+
                 }
                 else if (status.ToLower().Equals("unlock"))
                 {
-                    result = await UserManager.SetLockoutEnabledAsync(user.Id, false);
+                    //result = await UserManager.SetLockoutEnabledAsync(user.Id, false);
+                    user.LockoutEnabled = false;
+                    user.LockoutEndDateUtc = DateTime.UtcNow.AddMinutes(10000);
+                  result=  await UserManager.UpdateAsync(user);
                 }              
                 json.Data = new { Success = result.Succeeded, Message = string.Join(", ", result.Errors) };
             }

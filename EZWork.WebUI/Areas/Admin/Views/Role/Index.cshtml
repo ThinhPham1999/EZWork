@@ -27,6 +27,7 @@
     </div>
 </div>
 <script>
+    
     $('.createBtn').click(function () {
         //  debugger;
         $.ajax({
@@ -65,7 +66,8 @@
                             button: "Aww yiss!",
                         });
                     }
-                    location.reload();
+                      location.reload();
+                   // loadTable();
                 }).fail(function (response) {
                     alert('fail');
                 });
