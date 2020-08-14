@@ -89,10 +89,12 @@ namespace EZWork.WebUI.Controllers
                 return View(model);
             }
             // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             var user = await UserManager.FindByEmailAsync(model.Email);
-           var adminRole=  await RoleManager.FindByNameAsync("Admin");
+       
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
+           
+            var adminRole=  await RoleManager.FindByNameAsync("Admin");
             IdentityUserRole isAdmin=null;
             if (adminRole != null) {
              isAdmin = (IdentityUserRole)user.Roles.Where(x=>x.RoleId.Equals(adminRole.Id)).FirstOrDefault();

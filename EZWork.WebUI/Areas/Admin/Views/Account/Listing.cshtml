@@ -15,7 +15,7 @@
                 <tr>
                     <th>@item.Id</th>                
                     <td>@item.Email</td>
-                    @{ var lockOut = item.LockoutEnabled ? "UnLock" : "Lock";}
+                    @{ var lockOut = item.LockoutEnabled ? "Lock" : "UnLock";}
                     <td>@lockOut</td>
                     <td>
                         <button id="" data-href="@Url.Action("Detail","Account",new { ID=item.Id })" class="btn btn-primary createBtn" data-toggle="modal" data-target="#exampleModal">Detail</button>
