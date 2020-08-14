@@ -27,7 +27,7 @@ namespace EZWork.WebUI.Controllers
         {
         }
 
-        public AccountController(AccountRepository userManager, SignInRepository signInManager, RoleRepository roleManager )
+        public AccountController(AccountRepository userManager, SignInRepository signInManager, RoleRepository roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -40,9 +40,9 @@ namespace EZWork.WebUI.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<SignInRepository>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -90,20 +90,22 @@ namespace EZWork.WebUI.Controllers
             }
             // This doesn't count login failures towards account lockout
             var user = await UserManager.FindByEmailAsync(model.Email);
-       
+
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
-           
-            var adminRole=  await RoleManager.FindByNameAsync("Admin");
-            IdentityUserRole isAdmin=null;
-            if (adminRole != null) {
-             isAdmin = (IdentityUserRole)user.Roles.Where(x=>x.RoleId.Equals(adminRole.Id)).FirstOrDefault();
+
+            var adminRole = await RoleManager.FindByNameAsync("Admin");
+            IdentityUserRole isAdmin = null;
+            if (adminRole != null)
+            {
+                isAdmin = (IdentityUserRole)user.Roles.Where(x => x.RoleId.Equals(adminRole.Id)).FirstOrDefault();
             }
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (isAdmin!=null) {
-                        return RedirectToAction("Index","Account",new { area="Admin"});
+                    if (isAdmin != null)
+                    {
+                        return RedirectToAction("Index", "Account", new { area = "Admin" });
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -146,7 +148,7 @@ namespace EZWork.WebUI.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -186,15 +188,16 @@ namespace EZWork.WebUI.Controllers
                     {
                         Id = user.Id,
                         CreateAt = DateTime.Now.ToString(),
-                        
-                    }) ;
+                    });
                     db.SaveChanges();
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    var currentUser = await UserManager.FindByEmailAsync(model.Email);
+                    var roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "User");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                  await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");                 
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -215,7 +218,7 @@ namespace EZWork.WebUI.Controllers
         //    }
         //    return RedirectToAction("Login", "Account");
         //}
-        //
+
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)

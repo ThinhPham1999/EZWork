@@ -109,4 +109,14 @@ namespace EZWork.WebUI.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class UpdateViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+
+    }
 }

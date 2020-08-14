@@ -83,4 +83,10 @@ namespace EZWork.WebUI.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    public class UpdateAccountViewModel
+    {
+        public string Name { get; set; }
+        public bool? Gender { get; set; }
+    }
 }

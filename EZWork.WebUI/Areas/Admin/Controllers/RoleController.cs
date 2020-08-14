@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         // GET: Admin/Role    

@@ -20,9 +20,9 @@ namespace EZWork.Core.Entities
         public string CreateAt { get; set; }
         public string ModifierAt { get; set; }
         public virtual EZAccount  EZAccount { get; set; }
-        //public virtual Seller Seller { get; set; }
-        //public virtual IList<Comment> Comments { get; set; }
-        //public virtual IList<ReplyComment> ReplyComments { get; set; }
-        //public virtual IList<Rating> Ratings { get; set; }
+        public virtual Seller Seller { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
+        public virtual IList<ReplyComment> ReplyComments { get; set; }
+        public virtual IList<Rating> Ratings { get; set; }
     }
 }
