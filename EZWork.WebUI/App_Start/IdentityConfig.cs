@@ -19,54 +19,54 @@ using EZWork.Core.DBContext;
 
 namespace EZWork.WebUI
 {
-    public class EmailService : IIdentityMessageService
-    {
-        readonly ConcurrentQueue<SmtpClient> _clients = new ConcurrentQueue<SmtpClient>();
-        public async Task SendAsync(IdentityMessage message)
-        {
-            var client = GetOrCreateSmtpClient();
-            try
-            {
-                MailMessage mailMessage = new MailMessage();
+    //public class EmailService : IIdentityMessageService
+    //{
+    //    readonly ConcurrentQueue<SmtpClient> _clients = new ConcurrentQueue<SmtpClient>();
+    //    public async Task SendAsync(IdentityMessage message)
+    //    {
+    //        var client = GetOrCreateSmtpClient();
+    //        try
+    //        {
+    //            MailMessage mailMessage = new MailMessage();
 
-                mailMessage.To.Add(new MailAddress(message.Destination));
-                mailMessage.Subject = message.Subject;
-                mailMessage.Body = message.Body;
+    //            mailMessage.To.Add(new MailAddress(message.Destination));
+    //            mailMessage.Subject = message.Subject;
+    //            mailMessage.Body = message.Body;
 
-                mailMessage.BodyEncoding = Encoding.UTF8;
-                mailMessage.SubjectEncoding = Encoding.UTF8;
-                mailMessage.IsBodyHtml = true;
-                // there can only ever be one-1 concurrent call to SendMailAsync
-                await client.SendMailAsync(mailMessage);
-            }
-            finally
-            {
-                _clients.Enqueue(client);
-            }
-            // Plug in your email service here to send an email.
-            //   return Task.FromResult(0);
-        }
-        private SmtpClient GetOrCreateSmtpClient()
-        {
-            SmtpClient client = null;
-            if (_clients.TryDequeue(out client))
-            {
-                return client;
-            }
+    //            mailMessage.BodyEncoding = Encoding.UTF8;
+    //            mailMessage.SubjectEncoding = Encoding.UTF8;
+    //            mailMessage.IsBodyHtml = true;
+    //            // there can only ever be one-1 concurrent call to SendMailAsync
+    //            await client.SendMailAsync(mailMessage);
+    //        }
+    //        finally
+    //        {
+    //            _clients.Enqueue(client);
+    //        }
+    //        // Plug in your email service here to send an email.
+    //        //   return Task.FromResult(0);
+    //    }
+    //    private SmtpClient GetOrCreateSmtpClient()
+    //    {
+    //        SmtpClient client = null;
+    //        if (_clients.TryDequeue(out client))
+    //        {
+    //            return client;
+    //        }
 
-            client = new SmtpClient();
-            return client;
-        }
-    }
+    //        client = new SmtpClient();
+    //        return client;
+    //    }
+    //}
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
-        }
-    }
+    //public class SmsService : IIdentityMessageService
+    //{
+    //    public Task SendAsync(IdentityMessage message)
+    //    {
+    //        // Plug in your SMS service here to send a text message.
+    //        return Task.FromResult(0);
+    //    }
+    //}
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     //public class EZUserManager : UserManager<EZAccount>

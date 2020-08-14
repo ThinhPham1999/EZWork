@@ -1,0 +1,95 @@
+﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ActionAccountRoleViewModel
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <span>UserRole</span>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            @if (Model != null && Model.UserRoles != null && Model.UserRoles.Count > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">UserRoles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.UserRoles)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td><button class="btn btn-danger btnActionRole" data-href="@Url.Action("ActionRole", "Account",new { ID=Model.UserID,IDRole =item.Id,isDelete=true})">Delete</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    Sorry! No Role exist.
+                </div>
+            }
+            @if (Model != null && Model.Roles != null && Model.Roles.Count > 0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Roles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Roles)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td><button class="btn btn-success  btnActionRole" data-href="@Url.Action("ActionRole", "Account",new { ID=Model.UserID,IDRole =item.Id,isDelete=false})">Add</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    Sorry! No Role exist.
+                </div>
+            }
+        </div>
+        <div class="errorDiv">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Close</button>
+        </div>
+    </div>
+}
+
+<script>
+    $(' .btnActionRole').click(function () {
+    //   debugger;
+        $.ajax({
+            url: $(this).attr("data-href"),
+			type: "post",
+        }).done(function (response) {
+            if (response.Success) {
+                 $.ajax({
+                url: '@Url.Action("DetailRole","Account",new { ID=Model.UserID })'
+                 }).done(function (response) {
+                     $('#exampleModal .modal-dialog').html(response);
+                 });
+            }
+        }).fail(function (response) {
+            alert('fail');
+        })
+    })
+</script>
+
+
+

@@ -1,4 +1,4 @@
-﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListAccountViewModel
+﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListRoleViewModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -9,9 +9,9 @@
             <div class="input-group">
                 <input type="text" class="form-control inputSeach" placeholder="Search" name="searchTerm" />
                 <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i>Search</button>
-                    <button class="btn btn-outline-secondary " type="button" data-href="" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus "></i>Create</button>
-                    <button class="btn btn-outline-success resetBtn" data-href="@Url.Action("Index","Account")"><i class="fas fa-redo-alt"></i>Reset</button>
+                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search mr-1"></i>Search</button>
+                    <button class="btn btn-outline-secondary createBtn" type="button" data-href="@Url.Action("Action","Role")" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus mr-1"></i>Create</button>
+                    <button class="btn btn-outline-success resetBtn" data-href="@Url.Action("Index","Role")"><i class="fas fa-redo-alt mr-1"></i>Reset</button>
                 </div>
             </div>
         </form>
@@ -26,7 +26,6 @@
     <div class="modal-dialog modal-lg">
     </div>
 </div>
-
 <script>
     $('.createBtn').click(function () {
         //  debugger;
@@ -42,7 +41,9 @@
             url: $(this).attr("data-href"),
         })
     });
-    $('.lockBtn').click(function () {
+    $('.deleteBtn').click(function () {
+        //  alert('ok');
+        debugger;
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -51,15 +52,14 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                debugger;
                 $.ajax({
                     url: $(this).attr('data-href'),
                     type: 'post',
                 }).done(function (response) {
-                   debugger;
+                    debugger;
                     if (response.Success) {
                         swal({
-                            title: "Delete Success",
+                            title: "Good job!",
                             text: "You clicked the button!",
                             icon: "success",
                             button: "Aww yiss!",

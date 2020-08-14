@@ -1,0 +1,73 @@
+﻿
+@if (Model != null && Model.IdentityRoles != null && Model.IdentityRoles.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th scope="col">ID</th>*@
+                <th scope="col">Role</th>
+                <th scope="col">Actions</th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.IdentityRoles)
+            {
+                <tr>
+                    @*<th>@item.Id</th>*@
+                    <td>@item.Name</td>
+                    <td>
+                        <button id="" data-href="@Url.Action("Action","Role",new { ID=item.Id })" class="btn btn-primary createBtn" data-toggle="modal" data-target="#exampleModal">Edit</button>
+                        <button id="" data-href="@Url.Action("Delete","Role",new { ID=item.Id })" class="btn btn-danger deleteBtn">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    if (Model.Pager.EndPage > 1)
+    {
+        <nav>
+            <ul class="pagination">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Role")">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Role", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Role", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Role", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Role", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+
+}
