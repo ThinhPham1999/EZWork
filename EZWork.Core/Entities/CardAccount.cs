@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace EZWork.Core.Entities
 {
-    public class Order
+    public class CardAccount
     {
-        
+
     }
 }

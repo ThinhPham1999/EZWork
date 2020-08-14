@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EZWork.Core.Entities
 {
-    class Requirement
+    public class Requirement
     {
+
     }
 }
