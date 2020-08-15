@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EZWork.Core.Repository
 {
-  public  class RoleRepository: RoleManager<IdentityRole>
+    public class RoleRepository : RoleManager<IdentityRole>
     {
         public RoleRepository(IRoleStore<IdentityRole, string> roleStore)
            : base(roleStore)

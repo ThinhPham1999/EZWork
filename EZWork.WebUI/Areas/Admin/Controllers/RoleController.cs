@@ -118,6 +118,8 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
 
             return json;
         }
+
+
         [HttpPost]
         public async Task<JsonResult> Delete(string ID)
         {

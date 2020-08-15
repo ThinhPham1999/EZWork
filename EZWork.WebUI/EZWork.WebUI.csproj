@@ -169,7 +169,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CareerAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SkillAdminController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListAccountViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListRoleViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
@@ -644,6 +646,8 @@
     <Content Include="Areas\Admin\Views\Role\Action.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Account\DetailRole.cshtml" />
+    <Content Include="Areas\Admin\Views\CareerAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CareerAdmin\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -699,6 +703,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Career\" />
+    <Folder Include="Areas\Admin\Views\Skill\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
