@@ -9,9 +9,9 @@ namespace EZWork.Core.Abstract
 {
     public interface ISKillRepository
     {
-        void Create(Skill skill);
-        void Update(Skill skill);
-        void Delete(int id);
+        int Create(Skill skill);
+        int Update(Skill skill);
+        int Delete(int id);
         Skill Find(int id);
         IEnumerable<Skill> Find(string name);
         IEnumerable<Skill> GetAll();

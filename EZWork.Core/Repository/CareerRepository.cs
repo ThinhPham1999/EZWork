@@ -19,10 +19,11 @@ namespace EZWork.Core.Repository
             db = new EZWorkDbContext();
         }
 
-        public void CreateCareer(Career career)
+        public int CreateCareer(Career career)
         {
             db.Careers.Add(career);
             db.SaveChanges();
+            return 0;
         }
 
         public Career Find(int id)
@@ -40,10 +41,11 @@ namespace EZWork.Core.Repository
             return db.Careers.ToList();
         }
 
-        public void UpdateCareer(Career career)
+        public int UpdateCareer(Career career)
         {
             db.Entry(career).State = EntityState.Modified;
             db.SaveChanges();
+            return 0;
         }
 
         public void Dispose()
@@ -51,7 +53,7 @@ namespace EZWork.Core.Repository
             db.Dispose();
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             var item = db.Careers.Find(id);
             if (item != null)
@@ -63,6 +65,7 @@ namespace EZWork.Core.Repository
             }
             db.Careers.Remove(item);
             db.SaveChanges();
+            return 0;
         }
     }
 }

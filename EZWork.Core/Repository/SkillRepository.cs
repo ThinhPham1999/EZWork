@@ -19,16 +19,18 @@ namespace EZWork.Core.Repository
             db = new EZWorkDbContext();
         }
 
-        public void Create(Skill skill)
+        public int Create(Skill skill)
         {
             db.Skills.Add(skill);
             db.SaveChanges();
+            return 0;
         }
 
-        public void Delete(int id)
+        public int Delete(int id)
         {
             var item = db.Skills.Find(id);
             db.Skills.Remove(item);
+            return 0;
         }
 
         public Skill Find(int id)
@@ -51,10 +53,11 @@ namespace EZWork.Core.Repository
             return db.Skills.Where(s => s.Career.UrlSlug.Equals(career.ToLower()));
         }
 
-        public void Update(Skill skill)
+        public int Update(Skill skill)
         {
             db.Entry(skill).State = EntityState.Modified;
             db.SaveChanges();
+            return 0;
         }
     }
 }

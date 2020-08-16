@@ -9,11 +9,11 @@ namespace EZWork.Core.Abstract
 {
     public interface ICareerRepository
     {
-        void CreateCareer(Career career);
+        int CreateCareer(Career career);
         IEnumerable<Career> getAllCareers();
         Career Find(int id);
         Career Find(string name);
-        void UpdateCareer(Career career);
-        void Delete(int id);
+        int UpdateCareer(Career career);
+        int Delete(int id);
     }
 }

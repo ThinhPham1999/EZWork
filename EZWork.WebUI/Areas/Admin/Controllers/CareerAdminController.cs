@@ -22,34 +22,38 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         // GET: Admin/Career
         public ActionResult Index()
         {
-            var careers = careerRepository.getAllCareers();
-            return View(careers);
-        }
-
-        public ActionResult Create()
-        {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(Career career)
+        [HttpGet]
+        public JsonResult List()
         {
-            if (ModelState.IsValid)
-            {
-                careerRepository.CreateCareer(career);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(career);
-            }
+            return Json(careerRepository.getAllCareers(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public JsonResult Add(Career career)
         {
-            careerRepository.Delete(id);
-            return RedirectToAction("Index");
+            return Json(careerRepository.CreateCareer(career), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetbyID(int id)
+        {
+            var career = careerRepository.Find(id);
+            return Json(career, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Update(Career career)
+        {
+            return Json(careerRepository.UpdateCareer(career), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            return Json(careerRepository.Delete(id), JsonRequestBehavior.AllowGet);
         }
     }
 }
