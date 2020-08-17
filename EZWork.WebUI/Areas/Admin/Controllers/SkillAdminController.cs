@@ -1,6 +1,7 @@
 ﻿using EZWork.Core.Abstract;
 using EZWork.Core.Entities;
 using EZWork.Core.Repository;
+using EZWork.WebUI.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,21 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult List()
         {
-            return Json(skillRepository.GetAll(), JsonRequestBehavior.AllowGet);
+            var list = skillRepository.GetAll();
+            IList<SkillViewModel> listView = new List<SkillViewModel>();
+            foreach (var item in list)
+            {
+                listView.Add(new SkillViewModel()
+                {
+                    CareerId = item.Career.CareerId,
+                    CareerName = item.Career.Name,
+                    SkillName = item.Name,
+                    SkillDescription = item.Description,
+                    SkillId = item.SkillId,
+                    SkillUrlSlug = item.UrlSlug
+                });
+            }
+            return Json(listView, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

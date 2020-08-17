@@ -172,6 +172,8 @@
     <Compile Include="Areas\Admin\Controllers\CareerAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SkillAdminController.cs" />
+    <Compile Include="Areas\Admin\Models\CareerViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\SkillViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListAccountViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListRoleViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
@@ -660,6 +662,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Skill.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -703,7 +706,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
