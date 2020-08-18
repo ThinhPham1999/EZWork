@@ -60,7 +60,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 UrlSlug = skill.SkillUrlSlug,
                 Career = career
             };
-            //skillRepository.Create(newSkill);
+            skillRepository.Create(newSkill);
             return Json(0, JsonRequestBehavior.AllowGet);
         }
 

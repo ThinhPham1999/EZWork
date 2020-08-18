@@ -21,10 +21,16 @@ namespace EZWork.Core.Repository
 
         public int Create(Skill skill)
         {
-            db.Skills.Add(skill);
+            Skill newSkill = new Skill
+            {
+                Name = skill.Name,
+                Description = skill.Description,
+                UrlSlug = skill.UrlSlug
+            };
+
             var career = db.Careers.Find(skill.Career.CareerId);
-            career.Skills.Add(skill);
-            skill.Career = career;
+            career.Skills.Add(newSkill);
+            
             db.SaveChanges();
             return 0;
         }
@@ -33,6 +39,7 @@ namespace EZWork.Core.Repository
         {
             var item = db.Skills.Find(id);
             db.Skills.Remove(item);
+            db.SaveChanges();
             return 0;
         }
 
