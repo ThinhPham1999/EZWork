@@ -19,6 +19,36 @@ namespace EZWork.WebUI
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
                 , new[] { "EZWork.WebUI.Controllers" }
             );
+
+            routes.MapRoute(null,
+                "",
+                new
+                    {
+                        controller = "Seller",
+                        action = "ListSeller",
+                        category = (string)null,
+                        page = 1
+                    }
+            );
+
+            routes.MapRoute(null,
+                "Page{page}",
+                new { controller = "Seller", action = "ListSeller", category = (string)null },
+                new { page = @"\d+" }
+            );
+
+            routes.MapRoute(null,
+                "{category}",
+                new { controller = "Seller", action = "ListSeller", page = 1 }
+            );
+
+            routes.MapRoute(null,
+            "{category}/Page{page}",
+            new { controller = "Seller", action = "ListSeller" },
+            new { page = @"\d+" }
+            );
+
+            routes.MapRoute(null, "{controller}/{action}");
         }
     }
 }

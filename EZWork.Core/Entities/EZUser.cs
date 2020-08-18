@@ -24,5 +24,6 @@ namespace EZWork.Core.Entities
         public virtual IList<Comment> Comments { get; set; }
         public virtual IList<ReplyComment> ReplyComments { get; set; }
         public virtual IList<Rating> Ratings { get; set; }
+        public int Status { get; set; }
     }
 }

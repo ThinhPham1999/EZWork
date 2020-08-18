@@ -1,0 +1,23 @@
+﻿@model EZWork.WebUI.Areas.Admin.Models.SellerListViewModel
+
+@{
+    ViewBag.Title = "ListUser";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@foreach (var p in Model.EZUsers)
+{
+    <div class="well">
+        <h6>
+            <strong>Họ và Tên: @p.FullName</strong>
+        </h6>
+        <h6>
+            Số Điện thoại: @p.PhoneNumber
+        </h6>
+        @Html.ActionLink("Details", "Details", new { Id = p.Id })
+    </div>
+}
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("ListUser",
+    new { page = x, category = Model.CurrentCategory }))
+</div>

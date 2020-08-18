@@ -1,0 +1,29 @@
+﻿@model EZWork.Core.Entities.EZUser
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+    <h6>Id người Dùng: @Model.Id</h6>
+    <h6>Tên Người Dùng: @Model.FullName</h6>
+    <h6>Số Điện Thoại: @Model.PhoneNumber</h6>
+    <h6>Giới tính: @Model.Gender</h6>
+    <h6>Mail Đã Đăng kí: @Model.Email</h6>
+    <h6>Trạng thái: @Model.Status</h6>
+    <h6>Ngày Tạo: @Model.CreateAt</h6>
+    <h6>Chưa biết đặt cái gì :@Model.ModifierAt</h6>
+    <h6>Đánh giá :@Model.Ratings</h6>
+
+
+
+
+
+
+
+
+
+
+
+
+
