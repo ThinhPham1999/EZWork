@@ -114,15 +114,18 @@ function getbyIDSkill(id) {
 
 //function for updating employee's record  
 function UpdateSkill() {
-    var res = validate();
+    var res = validateSkill();
     if (res == false) {
         return false;
     }
+    var optionValue = $('#careerOption').val();
     var SkillObj = {
         SkillId: $('#SkillId').val(),
         SkillName: $('#SkillName').val(),
         SkillDescription: $('#SkillDescription').val(),
         SkillUrlSlug: $('#SkillUrlSlug').val(),
+        CareerId: optionValue,
+        CareerName: 'a'
     };
     $.ajax({
         url: "/SkillAdmin/Update",

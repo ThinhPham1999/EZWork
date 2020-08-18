@@ -58,7 +58,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 Name = skill.SkillName,
                 Description = skill.SkillDescription,
                 UrlSlug = skill.SkillUrlSlug,
-                Career = career
+                CareerId = skill.CareerId
             };
             skillRepository.Create(newSkill);
             return Json(0, JsonRequestBehavior.AllowGet);
@@ -89,9 +89,10 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 Name = skillView.SkillName,
                 Description = skillView.SkillDescription,
                 UrlSlug = skillView.SkillUrlSlug,
-                Career = careerRepository.Find(skillView.CareerId)
+                CareerId = skillView.CareerId
             };
-            return Json(skillRepository.Update(updateSkill), JsonRequestBehavior.AllowGet);
+            skillRepository.Update(updateSkill);
+            return Json(0 , JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

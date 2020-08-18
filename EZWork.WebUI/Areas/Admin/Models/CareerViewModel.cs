@@ -11,6 +11,5 @@ namespace EZWork.WebUI.Areas.Admin.Models
         public string CareerName { get; set; }
         public string CareerDescription { get; set; }
         public string CareerUrlSlug { get; set; }
-       
     }
 }

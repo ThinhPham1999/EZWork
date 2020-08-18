@@ -19,6 +19,7 @@ namespace EZWork.Core.Entities
         [StringLength(255)]
         public string UrlSlug { get; set; }
         public virtual IList<SellerMapSkill> SellerMapSkills { get; set; }
+        public int CareerId { get; set; }
         public virtual Career Career { get; set; }
     }
 }
