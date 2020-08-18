@@ -16,9 +16,6 @@ namespace EZWork.Core.Entities
         public string Name { get; set; }
         [StringLength(1024)]
         public string Description { get; set; }
-        [Required(ErrorMessage = "Trình độ không được để trống")]
-        [Range(0, Int32.MaxValue)]
-        public int Level { get; set; }
         [StringLength(255)]
         public string UrlSlug { get; set; }
         public virtual IList<SellerMapSkill> SellerMapSkills { get; set; }
