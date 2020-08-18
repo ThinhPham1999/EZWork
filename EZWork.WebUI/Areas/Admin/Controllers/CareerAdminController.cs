@@ -11,6 +11,7 @@ using EZWork.WebUI.Areas.Admin.Models;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CareerAdminController : Controller
     {
         private ICareerRepository careerRepository;
