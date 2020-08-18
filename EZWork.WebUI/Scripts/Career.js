@@ -73,7 +73,6 @@ function getbyID(id) {
             $('#Name').val(result.Name);
             $('#Description').val(result.Description);
             $('#UrlSlug').val(result.UrlSlug);
-
             $('#myModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
