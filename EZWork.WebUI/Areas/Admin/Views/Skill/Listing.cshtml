@@ -1,0 +1,82 @@
+﻿@*@model EZWork.WebUI.Areas.Admin.ViewModels.ListSkillViewModels*@
+@if
+    (Model != null && Model.Skills != null && Model.Skills.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">SkillName</th>
+                <th scope="col">Description</th>   
+                <th scope="col">UrlSlug</th>                
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Skills)
+            {
+                <tr>
+                    <th>@item.SkillId</th>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.UrlSlug</td>               
+                    <td>
+                        <button id="" data-href="@Url.Action("Action","Skill",new { ID=item.SkillId })" class="btn btn-primary createBtn" data-toggle="modal" data-target="#exampleModal">Edit</button>
+                        <button id="" data-href="@Url.Action("Delete","Skill",new { ID=item.SkillId })" class="btn btn-danger deleteBtn">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    if (Model.Pager.EndPage > 1)
+    {
+        <nav>
+            <ul class="pagination">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Skill")">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Skill", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Skill", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Skill", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Skill", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
+
+

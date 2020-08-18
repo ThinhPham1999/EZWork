@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model EZWork.WebUI.Areas.Admin.ViewModels.ListSkillViewModels
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col col-lg-12">
+        <h2>Skill</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col col-lg-12">
+        <form>
+            <div class="input-group">
+                <input type="text" class="form-control inputSeach" placeholder="Search" name="searchTerm" />
+                @if (Model.Careers != null && Model.Careers.Count > 0)
+                {
+                    <select name="CareerID" class="form-control" id="exampleFormControlSelect1">
+                        <option class="form-control">Choose Career</option>
+                        @foreach (var item in Model.Careers)
+                        {
+                            <option value="@item.Name">@item.Name</option>
+                        }
+                    </select>
+                }
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search mr-1"></i>Search</button>
+                    <button class="btn btn-outline-secondary createBtn" type="button" data-href="@Url.Action("Action","Skill")" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus mr-1"></i>Create</button>
+                    <button class="btn btn-outline-success resetBtn" data-href="@Url.Action("Index","Skill")"><i class="fas fa-redo-alt mr-1"></i>Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-lg-12">
+        @{ Html.RenderPartial("Listing", Model);}
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+    </div>
+</div>
+<script>
+    $('.createBtn').click(function () {
+        $.ajax({
+            url: $(this).attr("data-href")
+        }).done(function (response) {
+            $('#exampleModal .modal-dialog').html(response);
+        });
+    });
+    $('.resetBtn').click(function () {
+        $.ajax({
+            url: $(this).attr("data-href"),
+        })
+    });
+    $('.deleteBtn').click(function () {
+        swal({
+            title: "are you sure?",
+            text: "once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangermode: true,
+        }).then((willdelete) => {
+            if (willdelete) {
+                $.ajax({
+                    url: $(this).attr('data-href'),
+                    type: 'post',
+                }).done(function (response) {
+                    debugger;
+                    if (response.success) {
+                        swal("poof! your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    }
+                    location.reload();
+                }).fail(function (response) {
+                    alert('fail');
+                });
+            } else {
+                swal("your imaginary file is safe!");
+            }
+        });
+    })
+</script>

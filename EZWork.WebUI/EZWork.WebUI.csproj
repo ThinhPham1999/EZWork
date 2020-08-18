@@ -172,10 +172,12 @@
     <Compile Include="Areas\Admin\Controllers\CareerAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SkillAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SkillController.cs" />
     <Compile Include="Areas\Admin\Models\CareerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SkillViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListAccountViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListRoleViewModels.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ListSkillViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CareerController.cs" />
@@ -650,6 +652,9 @@
     <Content Include="Areas\Admin\Views\Account\DetailRole.cshtml" />
     <Content Include="Areas\Admin\Views\CareerAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SkillAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Skill\Listing.cshtml" />
+    <Content Include="Areas\Admin\Views\Skill\Action.cshtml" />
+    <Content Include="Areas\Admin\Views\Skill\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Career.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

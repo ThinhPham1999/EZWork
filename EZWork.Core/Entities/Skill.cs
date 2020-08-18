@@ -11,14 +11,16 @@ namespace EZWork.Core.Entities
     {
         [Key]
         public int SkillId { get; set; }
+        public int CareerId { get; set; }
+        public virtual Career Career { get; set; }
         [Required(ErrorMessage = "Name không được để trống")]
-        [StringLength(255)]
+        [StringLength(255)]   
         public string Name { get; set; }
         [StringLength(1024)]
         public string Description { get; set; }
         [StringLength(255)]
         public string UrlSlug { get; set; }
         public virtual IList<SellerMapSkill> SellerMapSkills { get; set; }
-        public virtual Career Career { get; set; }
+     
     }
 }

@@ -66,6 +66,7 @@ function AddSkill() {
         CareerId: optionValue,
         CareerName: 'a'
     };
+    debugger;
     $.ajax({
         url: "/SkillAdmin/Add",
         data: JSON.stringify(SkillObj),
@@ -73,6 +74,7 @@ function AddSkill() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
+            debugger;
             loadDataSkill();
             $('#myModalSkill').modal('hide');
             $('#myModalSkill').trigger('click');

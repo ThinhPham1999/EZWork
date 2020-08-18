@@ -62,5 +62,57 @@ namespace EZWork.Core.Repository
             db.SaveChanges();
             return 0;
         }
+
+
+
+        public List<Skill> SearchSkill(string searchTerm, int? carrerID, int page, int recordSize)
+        {
+            var listSkill = db.Skills.ToList();
+            if (carrerID.HasValue)
+            {
+                listSkill = listSkill.Where(x => x.CareerId == carrerID.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                listSkill = listSkill.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+            }
+            var skipSkill = (page - 1) * recordSize;
+            return listSkill.OrderBy(x => x.SkillId).Skip(skipSkill).Take(recordSize).ToList();
+        }
+        public int SearchSkillCount(string searchTerm, int? carrerID)
+        {
+            var listSkill = db.Skills.ToList();
+            if (carrerID.HasValue)
+            {
+                listSkill = listSkill.Where(x => x.CareerId == carrerID.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                listSkill = listSkill.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+            }
+
+            return listSkill.Count;
+        }
+
+        public Skill GetSkillByID(int ID)
+        {
+            return db.Skills.Find(ID);
+        }
+        public bool SaveSkill(Skill skill)
+        {
+            db.Skills.Add(skill);
+            return db.SaveChanges() > 0;
+        }
+        public bool UpdateSkill(Skill skill)
+        {
+            db.Entry(skill).State = EntityState.Modified;
+            return db.SaveChanges() > 0;
+        }
+
+        public bool DeleteSkill(Skill skill)
+        {
+            db.Entry(skill).State = EntityState.Deleted;
+            return db.SaveChanges() > 0;
+        }
     }
 }

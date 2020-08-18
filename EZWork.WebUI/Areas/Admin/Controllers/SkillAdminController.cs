@@ -38,8 +38,8 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 listView.Add(new SkillViewModel()
                 {
                     CareerId = item.Career.CareerId,
-                    CareerName = item.Career.Name,
-                    SkillName = item.Name,
+                    //CareerName = item.Career.Name,
+                    SkillName = item.Name,  
                     SkillDescription = item.Description,
                     SkillId = item.SkillId,
                     SkillUrlSlug = item.UrlSlug
@@ -47,6 +47,13 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
             }
             return Json(listView, JsonRequestBehavior.AllowGet);
         }
+
+     
+
+
+
+
+
 
         [HttpPost]
         public JsonResult Add(SkillViewModel skill)
@@ -71,7 +78,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
             SkillViewModel skillView =  new SkillViewModel()
             {
                 CareerId = item.Career.CareerId,
-                CareerName = item.Career.Name,
+               // CareerName = item.Career.Name,
                 SkillName = item.Name,
                 SkillDescription = item.Description,
                 SkillId = item.SkillId,
