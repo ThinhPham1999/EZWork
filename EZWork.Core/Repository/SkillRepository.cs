@@ -22,7 +22,9 @@ namespace EZWork.Core.Repository
         public int Create(Skill skill)
         {
             db.Skills.Add(skill);
-            skill.Career.Skills.Add(skill);
+            var career = db.Careers.Find(skill.Career.CareerId);
+            career.Skills.Add(skill);
+            skill.Career = career;
             db.SaveChanges();
             return 0;
         }

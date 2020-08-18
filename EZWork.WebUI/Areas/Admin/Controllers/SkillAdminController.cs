@@ -14,10 +14,12 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
     {
         // GET: Admin/Skill
         private ISKillRepository skillRepository;
+        private ICareerRepository careerRepository;
 
         public SkillAdminController()
         {
             skillRepository = new SkillRepository();
+            careerRepository = new CareerRepository();
         }
 
         // GET: Admin/Career
@@ -47,22 +49,49 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Add(Skill skill)
+        public JsonResult Add(SkillViewModel skill)
         {
-            return Json(skillRepository.Create(skill), JsonRequestBehavior.AllowGet);
+            Career career = careerRepository.Find(skill.CareerId);
+            Skill newSkill = new Skill()
+            {
+                SkillId = skill.SkillId,
+                Name = skill.SkillName,
+                Description = skill.SkillDescription,
+                UrlSlug = skill.SkillUrlSlug,
+                Career = career
+            };
+            //skillRepository.Create(newSkill);
+            return Json(0, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetbyID(int id)
         {
-            var career = skillRepository.Find(id);
-            return Json(career, JsonRequestBehavior.AllowGet);
+            var item = skillRepository.Find(id);
+            SkillViewModel skillView =  new SkillViewModel()
+            {
+                CareerId = item.Career.CareerId,
+                CareerName = item.Career.Name,
+                SkillName = item.Name,
+                SkillDescription = item.Description,
+                SkillId = item.SkillId,
+                SkillUrlSlug = item.UrlSlug
+            };
+            return Json(skillView, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult Update(Skill skill)
+        public JsonResult Update(SkillViewModel skillView)
         {
-            return Json(skillRepository.Update(skill), JsonRequestBehavior.AllowGet);
+            Skill updateSkill = new Skill()
+            {
+                SkillId = skillView.SkillId,
+                Name = skillView.SkillName,
+                Description = skillView.SkillDescription,
+                UrlSlug = skillView.SkillUrlSlug,
+                Career = careerRepository.Find(skillView.CareerId)
+            };
+            return Json(skillRepository.Update(updateSkill), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

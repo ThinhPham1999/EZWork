@@ -1,6 +1,7 @@
 ﻿//Load Data in Table when documents is ready  
 $(document).ready(function () {
     loadDataSkill();
+    loadCareerName();
 });
 
 //Load Data function  
@@ -30,17 +31,40 @@ function loadDataSkill() {
     });
 }
 
+function loadCareerName(){
+    $.ajax({
+        url: "/CareerAdmin/List",
+        type: "GET",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            var html = '';
+            $.each(result, function (key, item) {
+                html += '<option value =' + item.CareerId + '>' + item.CareerName + '</option>';
+            });
+            $('#careerOption').append(html);
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+}
+
 //Add Data Function   
 function AddSkill() {
-    var res = validate();
+    var res = validateSkill();
     if (res == false) {
         return false;
     }
+    var optionValue = $('#careerOption').val();
+    console.log(optionValue);
     var SkillObj = {
         SkillId: $('#SkillId').val(),
         SkillName: $('#SkillName').val(),
         SkillDescription: $('#SkillDescription').val(),
         SkillUrlSlug: $('#SkillUrlSlug').val(),
+        CareerId: optionValue,
+        CareerName: 'a'
     };
     $.ajax({
         url: "/SkillAdmin/Add",
@@ -74,6 +98,8 @@ function getbyIDSkill(id) {
             $('#SkillName').val(result.SkillName);
             $('#SkillDescription').val(result.SkillDescription);
             $('#SkillUrlSlug').val(result.SkillUrlSlug);
+            console.log(result.CareerId);
+            $('#careerOption').val(result.CareerId).change();
 
             $('#myModalSkill').modal('show');
             $('#btnUpdateSkill').show();
@@ -143,6 +169,7 @@ function clearTextBoxSkill() {
     $('#SkillName').val("");
     $('#SkillDescription').val("");
     $('#SkillUrlSlug').val("");
+    $('#careerOption option:first').prop('selected', true);
     $('#btnUpdateSkill').hide();
     $('#btnAddSkill').show();
     $('#SkillName').css('border-color', 'lightgrey');
@@ -150,7 +177,7 @@ function clearTextBoxSkill() {
     $('#SkillUrlSlug').css('border-color', 'lightgrey');
 }
 //Valdidation using jquery  
-function validate() {
+function validateSkill() {
     var isValid = true;
     if ($('#SkillName').val().trim() == "") {
         $('#SkillName').css('border-color', 'Red');
