@@ -704,10 +704,12 @@
     <Content Include="Views\Career\Index.cshtml" />
     <Content Include="Views\Career\_CareerPartial.cshtml" />
     <Content Include="Views\Skill\_SkillPartial.cshtml" />
+    <Content Include="Views\Seller\CreateProfile.cshtml" />
+    <Content Include="Views\Seller\ViewProfile.cshtml" />
+    <Content Include="Views\Seller\UpdateProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Seller\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
