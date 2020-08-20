@@ -707,6 +707,10 @@
     <Content Include="Views\Seller\CreateProfile.cshtml" />
     <Content Include="Views\Seller\ViewProfile.cshtml" />
     <Content Include="Views\Seller\UpdateProfile.cshtml" />
+    <Content Include="Views\Career\CreateCareer.cshtml" />
+    <Content Include="Views\Skill\CreateSkill.cshtml" />
+    <Content Include="Views\Skill\UpdateSkill.cshtml" />
+    <Content Include="Views\Skill\DeleteSkill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
