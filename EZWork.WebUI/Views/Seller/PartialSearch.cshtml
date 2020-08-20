@@ -1,4 +1,6 @@
-﻿<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+﻿@model EZWork.WebUI.Models.ActionSellerSkillViewModel
+
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
     <div class="wt-usersidebaricon">
         <span class="fa fa-cog wt-usersidebardown">
             <i></i>
@@ -7,18 +9,28 @@
     <aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>Categories</h2>
+                <h2>Skill</h2>
             </div>
             <div class="wt-widgetcontent">
+                @using (Html.BeginForm())
+                {
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="Search" class="form-control" placeholder="Search Skill">
+                            <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+                        </div>
+                    </fieldset>
+                }
                 <form class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" name="Search" class="form-control" placeholder="Search Category">
+                            <input type="text" name="Search" class="form-control" placeholder="Search Skill">
                             <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
                         </div>
                     </fieldset>
                     <fieldset>
                         <div class="wt-checkboxholder wt-verticalscrollbar">
+
                             <span class="wt-checkbox">
                                 <input id="wordpress" type="checkbox" name="description" value="company" checked>
                                 <label for="wordpress"> WordPress</label>

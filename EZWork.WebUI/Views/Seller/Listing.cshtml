@@ -1,0 +1,108 @@
+﻿﻿@model EZWork.WebUI.Models.ListSellerViewModel
+
+@if (Model != null && Model.Sellers != null && Model.Sellers.Count > 0)
+{
+
+    foreach (var item in Model.Sellers)
+    {
+        <div class="wt-userlistinghold wt-featured">
+            <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+            <figure class="wt-userlistingimg">
+                <img src="images/user/userlisting/img-01.jpg" alt="image description">
+            </figure>
+            <div class="wt-userlistingcontent">
+                <div class="wt-contenthead">
+                    <div class="wt-title">
+                        <a href="usersingle.html">
+                            <i class="fa fa-check-circle"></i> @item.EZUser.EZAccount.UserName
+                        </a>
+                        @if (!String.IsNullOrEmpty(item.CareerTitle))
+                        {
+                            <h2>Classifieds Posting, Data Entry, Typing</h2>
+                        }
+                    </div>
+                </div>
+                <div class="wt-rightarea">
+                    <span class="wt-starsvtwo">
+                        @if (item.Rate == null)
+                        {
+
+                        }
+                        else
+                        {
+                            for (int i = 1; i <= Math.Floor(item.Rate.Value); i++)
+                            {
+                                <i class="fa fa-star fill"></i>
+                            }
+                        }
+                    </span>
+                    <span class="wt-starcontent">@item.Rate/<sub>5</sub> <em>(@item.FeedBackCount Feedback)</em></span>
+                </div>
+            </div>
+            <div class="wt-description">
+                <p>@item.ShortDescription ...</p>
+            </div>
+            <div class="wt-tag wt-widgettag">
+                @if (item.SellerMapSkills.Count > 0)
+                {
+                    foreach (var skill in item.SellerMapSkills)
+                    {
+                        <a href="javascript:void(0);">@skill.Skill.Name</a>
+                    }
+                }
+            </div>
+        </div>
+    }
+
+    if (Model.Pager.EndPage > 1)
+    {
+        <nav>
+            <ul class="pagination">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Seller")">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
+
+
+

@@ -190,6 +190,7 @@
     <Compile Include="Models\CareerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SellerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -714,10 +715,12 @@
     <Content Include="Views\Skill\Index.cshtml" />
     <Content Include="Views\Career\_CareerPartial.cshtml" />
     <Content Include="Views\Skill\_SkillPartial.cshtml" />
-    <Content Include="Views\Seller\Index.cshtml" />
+    <Content Include="Views\Seller\Index1.cshtml" />
     <Content Include="Views\Seller\PartialSearch.cshtml" />
     <Content Include="Views\Seller\PartialSearchTopicResult.cshtml" />
     <Content Include="Views\Career\Index.cshtml" />
+    <Content Include="Views\Seller\Index.cshtml" />
+    <Content Include="Views\Seller\Listing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -739,6 +742,10 @@
     <ProjectReference Include="..\EZWork.Core\EZWork.Core.csproj">
       <Project>{16596E19-216F-47CD-8677-65978C92896E}</Project>
       <Name>EZWork.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EZWork.Extensions\EZWork.Extensions.csproj">
+      <Project>{4cf5a18b-b486-4fea-a69f-7377f10d2224}</Project>
+      <Name>EZWork.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
