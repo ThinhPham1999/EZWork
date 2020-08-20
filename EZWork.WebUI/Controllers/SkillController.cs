@@ -25,7 +25,7 @@ namespace EZWork.WebUI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateSkill([Bind(Include = "Name,Description,UrlSlug,CareerId")] Skill skill)
+        public ActionResult CreateSkill([Bind(Include = "SkillId,Name,Description,UrlSlug,CareerId")] Skill skill)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace EZWork.WebUI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateSkill([Bind(Include = "Name,Description,UrlSlug,CareerId")] Skill skill)
+        public ActionResult UpdateSkill([Bind(Include = "SkillId,Name,Description,UrlSlug,CareerId")] Skill skill)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace EZWork.WebUI.Controllers
             return View(skill);
         }
 
-       
+
         public ActionResult DeleteSkill(int? id)
         {
             if (id == null)
@@ -79,10 +79,10 @@ namespace EZWork.WebUI.Controllers
             return View(skill);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteSkill(int id)
         {
             Skill skill = db.Skills.Find(id);
             db.Skills.Remove(skill);
@@ -90,7 +90,7 @@ namespace EZWork.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
-       
+
         [ChildActionOnly]
         public ActionResult GetSkill()
         {

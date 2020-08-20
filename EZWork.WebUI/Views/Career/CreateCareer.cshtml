@@ -4,9 +4,10 @@
     ViewBag.Title = "CreateCareer";
 }
 
-<div class="container">
-    @using (Html.BeginForm())
-    {
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <form>
                     <div class="form-group row">
@@ -24,16 +25,16 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Url Link:</label>
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(x => x.UrlSlug, new { @class = "form-group", @type = "linkUrl" })
+                            @Html.TextBoxFor(x => x.UrlSlug, new { @class = "form-group", @placeholder = "Url link" })
                         </div>
-                    </div>             
+                    </div>
                     <div class="form-group row">
-                        <button class="col-2 form-group btn btn-success">Save$Submit</button>
-                        <button class="col-2 btn btn-secondary">Cancel</button>
+                        <button class="col-2 form-group btn btn-success" value="CreateCareer">Save$Submit</button>
+
                     </div>
                 </form>
             </div>
-        @Html.ActionLink("Back", "Index")
-    }
+            @Html.ActionLink("Back", "Index")
+        }
 
-</div>
+    </div>

@@ -700,7 +700,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_PartialHeader.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
-    <Content Include="Views\Skill\Index.cshtml" />
     <Content Include="Views\Career\Index.cshtml" />
     <Content Include="Views\Career\_CareerPartial.cshtml" />
     <Content Include="Views\Skill\_SkillPartial.cshtml" />
@@ -708,9 +707,12 @@
     <Content Include="Views\Seller\ViewProfile.cshtml" />
     <Content Include="Views\Seller\UpdateProfile.cshtml" />
     <Content Include="Views\Career\CreateCareer.cshtml" />
+    <Content Include="Views\Skill\Index.cshtml" />
     <Content Include="Views\Skill\CreateSkill.cshtml" />
     <Content Include="Views\Skill\UpdateSkill.cshtml" />
     <Content Include="Views\Skill\DeleteSkill.cshtml" />
+    <Content Include="Views\Career\UpdateCareer.cshtml" />
+    <Content Include="Views\Career\DeleteCareer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

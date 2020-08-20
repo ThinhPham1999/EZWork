@@ -4,45 +4,45 @@
 }
 
 
-    <div class="container">
-        <h2>List Skill</h2>
-        @Html.ActionLink("Create New", "CreateSkill")
-        <table class="table">
+<div class="container">
+    <h2>List Skill</h2>
+    @Html.ActionLink("Create New", "CreateSkill")
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(t => t.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(t => t.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(t => t.UrlSlug)
+            </th>
+            <th>
+                @Html.DisplayNameFor(t => t.CareerId)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(t => t.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(t => t.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(t => t.UrlSlug)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(t => t.CareerId)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UrlSlug)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CareerId)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "UpdateSkill", new { id = item.SkillId }) |
+                    @Html.ActionLink("Delete", "DeleteSkill", new { id = item.SkillId })
+                </td>
             </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UrlSlug)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CareerId)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Update", "UpdateSkill", new { id = item.SkillId }) |
-                        @Html.ActionLink("Delete", "DeleteSkill", new { id = item.SkillId })
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>

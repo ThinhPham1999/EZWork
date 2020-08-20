@@ -6,6 +6,7 @@
 
 <h2>Index</h2>
 <div class="container">
+    @Html.ActionLink("Create","CreateCareer")
     <table class="table">
         <tr>
             <th>
@@ -31,7 +32,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.UrlSlug)
         </td>
-        <td></td>
+        <td>
+            @Html.ActionLink("Update", "UpdateCareer", new { id = item.CareerId}) |
+            @Html.ActionLink("Delete", "DeleteCareer", new { id = item.CareerId})
+        </td>
     </tr>
         }
     </table>
