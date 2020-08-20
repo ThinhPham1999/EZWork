@@ -10,7 +10,7 @@ namespace EZWork.WebUI.Areas.Admin.ViewModels
     public class ListAccountViewModel
     {
         public List<EZAccount> EZAccounts { get; set; }
-        public string searchTerm { get; set; }
+        public string SearchTerm { get; set; }
         public Pager Pager { get; set; }
     }
     public class ActionAccountRoleViewModel
