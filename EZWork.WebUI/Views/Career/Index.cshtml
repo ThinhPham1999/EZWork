@@ -1,8 +1,45 @@
-﻿
+﻿@model EZWork.WebUI.Models.CareerViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<section class="wt-haslayout wt-main-section">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+                <div class="wt-sectionhead wt-textcenter">
+                    <div class="wt-sectiontitle">
+                        <h2>Explore Career</h2>
+                        <span>Professional by Career</span>
+                    </div>
+                </div>
+            </div>
+            <div class="wt-categoryexpl">
+                @foreach (var item in Model.Careers)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 float-left">
+                        <div class="wt-categorycontent">
+                            <figure><img src="~/App_Themes/FreelancerTheme/images/categories/img-01.png" alt="image description"></figure>
+                            <div class="wt-cattitle">
+                                <h3><a href="javascrip:void(0);">@item.Name</a></h3>
+                            </div>
+                            <div class="wt-categoryslidup">
+                                <p>@item.Description</p>
+                                <a href="javascript:void(0);">Explore <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
+                    <div class="wt-btnarea">
+                        <a href="javascript:void(0)" class="wt-btn">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
