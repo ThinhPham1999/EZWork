@@ -47,7 +47,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 int recordSize = 3;
                 page = page ?? 1;
                 ListAccountViewModel model = new ListAccountViewModel();
-                model.searchTerm = searchTerm;
+                model.SearchTerm = searchTerm;
                 model.EZAccounts = SearchEZAccount(searchTerm, page.Value, recordSize);
                 var totalRecord = SearchEZAccountCount(searchTerm);
                 model.Pager = new Pager(totalRecord, page, recordSize);

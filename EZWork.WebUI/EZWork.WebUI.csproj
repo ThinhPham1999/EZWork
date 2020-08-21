@@ -187,6 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CareerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -664,6 +665,16 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Skill.js" />
+    <Content Include="Uploads\Photo\img-01.png" />
+    <Content Include="Uploads\Photo\img-02.png" />
+    <Content Include="Uploads\Photo\img-03.png" />
+    <Content Include="Uploads\Photo\img-04.png" />
+    <Content Include="Uploads\Photo\img-05.png" />
+    <Content Include="Uploads\Photo\img-06.png" />
+    <Content Include="Uploads\Photo\img-07.png" />
+    <Content Include="Uploads\Photo\img-08.png" />
+    <Content Include="Uploads\Photo\img-09.png" />
+    <Content Include="Uploads\Photo\img-10.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -700,19 +711,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_PartialHeader.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
-    <Content Include="Views\Career\Index.cshtml" />
+    <Content Include="Views\Skill\Index.cshtml" />
     <Content Include="Views\Career\_CareerPartial.cshtml" />
     <Content Include="Views\Skill\_SkillPartial.cshtml" />
-    <Content Include="Views\Seller\CreateProfile.cshtml" />
-    <Content Include="Views\Seller\ViewProfile.cshtml" />
-    <Content Include="Views\Seller\UpdateProfile.cshtml" />
-    <Content Include="Views\Career\CreateCareer.cshtml" />
-    <Content Include="Views\Skill\Index.cshtml" />
-    <Content Include="Views\Skill\CreateSkill.cshtml" />
-    <Content Include="Views\Skill\UpdateSkill.cshtml" />
-    <Content Include="Views\Skill\DeleteSkill.cshtml" />
-    <Content Include="Views\Career\UpdateCareer.cshtml" />
-    <Content Include="Views\Career\DeleteCareer.cshtml" />
+    <Content Include="Views\Seller\Index.cshtml" />
+    <Content Include="Views\Seller\PartialSearch.cshtml" />
+    <Content Include="Views\Seller\PartialSearchTopicResult.cshtml" />
+    <Content Include="Views\Career\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
