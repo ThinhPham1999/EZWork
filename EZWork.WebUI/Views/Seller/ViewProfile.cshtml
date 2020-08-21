@@ -1,71 +1,93 @@
-﻿@model IEnumerable<EZWork.Core.Entities.EZUser>
+﻿@model IEnumerable<EZWork.Core.Entities.Seller>
 
 @{
-    ViewBag.Title = "Index";
-
+    ViewBag.Title = "ViewProfile";
 }
 
-<h2>View Profile</h2>
+<h2>ViewProfile</h2>
+
 <p>
-    @Html.ActionLink("Create profile", "CreateProfile")
-    @Html.ActionLink("Update profile", "UpdateProfile")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            @Html.DisplayNameFor(model => model.EZUser.FullName)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.EZUser.Gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.EZUser.BirthDay)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BirthDay)
+            @Html.DisplayNameFor(model => model.EZUser.ImageProfile)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageProfile)
+            @Html.DisplayNameFor(model => model.EZUser.CreateAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.EZUser.ModifierAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.EZUser.Status)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ShortDescription)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Seller.Description)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Seller.Status)
+            @Html.DisplayNameFor(model => model.CreateAt)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
     </tr>
-    @foreach (var item in Model)
-    {
+
+@foreach (var item in Model) {
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.FullName)
+        @Html.DisplayFor(modelItem => item.EZUser.FullName)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.EZUser.Gender)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Gender)
+        @Html.DisplayFor(modelItem => item.EZUser.BirthDay)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.BirthDay)
+        @Html.DisplayFor(modelItem => item.EZUser.ImageProfile)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.ImageProfile)
+        @Html.DisplayFor(modelItem => item.EZUser.CreateAt)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Email)
+        @Html.DisplayFor(modelItem => item.EZUser.ModifierAt)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.PhoneNumber)
+        @Html.DisplayFor(modelItem => item.EZUser.Status)
+    </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.ShortDescription)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Seller.Description)
+        @Html.DisplayFor(modelItem => item.Description)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Seller.Status)
+        @Html.DisplayFor(modelItem => item.CreateAt)
     </td>
-
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.SellerId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.SellerId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.SellerId })
+    </td>
 </tr>
-    }
+}
 
 </table>

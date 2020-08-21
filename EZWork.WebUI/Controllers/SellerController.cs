@@ -15,10 +15,14 @@ namespace EZWork.WebUI.Controllers
         // GET: Seller
         public ActionResult ViewProfile()
         {
-            var viewsellers = db.EZUsers.Where(s=>s.Id==s.Seller.SellerId)
-                .Include(p => p.Seller.Description)
-                .Include(p=>p.Seller.Status);
-            return View(viewsellers.ToList());
+            var viewsellers = db.Sellers.Include(p => p.EZUser.FullName);
+                //.Include(p=>p.EZUser.Gender)
+                //.Include(p=>p.EZUser.BirthDay)
+                //.Include(p=>p.EZUser.ImageProfile)
+               // .Include(p=>p.EZUser.CreateAt)
+               // .Include(p=>p.EZUser.ModifierAt)
+               // .Include(p=>p.EZUser.Status).ToList();
+             return View(viewsellers.ToList());
         }
         public ActionResult CreateProfile()
         {

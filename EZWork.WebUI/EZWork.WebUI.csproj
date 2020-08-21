@@ -718,6 +718,14 @@
     <Content Include="Views\Seller\PartialSearch.cshtml" />
     <Content Include="Views\Seller\PartialSearchTopicResult.cshtml" />
     <Content Include="Views\Career\Index.cshtml" />
+    <Content Include="Views\Skill\CreateSkill.cshtml" />
+    <Content Include="Views\Skill\UpdateSkill.cshtml" />
+    <Content Include="Views\Skill\DeleteSkill.cshtml" />
+    <Content Include="Views\Career\CreateCareer.cshtml" />
+    <Content Include="Views\Career\UpdateCareer.cshtml" />
+    <Content Include="Views\Career\DeleteCareer.cshtml" />
+    <Content Include="Views\Seller\ViewProfile.cshtml" />
+    <Content Include="Views\Seller\CreateProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
