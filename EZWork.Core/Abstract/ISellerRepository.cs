@@ -10,8 +10,8 @@ namespace EZWork.Core.Abstract
 {
     public interface ISellerRepository
     {
-        List<Seller> SearchSeller(string searchTerm, string sellerID, int page, int recordSize);
-        int SearchSellerCount(string searchTerm, string sellerID);
+        List<Seller> SearchSeller(string searchTerm, int page, int recordSize, int[] listSkills);
+        int SearchSellerCount(string searchTerm, int[] listSkills);
         Seller GetSellerByID(string ID);
         bool SaveSeller(Seller seller);
         bool UpdateSeller(Seller seller);

@@ -1,9 +1,9 @@
 ﻿﻿@model EZWork.WebUI.Models.ListSellerViewModel
 
-@if (Model != null && Model.Sellers != null && Model.Sellers.Count > 0)
+@if (Model != null && Model.ViewSellers != null && Model.ViewSellers.Count > 0)
 {
 
-    foreach (var item in Model.Sellers)
+    foreach (var item in Model.ViewSellers)
     {
         <div class="wt-userlistinghold wt-featured">
             <span class="wt-featuredtag"><img src="images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>

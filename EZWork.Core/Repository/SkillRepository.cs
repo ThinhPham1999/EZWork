@@ -54,7 +54,7 @@ namespace EZWork.Core.Repository
             return db.Skills.Where(s => s.UrlSlug.Equals(name.ToLower()));
         }
 
-        public IEnumerable<Skill> GetAll()
+        public IList<Skill> GetAll()
         {
             return db.Skills.ToList();
         }

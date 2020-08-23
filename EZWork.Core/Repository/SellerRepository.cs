@@ -24,13 +24,14 @@ namespace EZWork.Core.Repository
             return db.Sellers.ToList();
         }
 
-        public List<Seller> SearchSeller(string searchTerm, string sellerID, int page, int recordSize)
+        public List<Seller> SearchSeller(string searchTerm, int page, int recordSize, int[] listSkills)
         {
             var listSeller = db.Sellers.ToList();
-            if (!String.IsNullOrEmpty(sellerID))
+            if (listSkills != null && listSkills.Length > 0)
             {
-                listSeller = listSeller.Where(x => x.SellerId.Equals(sellerID)).ToList();
+                listSeller = listSeller.Where(s => s.SellerMapSkills.Any(si => listSkills.ToList().Contains(si.SkillId))).ToList();
             }
+
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 listSeller = listSeller.Where(x => x.EZUser.EZAccount.UserName.ToLower().Contains(searchTerm.ToLower())).ToList();
@@ -38,13 +39,10 @@ namespace EZWork.Core.Repository
             var skipSeller = (page - 1) * recordSize;
             return listSeller.OrderBy(x => x.SellerId).Skip(skipSeller).Take(recordSize).ToList();
         }
-        public int SearchSellerCount(string searchTerm, string sellerID)
+        public int SearchSellerCount(string searchTerm, int[] listSkills)
         {
             var listSeller = db.Sellers.ToList();
-            if (!String.IsNullOrEmpty(sellerID))
-            {
-                listSeller = listSeller.Where(x => x.SellerId.Equals(sellerID)).ToList();
-            }
+            
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 listSeller = listSeller.Where(x => x.EZUser.EZAccount.UserName.ToLower().Contains(searchTerm.ToLower())).ToList();

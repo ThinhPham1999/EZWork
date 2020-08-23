@@ -1,25 +1,5 @@
-﻿<div class="wt-userlistingtitle">
-    <span>01 - 48 of 57143 results for <em>"Logo Design"</em></span>
-</div>
-<div class="wt-filterholder">
-    <ul class="wt-filtertag">
-        <li class="wt-filtertagclear">
-            <a href="javascrip:void(0)"><i class="fa fa-times"></i> <span>Clear All Filter</span></a>
-        </li>
-        <li class="alert alert-dismissable fade in">
-            <a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Graphic Design</span></a>
-        </li>
-        <li class="alert alert-dismissable fade in">
-            <a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Any Hourly Rate</span></a>
-        </li>
-        <li class="alert alert-dismissable fade in">
-            <a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Any Freelancer Type</span></a>
-        </li>
-        <li class="alert alert-dismissable fade in">
-            <a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>Chinese</span></a>
-        </li>
-        <li class="alert alert-dismissable fade in">
-            <a href="javascrip:void(0)"><i class="fa fa-times close" data-dismiss="alert" aria-label="close"></i> <span>English</span></a>
-        </li>
-    </ul>
+﻿@model EZWork.WebUI.Models.ListSellerViewModel
+
+<div class="wt-userlistingtitle">
+    <span>@Model.ViewSellers.Count results</span>
 </div>

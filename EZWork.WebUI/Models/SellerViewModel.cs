@@ -14,13 +14,14 @@ namespace EZWork.WebUI.Models
 
     public class ListSellerViewModel
     {
-        public List<Seller> Sellers { get; set; }
+        public List<Seller> ViewSellers { get; set; }
         public string SearchTerm { get; set; }
+        public List<SkillViewModel> ViewSkills { get; set; }
         public Pager Pager { get; set; }
     }
-    public class ActionSellerSkillViewModel
-    {
-        public string SearchTerm { get; set; }
-        public List<Skill> Skills { get; set; }
+
+    public class SkillViewModel{
+        public Skill Skill { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

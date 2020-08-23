@@ -666,6 +666,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Skill.js" />
+    <Content Include="Uploads\Photo\featured.png" />
     <Content Include="Uploads\Photo\img-01.png" />
     <Content Include="Uploads\Photo\img-02.png" />
     <Content Include="Uploads\Photo\img-03.png" />
@@ -676,6 +677,7 @@
     <Content Include="Uploads\Photo\img-08.png" />
     <Content Include="Uploads\Photo\img-09.png" />
     <Content Include="Uploads\Photo\img-10.png" />
+    <Content Include="Uploads\Profile\user-picture.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -715,12 +717,11 @@
     <Content Include="Views\Skill\Index.cshtml" />
     <Content Include="Views\Career\_CareerPartial.cshtml" />
     <Content Include="Views\Skill\_SkillPartial.cshtml" />
-    <Content Include="Views\Seller\Index1.cshtml" />
-    <Content Include="Views\Seller\PartialSearch.cshtml" />
     <Content Include="Views\Seller\PartialSearchTopicResult.cshtml" />
     <Content Include="Views\Career\Index.cshtml" />
     <Content Include="Views\Seller\Index.cshtml" />
     <Content Include="Views\Seller\Listing.cshtml" />
+    <Content Include="Views\Seller\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
