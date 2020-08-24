@@ -75,11 +75,31 @@ namespace EZWork.WebUI.Controllers
             PartialHeaderViewModel model = new PartialHeaderViewModel();
             if (!string.IsNullOrEmpty(name)) {
                 model.EZAccount = UserManager.FindByEmail(name);
+                if (!UserManager.FindByEmail(name).EmailConfirmed) {
+                    ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
+                }
                 model.EZUser = db.EZUsers.Find((UserManager.FindByEmail(name).Id.ToLower()));
             }
             return PartialView("_PartialHeader", model);
         }
-        //
+
+        //[NonAction]
+        public async Task<ActionResult> SendEmail()
+        {
+            var name = User.Identity.Name;
+            if (!string.IsNullOrEmpty(name))
+            {
+                //string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
+                //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
+                //await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                var user = await UserManager.FindByEmailAsync(name);
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Login", "Account");
+        }
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -218,18 +238,7 @@ namespace EZWork.WebUI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        //[NonAction]
-        //public async Task<ActionResult> SendEmail()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
-        //        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
-        //        await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-        //        return View();
-        //    }
-        //    return RedirectToAction("Login", "Account");
-        //}
+       
 
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
