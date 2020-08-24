@@ -10,6 +10,7 @@ namespace EZWork.Core.Entities
 {
     public class Seller
     {
+        [Key]
         [ForeignKey("EZUser")]
         public string SellerId { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập tóm tắt về bản thân")]
@@ -20,6 +21,13 @@ namespace EZWork.Core.Entities
         public DateTime CreateAt { get; set; }
         [Range(0,3)]
         public int Status { get; set; }
+        [Range(0,5)]
+        public decimal? Rate { get; set; }
+        [Range(0, Int32.MaxValue)]
+        public int FeedBackCount { get; set; }
+        [StringLength(1024)]
+        public string CareerTitle { get; set; }
+
         public virtual EZUser EZUser { get; set; }
         public virtual IList<SellerMapSkill> SellerMapSkills { get; set; }
         public virtual IList<Rating> Ratings { get; set; }

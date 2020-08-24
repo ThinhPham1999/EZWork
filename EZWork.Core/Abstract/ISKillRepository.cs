@@ -14,7 +14,7 @@ namespace EZWork.Core.Abstract
         int Delete(int id);
         Skill Find(int id);
         IEnumerable<Skill> Find(string name);
-        IEnumerable<Skill> GetAll();
+        IList<Skill> GetAll();
         IEnumerable<Skill> GetByCareer(string career);
     }
 }
