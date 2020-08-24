@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@model EZWork.WebUI.Models.PartialHeaderViewModel
 <!-- Header Start -->
 <header id="wt-header" class="wt-header wt-haslayout">
     <div class="wt-navigationarea">
@@ -39,15 +40,18 @@
                                 </ul>
                             </div>
                         </nav>
-                        @if (Request.IsAuthenticated)
+                        @if (Model!=null &&Model.EZAccount!=null && Model.EZUser!=null && Request.IsAuthenticated)
                         {
+                            //var claims = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims;
+                            //var claim = claims.SingleOrDefault(m => m.Type == "FullName");
                             <div class="wt-userlogedin">
                                 <figure class="wt-userimg">
-                                    <img src="~/App_Themes/FreelancerTheme/images/user-img.jpg" alt="image description">
+                                    <img src="~/Uploads/Photo/@(Model.EZUser.ImageProfile!=null?Model.EZUser.ImageProfile:"default.jpg")" alt="image description">
+                                    @*<img src="~/App_Themes/FreelancerTheme/images/user-img.jpg" alt="image description">*@
                                 </figure>
-                                <div class="wt-username">
-                                    <h3>Louanne Mattioli</h3>
-                                    <span>Amento Tech</span>
+                                <div class="wt-username">   
+                                    <h3>@User.Identity.Name</h3>
+                                    <span>@Model.EZUser.FullName</span>
                                 </div>
                                 <nav class="wt-usernav">
                                     <ul>
@@ -61,7 +65,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="dashboard-profile.html">
+                                            <a href="#">
                                                 <span>My Profile</span>
                                             </a>
                                         </li>

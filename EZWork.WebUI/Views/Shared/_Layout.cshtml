@@ -24,6 +24,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <link href="~/Content/loginForm.css" rel="stylesheet" />
 </head>
 <body class="wt-login">
     <!--[if lt IE 8]>
@@ -38,8 +39,8 @@
     <div id="wt-wrapper" class="wt-wrapper wt-haslayout">
         <!-- Content Wrapper Start -->
         <div class="wt-contentwrapper">
-            @Html.Partial("_PartialHeader")
-                @RenderBody()
+            @Html.Action("PartialHeader", "Account");
+            @RenderBody()
             @Html.Partial("_PartialFooter")
         </div>
         <!--Content Wrapper End-->

@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <div class="row">
     <div class="col col-lg-12">
         <form>
@@ -17,11 +18,13 @@
         </form>
     </div>
 </div>
+
 <div class="row">
     <div class="col col-lg-12">
         @{ Html.RenderPartial("Listing", Model);}
     </div>
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
     </div>
@@ -37,11 +40,13 @@
             $('#exampleModal .modal-dialog').html(response);
         });
     });
+
     $('.resetBtn').click(function () {
         $.ajax({
             url: $(this).attr("data-href"),
         })
     });
+
     $('.lockBtn').click(function () {
         swal({
             title: "Are you sure?",
