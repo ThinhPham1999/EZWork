@@ -53,17 +53,12 @@ namespace EZWork.WebUI.Controllers
             return View(model);
         }
 
-        
-        public ActionResult SearchOneSkill(int id)
-        {
-            int[] search = new int[] { id };
-            return RedirectToAction("Index", new { searchTerm = "", page = 1, pageSize = 3, Searchskills = search });
-        }
-
         [HttpGet]
-        public ActionResult Detail() 
+        [ChildActionOnly]
+        public ActionResult Detail(string id) 
         {
-            return View();
+            Seller seller = sellerRepository.GetSellerByID(id);
+            return View(seller);
         }
     }
 }
