@@ -24,12 +24,16 @@ namespace EZWork.WebUI.Controllers
             reviewRepository= new ReviewRepository();
         }
 
-        public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills)
+        public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills, int? oneSkill)
         {
             page = page ?? 1;
             pageSize = pageSize ?? 3;
             ListSellerViewModel model = new ListSellerViewModel();
-            
+            if (oneSkill != null)
+            {
+                Searchskills = new int[] { oneSkill.Value };
+                oneSkill = null;
+            }
             model.SearchTerm = searchTerm;
             model.ViewSellers = sellerRepository.SearchSeller(searchTerm, page.Value, pageSize.Value, Searchskills);
             model.ViewSkills = new List<SkillViewModel>();

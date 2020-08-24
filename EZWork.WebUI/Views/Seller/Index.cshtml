@@ -98,7 +98,7 @@
                                                 {
                                                     foreach (var skill in item.SellerMapSkills)
                                                     {
-                                                        @Html.ActionLink(skill.Skill.Name, "Index")
+                                                        @Html.ActionLink(skill.Skill.Name, "Index", new { oneSkill = skill.SkillId})
                                                     }
                                                 }
                                             </div>
