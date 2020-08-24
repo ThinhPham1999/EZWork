@@ -22,10 +22,10 @@ namespace EZWork.WebUI.Controllers
             skillRepository = new SkillRepository();
             sellerRepository = new SellerRepository();
         }
-
+            
         public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills, int? oneSkill)
         {
-            page = page ?? 1;
+            page = page ?? 1;   
             pageSize = pageSize ?? 3;
             ListSellerViewModel model = new ListSellerViewModel();
             if (oneSkill != null)
