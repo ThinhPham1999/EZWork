@@ -1,8 +1,257 @@
-﻿
+﻿@model EZWork.Core.Entities.Seller
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detail</h2>
+<!--Inner Home Banner Start-->
+<div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Inner Home End-->
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+    <!-- User Profile Start-->
+    <div class="wt-main-section wt-paddingtopnull wt-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
+                    <div class="wt-userprofileholder">
+                        <span class="wt-featuredtag"><img src="~/Uploads/Photo/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 float-left">
+                            <div class="row">
+                                <div class="wt-userprofile">
+                                    <figure>
+                                        @if (Model.EZUser.ImageProfile == null)
+                                        {
+                                            <img src="~/Uploads/Profile/user-picture.png" alt="img description">
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content(Model.EZUser.ImageProfile)" alt="img description">
+                                        }
+                                        <div class="wt-userdropdown wt-online">
+                                        </div>
+                                    </figure>
+                                    <div class="wt-title">
+                                        <h3><i class="fa fa-check-circle"></i> @Model.EZUser.FullName</h3>
+                                        <span>@Model.Rate/5 <a class="javascript:void(0);">(@Model.FeedBackCount Feedback)</a> <br>Member since @Model.CreateAt.Month, @Model.CreateAt.Day, @Model.CreateAt.Year <br><a href="javascript:void(0);">@Model.EZUser.UserName</a> <a href="javascript:void(0);" class="wt-reportuser">Report User</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
+                            <div class="row">
+                                <div class="wt-proposalhead wt-userdetails">
+                                    <h2>@Model.CareerTitle</h2>
+                                    <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+                                        <li>VietNam</li>
+                                        <li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
+                                    </ul>
+                                    <div class="wt-description">
+                                        <p>@Model.Description</p>
+                                    </div>
+                                </div>
+                                <div id="wt-statistics" class="wt-statistics wt-profilecounter">
+                                    <div class="wt-statisticcontent wt-countercolor1">
+                                        <h3 data-from="0" data-to="03" data-speed="800" data-refresh-interval="03">03</h3>
+                                        <h4>Ongoing <br>Projects</h4>
+                                    </div>
+                                    <div class="wt-statisticcontent wt-countercolor2">
+                                        <h3 data-from="0" data-to="1503" data-speed="8000" data-refresh-interval="100">1503</h3>
+                                        <h4>Completed <br>Projects</h4>
+                                    </div>
+                                    <div class="wt-statisticcontent wt-countercolor4">
+                                        <h3 data-from="0" data-to="02" data-speed="800" data-refresh-interval="02">02</h3>
+                                        <h4>Cancelled <br>Projects</h4>
+                                    </div>
+                                    <div class="wt-statisticcontent wt-countercolor3">
+                                        <h3 data-from="0" data-to="25" data-speed="8000" data-refresh-interval="100">25</h3>
+                                        <em>k</em>
+                                        <h4>Served <br>Hours</h4>
+                                    </div>
+                                    <div class="wt-description">
+                                        <p>Hire</p>
+                                        <a href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Send Offer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Profile End-->
+        <!-- User Listing Start-->
+        <div class="container">
+            <div class="row">
+                <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+                        <div class="wt-usersingle">
+                            @*Rating and comment here*@
+                            <div class="wt-clientfeedback">
+                                <div class="wt-usertitle wt-titlewithselect">
+                                    <h2>Client Feedback</h2>
+                                    <div class="form-group">
+                                        <span class="wt-select">
+                                            <select>
+                                                <option value="Show All">Show All</option>
+                                                <option value="One Page">One Page </option>
+                                                <option value="Two Page">Two Page</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
+                                    <figure class="wt-userlistingimg">
+                                        <img src="images/client/img-01.jpg" alt="image description">
+                                    </figure>
+                                    <div class="wt-userlistingcontent">
+                                        <div class="wt-contenthead">
+                                            <div class="wt-title">
+                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Themeforest Company</a>
+                                                <h3>Translation and Proof Reading (Multi Language)</h3>
+                                            </div>
+                                            <ul class="wt-userlisting-breadcrumb">
+                                                <li><span><i class="fa fa-dollar-sign"></i> Beginner</span></li>
+                                                <li><span><img src="images/flag/img-04.png" alt="img description"> England</span></li>
+                                                <li><span><i class="fas fa-spinner fa-spin"></i> In Progress</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wt-userlistinghold wt-userlistingsingle">
+                                    <figure class="wt-userlistingimg">
+                                        <img src="images/client/img-02.jpg" alt="image description">
+                                    </figure>
+                                    <div class="wt-userlistingcontent">
+                                        <div class="wt-contenthead">
+                                            <div class="wt-title">
+                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Videohive Studio</a>
+                                                <h3>Need help translating app stringlist from English to Arabic</h3>
+                                            </div>
+                                            <ul class="wt-userlisting-breadcrumb">
+                                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Intermediate</span></li>
+                                                <li><span><img src="images/flag/img-03.png" alt="img description">  Canada</span></li>
+                                                <li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2017</span></li>
+                                                <li><span class="wt-stars"><span></span></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="wt-description">
+                                        <p>“ Eiusmod tempor incididunt ut labore et dolore magna quis nostrud exercitation ullamco laboris. ”</p>
+                                    </div>
+                                </div>
+                                <div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
+                                    <figure class="wt-userlistingimg">
+                                        <img src="images/client/img-03.jpg" alt="image description">
+                                    </figure>
+                                    <div class="wt-userlistingcontent">
+                                        <div class="wt-contenthead">
+                                            <div class="wt-title">
+                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Photodune Professionals</a>
+                                                <h3>Blog Post Writing in English Language</h3>
+                                            </div>
+                                            <ul class="wt-userlisting-breadcrumb">
+                                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Professional</span></li>
+                                                <li><span><img src="images/flag/img-02.png" alt="img description"> United States</span></li>
+                                                <li><span><i class="far fa-calendar"></i>  Jun 2017</span></li>
+                                                <li><span class="wt-stars"><span></span></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="wt-description">
+                                        <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
+                                    </div>
+                                </div>
+                                <div class="wt-btnarea">
+                                    <a href="javascript:void(0);" class="wt-btn">Load More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+                        <aside id="wt-sidebar" class="wt-sidebar">
+                            <div id="wt-ourskill" class="wt-widget">
+                                <div class="wt-widgettitle">
+                                    <h2>My Skills</h2>
+                                </div>
+                                <div class="wt-widgetcontent wt-skillscontent">
+                                    @foreach (var skill in Model.SellerMapSkills)
+                                    {
+                                        <div class="wt-skillholder" data-percent="@skill.Level%">
+                                            <span>PHP <em>@skill.Level%</em></span>
+                                            <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="wt-widget">
+                                <div class="wt-widgettitle">
+                                    <h2>Similar Freelancers</h2>
+                                </div>
+                                <div class="wt-widgetcontent">
+                                    <div class="wt-widgettag wt-widgettagvtwo">
+                                        @foreach (var skill in Model.SellerMapSkills)
+                                        {
+                                            @Html.ActionLink(skill.Skill.Name, "Index")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wt-widget wt-sharejob">
+                                <div class="wt-widgettitle">
+                                    <h2>Share This User</h2>
+                                </div>
+                                <div class="wt-widgetcontent">
+                                    <ul class="wt-socialiconssimple">
+                                        <li class="wt-facebook"><a href="javascript:void(0);"><i class="fab fa-facebook-f"></i>Share on Facebook</a></li>
+                                        <li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i>Share on Twitter</a></li>
+                                        <li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i>Share on Linkedin</a></li>
+                                        <li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i>Share on Google Plus</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="wt-widget wt-reportjob">
+                                <div class="wt-widgettitle">
+                                    <h2>Report This User</h2>
+                                </div>
+                                <div class="wt-widgetcontent">
+                                    <form class="wt-formtheme wt-formreport">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <span class="wt-select">
+                                                    <select>
+                                                        <option value="reason">Select Reason</option>
+                                                        <option value="reason1">Reason1</option>
+                                                        <option value="reason2">Reason2</option>
+                                                        <option value="reason3">Reason3</option>
+                                                        <option value="reason4">Reason4</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" placeholder="Description"></textarea>
+                                            </div>
+                                            <div class="form-group wt-btnarea">
+                                                <a href="javascrip:void(0);" class="wt-btn">Submit</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Listing End-->
+    </div>
+</main>
+<!--Main End-->

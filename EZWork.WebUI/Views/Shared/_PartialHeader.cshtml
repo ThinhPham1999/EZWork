@@ -34,9 +34,6 @@
                                             <li>
                                                 @Html.ActionLink("User Listing", "Index","Seller",null,null)
                                             </li>
-                                            <li class="current-menu-item">
-                                                <a href="usersingle.html">User Single</a>
-                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -88,11 +85,9 @@
                                 <div class="collapse navbar-collapse wt-navigation" id="navbarNav">
                                     <ul class="navbar-nav">
                                         <li class="menu-item-has-children page_item_has_children">
-                                         
                                             @Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                                         </li>
                                         <li class="menu-item-has-children page_item_has_children">
-                                          
                                         <li>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
                                         </li>
                                     </ul>
