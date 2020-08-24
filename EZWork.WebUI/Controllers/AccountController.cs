@@ -68,6 +68,17 @@ namespace EZWork.WebUI.Controllers
                 _roleManager = value;
             }
         }
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public  ActionResult PartialHeader() {
+            var name=User.Identity.Name;
+            PartialHeaderViewModel model = new PartialHeaderViewModel();
+            if (!string.IsNullOrEmpty(name)) {
+                model.EZAccount = UserManager.FindByEmail(name);
+                model.EZUser = db.EZUsers.Find((UserManager.FindByEmail(name).Id.ToLower()));
+            }
+            return PartialView("_PartialHeader", model);
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -88,12 +99,10 @@ namespace EZWork.WebUI.Controllers
             {
                 return View(model);
             }
-            // This doesn't count login failures towards account lockout
-            var user = await UserManager.FindByEmailAsync(model.Email);
-
+            // This doesn't count login failures towards account lockout                   
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
-
+            var user = await UserManager.FindByEmailAsync(model.Email);
             var adminRole = await RoleManager.FindByNameAsync("Admin");
             IdentityUserRole isAdmin = null;
             if (adminRole != null)
@@ -179,9 +188,12 @@ namespace EZWork.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = new EZAccount { UserName = model.Email, Email = model.Email };
+                var account = new EZAccount { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(account, model.Password);
                 var user = await UserManager.FindByEmailAsync(model.Email);
+                if (RoleManager.FindByName("User") == null) {
+                  await  RoleManager.CreateAsync(new IdentityRole("User"));
+                }
                 if (result.Succeeded)
                 {
                     db.EZUsers.Add(new EZUser
