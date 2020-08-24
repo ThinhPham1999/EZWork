@@ -200,7 +200,7 @@
                                     <div class="wt-widgettag wt-widgettagvtwo">
                                         @foreach (var skill in Model.SellerMapSkills)
                                         {
-                                            @Html.ActionLink(skill.Skill.Name, "Index")
+                                            @Html.ActionLink(skill.Skill.Name, "Index", new { oneSkill = skill.SkillId})
                                         }
                                     </div>
                                 </div>
