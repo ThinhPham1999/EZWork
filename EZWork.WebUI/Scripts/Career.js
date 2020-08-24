@@ -1,10 +1,10 @@
 ﻿//Load Data in Table when documents is ready  
 $(document).ready(function () {
-    loadData();
+    loadDataCareer();
 });
 
 //Load Data function  
-function loadData() {
+function loadDataCareer() {
     $.ajax({
         url: "/CareerAdmin/List",
         type: "GET",
@@ -15,13 +15,13 @@ function loadData() {
             $.each(result, function (key, item) {
                 html += '<tr>';
                 html += '<td>' + item.CareerId + '</td>';
-                html += '<td>' + item.Name + '</td>';
-                html += '<td>' + item.Description + '</td>';
-                html += '<td>' + item.UrlSlug + '</td>';
-                html += '<td><a href="#" onclick="return getbyID(' + item.CareerId + ')">Edit</a> | <a href="#" onclick="Delele(' + item.CareerId + ')">Delete</a></td>';
+                html += '<td>' + item.CareerName + '</td>';
+                html += '<td>' + item.CareerDescription + '</td>';
+                html += '<td>' + item.CareerUrlSlug + '</td>';
+                html += '<td><a href="#" onclick="return getbyIDCareer(' + item.CareerId + ')">Edit</a> | <a href="#" onclick="DeleleCareer(' + item.CareerId + ')">Delete</a></td>';
                 html += '</tr>';
             });
-            $('.tbody').html(html);
+            $('#CareerTable').html(html);
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -30,16 +30,16 @@ function loadData() {
 }
 
 //Add Data Function   
-function Add() {
+function AddCareer() {
     var res = validate();
     if (res == false) {
         return false;
     }
     var careerObj = {
         CareerId: $('#CareerId').val(),
-        Name: $('#Name').val(),
-        Description: $('#Description').val(),
-        UrlSlug: $('#UrlSlug').val(),
+        CareerName: $('#CareerName').val(),
+        CareerDescription: $('#CareerDescription').val(),
+        CareerUrlSlug: $('#CareerUrlSlug').val(),
     };
     $.ajax({
         url: "/CareerAdmin/Add",
@@ -48,9 +48,9 @@ function Add() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
-            loadData();
-            $('#myModal').modal('hide');
-            $('#myModal').trigger('click');
+            loadDataCareer();
+            $('#myModalCareer').modal('hide');
+            $('#myModalCareer').trigger('click');
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -59,10 +59,10 @@ function Add() {
 }
 
 //Function for getting the Data Based upon Employee ID  
-function getbyID(id) {
-    $('#Name').css('border-color', 'lightgrey');
-    $('#Description').css('border-color', 'lightgrey');
-    $('#UrlSlug').css('border-color', 'lightgrey');
+function getbyIDCareer(id) {
+    $('#CareerName').css('border-color', 'lightgrey');
+    $('#CareerDescription').css('border-color', 'lightgrey');
+    $('#CareerUrlSlug').css('border-color', 'lightgrey');
     $.ajax({
         url: "/CareerAdmin/GetbyID/" + id,
         typr: "GET",
@@ -73,6 +73,7 @@ function getbyID(id) {
             $('#Name').val(result.Name);
             $('#Description').val(result.Description);
             $('#UrlSlug').val(result.UrlSlug);
+
             $('#myModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
@@ -85,16 +86,16 @@ function getbyID(id) {
 }
 
 //function for updating employee's record  
-function Update() {
+function UpdateCareer() {
     var res = validate();
     if (res == false) {
         return false;
     }
     var careerObj = {
         CareerId: $('#CareerId').val(),
-        Name: $('#Name').val(),
-        Description: $('#Description').val(),
-        UrlSlug: $('#UrlSlug').val(),
+        CareerName: $('#CareerName').val(),
+        CareerDescription: $('#CareerDescription').val(),
+        CareerUrlSlug: $('#CareerUrlSlug').val(),
     };
     $.ajax({
         url: "/CareerAdmin/Update",
@@ -103,12 +104,12 @@ function Update() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
-            loadData();
-            $('#myModal').modal('hide');
+            loadDataCareer();
+            $('#myModalCareer').modal('hide');
             $('#CareerId').val("");
-            $('#Name').val("");
-            $('#Description').val("");
-            $('#UrlSlug').val("");
+            $('#CareerName').val("");
+            $('#CareerDescription').val("");
+            $('#CareerUrlSlug').val("");
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -117,7 +118,7 @@ function Update() {
 }
 
 //function for deleting employee's record  
-function Delele(ID) {
+function DeleleCareer(ID) {
     var ans = confirm("Are you sure you want to delete this Record?");
     if (ans) {
         $.ajax({
@@ -126,7 +127,7 @@ function Delele(ID) {
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             success: function (result) {
-                loadData();
+                loadDataCareer();
             },
             error: function (errormessage) {
                 alert(errormessage.responseText);
@@ -136,40 +137,40 @@ function Delele(ID) {
 }
 
 //Function for clearing the textboxes  
-function clearTextBox() {
+function clearTextBoxCareer() {
     $('#CareerId').val("");
-    $('#Name').val("");
-    $('#Description').val("");
-    $('#UrlSlug').val("");
-    $('#btnUpdate').hide();
-    $('#btnAdd').show();
-    $('#Name').css('border-color', 'lightgrey');
-    $('#Description').css('border-color', 'lightgrey');
-    $('#UrlSlug').css('border-color', 'lightgrey');
+    $('#CareerName').val("");
+    $('#CareerDescription').val("");
+    $('#CareerUrlSlug').val("");
+    $('#btnUpdateCareer').hide();
+    $('#btnAddCareer').show();
+    $('#CareerName').css('border-color', 'lightgrey');
+    $('#CareerDescription').css('border-color', 'lightgrey');
+    $('#CareerUrlSlug').css('border-color', 'lightgrey');
 }
 //Valdidation using jquery  
 function validate() {
     var isValid = true;
-    if ($('#Name').val().trim() == "") {
-        $('#Name').css('border-color', 'Red');
+    if ($('#CareerName').val().trim() == "") {
+        $('#CareerName').css('border-color', 'Red');
         isValid = false;
     }
     else {
-        $('#Name').css('border-color', 'lightgrey');
+        $('#CareerName').css('border-color', 'lightgrey');
     }
-    if ($('#Description').val().trim() == "") {
-        $('#Description').css('border-color', 'Red');
+    if ($('#CareerDescription').val().trim() == "") {
+        $('#CareerDescription').css('border-color', 'Red');
         isValid = false;
     }
     else {
-        $('#Description').css('border-color', 'lightgrey');
+        $('#CareerDescription').css('border-color', 'lightgrey');
     }
-    if ($('#UrlSlug').val().trim() == "") {
-        $('#UrlSlug').css('border-color', 'Red');
+    if ($('#CareerUrlSlug').val().trim() == "") {
+        $('#CareerUrlSlug').css('border-color', 'Red');
         isValid = false;
     }
     else {
-        $('#UrlSlug').css('border-color', 'lightgrey');
+        $('#CareerUrlSlug').css('border-color', 'lightgrey');
     }
     return isValid;
 }

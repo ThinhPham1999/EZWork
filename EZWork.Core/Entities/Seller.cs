@@ -17,6 +17,7 @@ namespace EZWork.Core.Entities
         public string ShortDescription { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập giới thiệu về bản thân")]
         public string Description { get; set; }
+        public DateTime CreateAt { get; set; }
         [Range(0,3)]
         public int Status { get; set; }
         public virtual EZUser EZUser { get; set; }

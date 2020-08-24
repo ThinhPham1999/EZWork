@@ -4,5 +4,77 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <h2>Skill Record</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalSkill" onclick="clearTextBoxSkill();">Add New Skill</button><br /><br />
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    UrlSlug
+                </th>
+                <th>
+                    Career
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody" id="SkillTable"></tbody>
+    </table>
+</div>
 
+<div class="modal fade" id="myModalSkill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add Skill</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="EmployeeId">ID</label>
+                        <input type="text" class="form-control" id="SkillId" placeholder="Id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        <input type="text" class="form-control" id="SkillName" placeholder="Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Age">Description</label>
+                        <input type="text" class="form-control" id="SkillDescription" placeholder="Description" />
+                    </div>
+                    <div class="form-group">
+                        <label for="State">UrlSlug</label>
+                        <input type="text" class="form-control" id="SkillUrlSlug" placeholder="UrlSlug" />
+                    </div>
+                    <div class="form-group">
+                        <label for="careerOption">State</label>
+                        <select id="careerOption" class="form-control">
+                            <option disabled selected>Choose...</option>
+
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAddSkill" onclick="AddSkill();">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdateSkill" style="display:none;" onclick="UpdateSkill();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Skill.js"></script>
