@@ -57,7 +57,7 @@ namespace EZWork.WebUI.Controllers
                 db.Entry(career).State = EntityState.Modified;  
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            } 
             return View(career);
         }
 
