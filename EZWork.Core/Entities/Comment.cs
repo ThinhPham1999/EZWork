@@ -18,7 +18,6 @@ namespace EZWork.Core.Entities
         public string Content { get; set; }
         [Range(1,3)]
         public int Status { get; set; }
-
         public virtual Seller Seller { get; set; }
         public virtual EZUser EZUser { get; set; }
         public virtual IList<ReplyComment> ReplyComments { get; set; }

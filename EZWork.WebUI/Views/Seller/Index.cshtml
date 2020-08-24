@@ -65,7 +65,7 @@
                                                     <div class="wt-title">
                                                         <a href="usersingle.html">
                                                             <i class="fa fa-check-circle"></i>
-                                                            @Html.ActionLink(@item.EZUser.UserName, "Detail", new { id = item.SellerId })
+                                                            @Html.ActionLink(@item.EZUser.FullName, "Detail", new { id = item.SellerId })
                                                         </a>
                                                         @if (!String.IsNullOrEmpty(item.CareerTitle))
                                                         {
