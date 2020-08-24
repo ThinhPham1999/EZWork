@@ -19,7 +19,7 @@ namespace EZWork.Core.Entities
         [Range(1, 3)]
         public int Status { get; set; }
 
-        public virtual EZUser EZUser { get; set; }
+      //  public virtual EZUser EZUser { get; set; }
         public virtual Comment Comment { get; set; }
     }
 }

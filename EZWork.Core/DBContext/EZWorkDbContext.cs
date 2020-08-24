@@ -28,9 +28,10 @@ namespace EZWork.Core.DBContext
         public DbSet<Career> Careers { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<SellerMapSkill> SellerMapSkills { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<ReplyComment> ReplyComments { get; set; }
+        // public DbSet<Rating> Ratings { get; set; }
+        //  public DbSet<Comment> Comments { get; set; }
+        //  public DbSet<ReplyComment> ReplyComments { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<Contact_AboutMe> Contact_AboutMes { get; set; }
         public DbSet<Payer> Payers { get; set; }
 

@@ -14,7 +14,7 @@ namespace EZWork.Core.Entities
         [Range(1,5)]
         public int? Value { get; set; }
 
-        public virtual Seller Seller { get; set; }
-        public virtual EZUser EZUser { get; set; }
+      //  public virtual Seller Seller { get; set; }
+      //  public virtual EZUser EZUser { get; set; }
     }
 }
