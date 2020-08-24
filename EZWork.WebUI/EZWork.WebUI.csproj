@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CareerController.cs" />
+    <Compile Include="Controllers\ExampleSellersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
@@ -726,6 +727,17 @@
     <Content Include="Views\Seller\Detail.cshtml" />
     <Content Include="Views\SellerLog\Index.cshtml" />
     <Content Include="Views\SellerLog\UpdateProfile.cshtml" />
+    <Content Include="Views\Skill\CreateSkill.cshtml" />
+    <Content Include="Views\Skill\UpdateSkill.cshtml" />
+    <Content Include="Views\Skill\DeleteSkill.cshtml" />
+    <Content Include="Views\Career\CreateCareer.cshtml" />
+    <Content Include="Views\Career\UpdateCareer.cshtml" />
+    <Content Include="Views\Career\DeleteCareer.cshtml" />
+    <Content Include="Views\ExampleSellers\Create.cshtml" />
+    <Content Include="Views\ExampleSellers\Delete.cshtml" />
+    <Content Include="Views\ExampleSellers\Details.cshtml" />
+    <Content Include="Views\ExampleSellers\Edit.cshtml" />
+    <Content Include="Views\ExampleSellers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,12 +29,12 @@ namespace EZWork.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-           // ViewBag.CareerId = new SelectList(db.Careers, "CareerId", "Name", skill.CareerId);
+            ViewBag.Id = new SelectList(db.EZUsers, "Id", "FullName", "Gender", "Birthday", "ImageProfile", seller.SellerId);
             return View(seller);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateProfile([Bind(Include = "SellerId,ShortDescription")] Seller seller)
+        public ActionResult UpdateProfile([Bind(Include = "SellerId,ShortDescription,Status,CreateAt")] Seller seller)
         {
             if (ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace EZWork.WebUI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.EZUsers, "FullName",seller.SellerId);
+            ViewBag.Id = new SelectList(db.EZUsers,"Id","FullName", "Gender", "Birthday", "ImageProfile", seller.SellerId);
             return View(seller);
         }
     }

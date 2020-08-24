@@ -1,11 +1,8 @@
 ﻿@model EZWork.Core.Entities.Career
 
-@{
-    ViewBag.Title = "DeleteCarrer";
-}
-
-
 <div class="container">
+    <h4>Career</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -30,21 +27,15 @@
         <dd>
             @Html.DisplayFor(model => model.UrlSlug)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CareerId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CareerId)
-        </dd>
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="DeleteCareer" class="btn btn-default" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

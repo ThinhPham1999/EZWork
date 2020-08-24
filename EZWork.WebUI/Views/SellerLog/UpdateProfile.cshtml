@@ -15,19 +15,51 @@
     <hr />
     @Html.HiddenFor(model => model.SellerId)
 
-    
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.EZUser.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EZUser.FullName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EZUser.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EZUser.Gender, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EZUser.BirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EZUser.BirthDay, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EZUser.ImageProfile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EZUser.ImageProfile, new { htmlAttributes = new { @class = "", @type = "file" } })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
-
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreateAt, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreateAt, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button class="col-2 form-group btn btn-success" value="UpdateProfile">Save$Submit</button>
+            <button class="col-2 form-group btn btn-success" value="UpdateProfile">Update</button>
         </div>
     </div>
 </div>
