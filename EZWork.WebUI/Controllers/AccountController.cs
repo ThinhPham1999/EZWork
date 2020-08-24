@@ -68,7 +68,38 @@ namespace EZWork.WebUI.Controllers
                 _roleManager = value;
             }
         }
-        //
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public  ActionResult PartialHeader() {
+            var name=User.Identity.Name;
+            PartialHeaderViewModel model = new PartialHeaderViewModel();
+            if (!string.IsNullOrEmpty(name)) {
+                model.EZAccount = UserManager.FindByEmail(name);
+                if (!UserManager.FindByEmail(name).EmailConfirmed) {
+                    ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
+                }
+                model.EZUser = db.EZUsers.Find((UserManager.FindByEmail(name).Id.ToLower()));
+            }
+            return PartialView("_PartialHeader", model);
+        }
+
+        //[NonAction]
+        public async Task<ActionResult> SendEmail()
+        {
+            var name = User.Identity.Name;
+            if (!string.IsNullOrEmpty(name))
+            {
+                //string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
+                //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
+                //await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                var user = await UserManager.FindByEmailAsync(name);
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Login", "Account");
+        }
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -88,12 +119,10 @@ namespace EZWork.WebUI.Controllers
             {
                 return View(model);
             }
-            // This doesn't count login failures towards account lockout
-            var user = await UserManager.FindByEmailAsync(model.Email);
-
+            // This doesn't count login failures towards account lockout                   
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
-
+            var user = await UserManager.FindByEmailAsync(model.Email);
             var adminRole = await RoleManager.FindByNameAsync("Admin");
             IdentityUserRole isAdmin = null;
             if (adminRole != null)
@@ -179,9 +208,12 @@ namespace EZWork.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = new EZAccount { UserName = model.Email, Email = model.Email };
+                var account = new EZAccount { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(account, model.Password);
                 var user = await UserManager.FindByEmailAsync(model.Email);
+                if (RoleManager.FindByName("User") == null) {
+                  await  RoleManager.CreateAsync(new IdentityRole("User"));
+                }
                 if (result.Succeeded)
                 {
                     db.EZUsers.Add(new EZUser
@@ -206,18 +238,7 @@ namespace EZWork.WebUI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        //[NonAction]
-        //public async Task<ActionResult> SendEmail()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
-        //        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = User.Identity.GetUserId(), code = code }, protocol: Request.Url.Scheme);
-        //        await UserManager.SendEmailAsync(User.Identity.GetUserId(), "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-        //        return View();
-        //    }
-        //    return RedirectToAction("Login", "Account");
-        //}
+       
 
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

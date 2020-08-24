@@ -70,13 +70,13 @@ function getbyIDCareer(id) {
         dataType: "json",
         success: function (result) {
             $('#CareerId').val(result.CareerId);
-            $('#CareerName').val(result.CareerName);
-            $('#CareerDescription').val(result.CareerDescription);
-            $('#CareerUrlSlug').val(result.CareerUrlSlug);
+            $('#Name').val(result.Name);
+            $('#Description').val(result.Description);
+            $('#UrlSlug').val(result.UrlSlug);
 
-            $('#myModalCareer').modal('show');
-            $('#btnUpdateCareer').show();
-            $('#btnAddCareer').hide();
+            $('#myModal').modal('show');
+            $('#btnUpdate').show();
+            $('#btnAdd').hide();
         },
         error: function (errormessage) {
             alert(errormessage.responseText);

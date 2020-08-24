@@ -191,6 +191,7 @@
     <Compile Include="Models\CareerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PartialHeaderViewModel.cs" />
     <Compile Include="Models\SellerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -566,6 +567,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loginForm.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -667,7 +669,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Skill.js" />
-    <Content Include="Uploads\Photo\featured.png" />
     <Content Include="Uploads\Photo\img-01.png" />
     <Content Include="Uploads\Photo\img-02.png" />
     <Content Include="Uploads\Photo\img-03.png" />

@@ -20,6 +20,7 @@ namespace EZWork.Core.Entities
         public string CreateAt { get; set; }
         public string ModifierAt { get; set; }
         public int Status { get; set; }
+        public string UserName { get; set; }
         public virtual EZAccount  EZAccount { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual IList<Comment> Comments { get; set; }

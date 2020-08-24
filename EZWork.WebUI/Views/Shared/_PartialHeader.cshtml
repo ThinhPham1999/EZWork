@@ -1,4 +1,17 @@
 ﻿@using Microsoft.AspNet.Identity
+@model EZWork.WebUI.Models.PartialHeaderViewModel
+    @if (ViewBag.Message != null) { 
+<div class="col-12 ">
+    <div class="wt-jobalerts">
+        <div class="alert alert-primary alert-dismissible fade show">
+            <span> @Html.Raw(ViewBag.Message)</span>
+            @*<a href="javascript:void(0)" class="wt-alertbtn primary">View</a>*@
+            <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close" style="float:right"></i></a>
+        </div>
+    </div>
+</div>
+    }
+
 <!-- Header Start -->
 <header id="wt-header" class="wt-header wt-haslayout">
     <div class="wt-navigationarea">
@@ -23,7 +36,7 @@
                                                 <a href="jobsingle.html">Job Single</a>
                                             </li>
                                             <li>
-                                                
+
                                                 <a href="jobproposal.html">Job Proposal</a>
                                             </li>
                                         </ul>
@@ -32,25 +45,25 @@
                                         <a href="javascript:void(0);">View Freelancers</a>
                                         <ul class="sub-menu">
                                             <li>
-                                                @Html.ActionLink("User Listing", "Index","Seller",null,null)
-                                            </li>
-                                            <li class="current-menu-item">
-                                                <a href="usersingle.html">User Single</a>
+                                                @Html.ActionLink("User Listing", "Index", "Seller", null, null)
                                             </li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                         </nav>
-                        @if (Request.IsAuthenticated)
+                        @if (Model != null && Model.EZAccount != null && Model.EZUser != null && Request.IsAuthenticated)
                         {
+                            //var claims = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims;
+                            //var claim = claims.SingleOrDefault(m => m.Type == "FullName");
                             <div class="wt-userlogedin">
                                 <figure class="wt-userimg">
-                                    <img src="~/App_Themes/FreelancerTheme/images/user-img.jpg" alt="image description">
+                                    <img src="~/Uploads/Photo/@(Model.EZUser.ImageProfile!=null?Model.EZUser.ImageProfile:"default.jpg")" alt="image description">
+                                    @*<img src="~/App_Themes/FreelancerTheme/images/user-img.jpg" alt="image description">*@
                                 </figure>
                                 <div class="wt-username">
-                                    <h3>Louanne Mattioli</h3>
-                                    <span>Amento Tech</span>
+                                    <h3>@User.Identity.Name</h3>
+                                    <span>@Model.EZUser.FullName</span>
                                 </div>
                                 <nav class="wt-usernav">
                                     <ul>
@@ -64,18 +77,18 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="dashboard-profile.html">
+                                            <a href="#">
                                                 <span>My Profile</span>
                                             </a>
                                         </li>
                                         <li>
                                             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                             {
-                                            @Html.AntiForgeryToken()
+                                                @Html.AntiForgeryToken()
 
-                                            <a href="javascript:document.getElementById('logoutForm').submit()">
-                                                <span>Logout</span>
-                                            </a>
+                                                <a href="javascript:document.getElementById('logoutForm').submit()">
+                                                    <span>Logout</span>
+                                                </a>
                                             }
                                         </li>
                                     </ul>
@@ -84,21 +97,22 @@
                         }
                         else
                         {
-                            <nav id="wt-nav" class="wt-nav navbar-expand-lg">                             
+                            <nav id="wt-nav" class="wt-nav navbar-expand-lg">
                                 <div class="collapse navbar-collapse wt-navigation" id="navbarNav">
                                     <ul class="navbar-nav">
                                         <li class="menu-item-has-children page_item_has_children">
-                                         
+
                                             @Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                                         </li>
                                         <li class="menu-item-has-children page_item_has_children">
-                                          
-                                        <li>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        }
+
+                                        <li>
+                                            @Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    }
                     </div>
                 </div>
             </div>

@@ -64,7 +64,8 @@
                                                 <div class="wt-contenthead">
                                                     <div class="wt-title">
                                                         <a href="usersingle.html">
-                                                            <i class="fa fa-check-circle"></i>@item.EZUser.EZAccount.UserName
+                                                            <i class="fa fa-check-circle"></i>
+                                                            @Html.ActionLink(@item.EZUser.UserName, "Detail", new { id = item.SellerId })
                                                         </a>
                                                         @if (!String.IsNullOrEmpty(item.CareerTitle))
                                                         {
@@ -97,7 +98,7 @@
                                                 {
                                                     foreach (var skill in item.SellerMapSkills)
                                                     {
-                                                        @Html.ActionLink(skill.Skill.Name, "SearchOneSkill", new { id = skill.SkillId})
+                                                        @Html.ActionLink(skill.Skill.Name, "Index", new { oneSkill = skill.SkillId})
                                                     }
                                                 }
                                             </div>

@@ -23,12 +23,16 @@ namespace EZWork.WebUI.Controllers
             sellerRepository = new SellerRepository();
         }
 
-        public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills)
+        public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills, int? oneSkill)
         {
             page = page ?? 1;
             pageSize = pageSize ?? 3;
             ListSellerViewModel model = new ListSellerViewModel();
-            
+            if (oneSkill != null)
+            {
+                Searchskills = new int[] { oneSkill.Value };
+                oneSkill = null;
+            }
             model.SearchTerm = searchTerm;
             model.ViewSellers = sellerRepository.SearchSeller(searchTerm, page.Value, pageSize.Value, Searchskills);
             model.ViewSkills = new List<SkillViewModel>();
@@ -53,17 +57,11 @@ namespace EZWork.WebUI.Controllers
             return View(model);
         }
 
-        
-        public ActionResult SearchOneSkill(int id)
-        {
-            int[] search = new int[] { id };
-            return RedirectToAction("Index", new { searchTerm = "", page = 1, pageSize = 3, Searchskills = search });
-        }
-
         [HttpGet]
-        public ActionResult Detail() 
+        public ActionResult Detail(string id) 
         {
-            return View();
+            Seller seller = sellerRepository.GetSellerByID(id);
+            return View(seller);
         }
     }
 }
