@@ -33,10 +33,10 @@ namespace EZWork.Core.DBContext
         public DbSet<ReplyComment> ReplyComments { get; set; }
         public DbSet<Contact_AboutMe> Contact_AboutMes { get; set; }
         public DbSet<Payer> Payers { get; set; }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

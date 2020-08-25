@@ -574,6 +574,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\profile.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -739,10 +740,11 @@
     <Content Include="Views\ExampleSellers\Details.cshtml" />
     <Content Include="Views\ExampleSellers\Edit.cshtml" />
     <Content Include="Views\ExampleSellers\Index.cshtml" />
+    <Content Include="Views\UserLog\Index.cshtml" />
+    <Content Include="Views\UserLog\UpdateProfileUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\UserLog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
