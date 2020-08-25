@@ -223,7 +223,7 @@
         </div>
         <!-- User Listing End-->
         <!-- User Profile End-->
-        
+
     </div>
 </main>
 <!--Main End-->
@@ -249,43 +249,70 @@
             }).done(function (response) {
                 debugger;
                 if (response.Success) {
-                    // alert('ok');
-                    window.location.reload();
-                    $('.divComment').focus();
+                    addnewComment(response.newReview);
                 } else {
                     alert(response.Message);
                 }
             }).fail(function (response) {
-                alert(response.Message);
+                debugger;
+               // alert(response.Message);
             })
         } else {
             alert('Please Vote rating before leave Comment');
         }
     })
+    function addnewComment(newReview) {
+        debugger;
+        var defaultStar = 5 - newReview.Rate;
+        var starHtml = '';
+        for (var i = 0; i < defaultStar; i++)
+        {
+            starHtml += `<span class="float-right"><i class="text-warning far fa-star"></i></span>`;
+        }
+        for (var i = 0; i < newReview.Rate; i++)
+        {
+            starHtml += `<span class="float-right"><i class="text-warning fa fa-star"></i></span>`;
+        } 
+        var html =`<div class="card">
+                      <div class="card-body">
+                           <div class="row">
+                               <div class="col-md-2">
+                                      <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:60px;height:60px" />
+                                                    <p class="text-secondary text-center">`+ newReview.TimeStamp+ `</p>
+                                     </div>
+                                                <div class="col-md-10">
+                                                    <p>`+ starHtml +`
+                                                    </p>
+                                                    <div class="clearfix"></div>
+                                                    <p>`+ newReview.Text+`</p>
+                                                    <p>
+                                                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                                                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+        debugger;
+ $('.divComment').append(html);
+    }
 </script>
 
-
-
-
-
-
-
-
 @*<div class="card card-inner ">
-        <div class="card-body">
-            <div class="row ">
-                <div class="col-md-2">
-                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" width="80px" height="80px" />
-                    <p class="text-secondary text-center">15 Minutes Ago</p>
-                </div>
-                <div class="col-md-10">
-                    <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
-                    <p>Lorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsum.</p>
-                    <p>
-                        <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
-                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+           <div class="card-body">
+               <div class="row ">
+                   <div class="col-md-2">
+                       <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" width="80px" height="80px" />
+                       <p class="text-secondary text-center">15 Minutes Ago</p>
+                   </div>
+                   <div class="col-md-10">
+                       <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
+                       <p>Lorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsum.</p>
+                       <p>
+                           <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
+                           <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                       </p>
+                   </div>
+               </div>
+           </div>
     </div>*@
