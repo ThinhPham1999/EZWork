@@ -115,7 +115,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-2">
-                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:80px;height:80px" />
+                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:60px;height:60px" />
                                                     <p class="text-secondary text-center">@item.TimeStamp</p>
                                                 </div>
                                                 <div class="col-md-10">
@@ -239,24 +239,28 @@
         $('#ratingValue').val(starValue);
     })
     $('.btnComment').click(function () {
-        alert('hello');
-         debugger;
-        $.ajax({
-            url: '@Url.Action("LeaveReview", "Review")',
-            type: 'post',
-            data: $('#commentForm').serialize(),
-        }).done(function (response) {
-            debugger;
-            if (response.Success) {
-                alert('ok');
-                window.location.reload();
-                $('.divComment').focus();
-            } else {
-                alert(response.Message);
-            }
+        debugger;
+        var starValue = $('#ratingValue').val();
+        if (starValue !== '') {
+            $.ajax({
+                url: '@Url.Action("LeaveReview", "Review")',
+                type: 'post',
+                data: $('#commentForm').serialize(),
+            }).done(function (response) {
+                debugger;
+                if (response.Success) {
+                    // alert('ok');
+                    window.location.reload();
+                    $('.divComment').focus();
+                } else {
+                    alert(response.Message);
+                }
             }).fail(function (response) {
                 alert(response.Message);
             })
+        } else {
+            alert('Please Vote rating before leave Comment');
+        }
     })
 </script>
 

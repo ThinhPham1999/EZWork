@@ -30,27 +30,33 @@ namespace EZWork.WebUI.Controllers
         {
             JsonResult json = new JsonResult();
             var review = new Review();
+            var reviewerID = User.Identity.GetUserId();
             if (User.Identity.IsAuthenticated)
             {
                 review.Text = model.Text;
                 review.SellerID = model.SellerID;
-                if (model.SellerID.Equals(User.Identity.GetUserId()))
+                if (model.SellerID.Equals(reviewerID))
                 {
                     json.Data = new { Success = false, Message = "You can not review yourself" };
                 }
                 else {
-                    review.ReviewerID = User.Identity.GetUserId();
-                    review.TimeStamp = DateTime.Now;
-                    review.Rate = Convert.ToInt32(model.Rate);
-                    var result = reviewRepository.LeaveComment(review);
-                    if (result)
-                    {
-                        json.Data = new { Success = true };
+                    if (reviewRepository.IsExistedReviewer((model.SellerID), reviewerID)){
+                        json.Data = new { Success = false, Message = "You can comment only one" };
                     }
-                    else
-                    {
-                        json.Data = new { Success = false };
-                    }
+                    else {
+                        review.ReviewerID = User.Identity.GetUserId();
+                        review.TimeStamp = DateTime.Now;
+                        review.Rate = Convert.ToInt32(model.Rate);
+                        var result = reviewRepository.LeaveComment(review);
+                        if (result)
+                        {
+                            json.Data = new { Success = true };
+                        }
+                        else
+                        {
+                            json.Data = new { Success = false };
+                        }
+                    }                  
                 }            
             }
             else
