@@ -239,24 +239,28 @@
         $('#ratingValue').val(starValue);
     })
     $('.btnComment').click(function () {
-        alert('hello');
-         debugger;
-        $.ajax({
-            url: '@Url.Action("LeaveReview", "Review")',
-            type: 'post',
-            data: $('#commentForm').serialize(),
-        }).done(function (response) {
-            debugger;
-            if (response.Success) {
-                alert('ok');
-                window.location.reload();
-                $('.divComment').focus();
-            } else {
-                alert(response.Message);
-            }
+        debugger;
+        var starValue = $('#ratingValue').val();
+        if (starValue !== '') {
+            $.ajax({
+                url: '@Url.Action("LeaveReview", "Review")',
+                type: 'post',
+                data: $('#commentForm').serialize(),
+            }).done(function (response) {
+                debugger;
+                if (response.Success) {
+                    // alert('ok');
+                    window.location.reload();
+                    $('.divComment').focus();
+                } else {
+                    alert(response.Message);
+                }
             }).fail(function (response) {
                 alert(response.Message);
             })
+        } else {
+            alert('Please Vote rating before leave Comment');
+        }
     })
 </script>
 
