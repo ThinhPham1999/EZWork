@@ -71,6 +71,7 @@ namespace EZWork.WebUI.Controllers
 
         public ActionResult BecomeSeller(string id)
         {
+            //var seller = sellerRepository.GetSellerByID(id);
             return View();
         }
     }
