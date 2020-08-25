@@ -21,7 +21,7 @@ namespace EZWork.WebUI.Controllers
         {
             skillRepository = new SkillRepository();
             sellerRepository = new SellerRepository();
-            reviewRepository= new ReviewRepository();
+            reviewRepository = new ReviewRepository();
         }
 
         public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills, int? oneSkill)
@@ -54,14 +54,14 @@ namespace EZWork.WebUI.Controllers
             }
             var totalFilterSeller = sellerRepository.SearchSellerCount(searchTerm, Searchskills);
             model.Pager = new Pager(totalFilterSeller, page.Value, pageSize.Value);
-            model.SearchTerm = searchTerm?? "";
-          
+            model.SearchTerm = searchTerm ?? "";
+
             return View(model);
         }
 
         [HttpGet]
         //[ChildActionOnly]
-        public ActionResult Detail(string id) 
+        public ActionResult Detail(string id)
         {
             DetailSellerViewModel model = new DetailSellerViewModel();
             model.Seller = sellerRepository.GetSellerByID(id);
