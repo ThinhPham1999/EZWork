@@ -1,0 +1,35 @@
+﻿@model EZWork.Core.Entities.Review
+@if (Model != null)
+{
+    var defaultStar = 5 - Model.Rate;
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:60px;height:60px" />
+                    <p class="text-secondary text-center">@Model.TimeStamp</p>
+                </div>
+                <div class="col-md-10">
+                    <p>
+                        @for (int i = 0; i < defaultStar; i++)
+                        {
+                            <span class="float-right"><i class="text-warning far fa-star"></i></span>
+                        }
+                        @for (int i = 0; i < Model.Rate; i++)
+                        {
+                            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                        }
+
+                    </p>
+                    <div class="clearfix"></div>
+                    <p>@Model.Text</p>
+                    <p>
+                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

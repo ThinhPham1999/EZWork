@@ -26,9 +26,10 @@ namespace EZWork.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult LeaveReview(ReviewViewModel model)
+        public ActionResult LeaveReview(ReviewViewModel model)
         {
             JsonResult json = new JsonResult();
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             var review = new Review();
             var reviewerID = User.Identity.GetUserId();
             if (User.Identity.IsAuthenticated)
@@ -45,17 +46,18 @@ namespace EZWork.WebUI.Controllers
                     }
                     else {
                         review.ReviewerID = User.Identity.GetUserId();
+                        //Lưu ý chỗ này
                         review.TimeStamp = DateTime.Now;
                         review.Rate = Convert.ToInt32(model.Rate);
                         var result = reviewRepository.LeaveComment(review);
                         if (result)
                         {
-                            json.Data = new { Success = true };
+                            json.Data = new { Success = true , newReview= review };               
                         }
-                        else
-                        {
-                            json.Data = new { Success = false };
-                        }
+                        //else
+                        //{
+                        //    json.Data = new { Success = false };
+                        //}
                     }                  
                 }            
             }
