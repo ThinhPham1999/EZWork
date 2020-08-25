@@ -68,5 +68,10 @@ namespace EZWork.WebUI.Controllers
             model.Reviews = reviewRepository.GetReviewsByID(id);
             return View(model);
         }
+
+        public ActionResult BecomeSeller(string id)
+        {
+            return View();
+        }
     }
 }

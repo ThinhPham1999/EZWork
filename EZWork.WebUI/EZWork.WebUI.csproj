@@ -727,6 +727,7 @@
     <Content Include="Views\Seller\Index.cshtml" />
     <Content Include="Views\Seller\Listing.cshtml" />
     <Content Include="Views\Seller\Detail.cshtml" />
+    <Content Include="Views\Seller\BecomeSeller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
