@@ -64,7 +64,7 @@ namespace EZWork.WebUI.Controllers
         public ActionResult Detail(string id) 
         {
             DetailSellerViewModel model = new DetailSellerViewModel();
-           model.Seller = sellerRepository.GetSellerByID(id);
+            model.Seller = sellerRepository.GetSellerByID(id);
             model.Reviews = reviewRepository.GetReviewsByID(id);
             return View(model);
         }
