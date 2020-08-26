@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
+    <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -728,6 +729,14 @@
     <Content Include="Views\Seller\Listing.cshtml" />
     <Content Include="Views\Seller\Detail.cshtml" />
     <Content Include="Views\Review\LeaveReview.cshtml" />
+    <Content Include="Views\UserLogin\Index.cshtml" />
+    <Content Include="Views\UserLogin\UpdateProfileUser.cshtml" />
+    <Content Include="Views\Skill\CreateSkill.cshtml" />
+    <Content Include="Views\Skill\UpdateSkill.cshtml" />
+    <Content Include="Views\Skill\DeleteSkill.cshtml" />
+    <Content Include="Views\Career\CreateCareer.cshtml" />
+    <Content Include="Views\Career\UpdateCareer.cshtml" />
+    <Content Include="Views\Career\DeleteCareer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
