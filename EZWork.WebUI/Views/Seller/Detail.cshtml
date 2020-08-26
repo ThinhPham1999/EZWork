@@ -108,44 +108,22 @@
                                         <button type="button" class="btn btn-success btnComment">Comment</button>
                                     </form>
                                 </div>
-                                @foreach (var item in Model.Reviews)
-                                {
-                                    var defaultStar = 5 - item.Rate;
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:60px;height:60px" />
-                                                    <p class="text-secondary text-center">@item.TimeStamp</p>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <p>
-                                                        @for (int i = 0; i < defaultStar; i++)
-                                                        {
-                                                            <span class="float-right"><i class="text-warning far fa-star"></i></span>
-                                                        }
-                                                        @for (int i = 0; i < item.Rate; i++)
-                                                        {
-                                                            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
-                                                        }
-
-                                                    </p>
-                                                    <div class="clearfix"></div>
-                                                    <p>@item.Text</p>
-                                                    <p>
-                                                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-                                                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @{
+                                    ShowReviewViewModel showReview = new ShowReviewViewModel();
+                                    showComment.Review = Model.Reviews;
+                                    //showComment.ReplyComments = Model.ReplyComments;
+                                    //showComment.AverageRate = Model.AverageRate;*@
+                                    Html.RenderPartial("ShowReview", showReview);
                                 }
+                             
                             </div>
                             <!-- User Listing End-->
+                            <div class="row ">
+                                <a href="#" class="seeMoreCommentBtn"><p>Click to see more</p></a>
+                            </div>
                         </div>
                     </div>
-
+                   
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
                         <aside id="wt-sidebar" class="wt-sidebar">
                             <div id="wt-ourskill" class="wt-widget">
@@ -262,7 +240,7 @@
         }
     })
     function addnewComment(newReview) {
-        debugger;
+      //  debugger;
         var defaultStar = 5 - newReview.Rate;
         var starHtml = '';
         for (var i = 0; i < defaultStar; i++)
@@ -272,7 +250,7 @@
         for (var i = 0; i < newReview.Rate; i++)
         {
             starHtml += `<span class="float-right"><i class="text-warning fa fa-star"></i></span>`;
-        } 
+        }
         var html =`<div class="card">
                       <div class="card-body">
                            <div class="row">
@@ -293,9 +271,13 @@
                                             </div>
                                         </div>
                                     </div>`;
-        debugger;
- $('.divComment').append(html);
+       // debugger;
+        $('.divComment').prepend(html);
     }
+    $('.seeMoreCommentBtn').click(function () {
+        // alert('ok');
+      //  debugger;
+    })
 </script>
 
 @*<div class="card card-inner ">

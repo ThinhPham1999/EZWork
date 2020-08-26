@@ -22,5 +22,14 @@ namespace EZWork.Core.Repository
            var review= db.Reviews.Where(x => x.SellerID == sellerID && x.ReviewerID == reviewerID).SingleOrDefault();
             return review != null ? true : false;
         }
+        public List<Review> GetListReviewsFollowPage( int page, int recordSize)
+        {
+            var reviews = db.Reviews.ToList();
+            var skip = (page - 1) * recordSize;
+            return reviews.OrderBy(x => x.TimeStamp).Skip(skip).Take(recordSize).ToList();
+        }
+        public int GetCountReview() {
+            return db.Reviews.Count();
+        }
     }
 }

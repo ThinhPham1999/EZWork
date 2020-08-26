@@ -195,6 +195,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PartialHeaderViewModel.cs" />
     <Compile Include="Models\SellerViewModel.cs" />
+    <Compile Include="Models\ShowReviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -728,10 +729,11 @@
     <Content Include="Views\Seller\Listing.cshtml" />
     <Content Include="Views\Seller\Detail.cshtml" />
     <Content Include="Views\Review\LeaveReview.cshtml" />
+    <Content Include="Views\Seller\ShowReview.cshtml" />
+    <Content Include="Views\Review\GetReviewsFollowPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
