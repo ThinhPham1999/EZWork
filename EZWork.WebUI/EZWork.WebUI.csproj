@@ -179,18 +179,18 @@
     <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CareerController.cs" />
-    <Compile Include="Controllers\ExampleSellersController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
-    <Compile Include="Controllers\SellerLogController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
-    <Compile Include="Controllers\UserLogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CareerViewModel.cs" />
+    <Compile Include="Models\DetailSellerViewModel.cs" />
+    <Compile Include="Models\ReviewViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PartialHeaderViewModel.cs" />
@@ -570,11 +570,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\loginForm.css" />
+    <Content Include="Content\ReviewForm.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Image\profile.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -727,24 +727,11 @@
     <Content Include="Views\Seller\Index.cshtml" />
     <Content Include="Views\Seller\Listing.cshtml" />
     <Content Include="Views\Seller\Detail.cshtml" />
-    <Content Include="Views\SellerLog\Index.cshtml" />
-    <Content Include="Views\SellerLog\UpdateProfile.cshtml" />
-    <Content Include="Views\Skill\CreateSkill.cshtml" />
-    <Content Include="Views\Skill\UpdateSkill.cshtml" />
-    <Content Include="Views\Skill\DeleteSkill.cshtml" />
-    <Content Include="Views\Career\CreateCareer.cshtml" />
-    <Content Include="Views\Career\UpdateCareer.cshtml" />
-    <Content Include="Views\Career\DeleteCareer.cshtml" />
-    <Content Include="Views\ExampleSellers\Create.cshtml" />
-    <Content Include="Views\ExampleSellers\Delete.cshtml" />
-    <Content Include="Views\ExampleSellers\Details.cshtml" />
-    <Content Include="Views\ExampleSellers\Edit.cshtml" />
-    <Content Include="Views\ExampleSellers\Index.cshtml" />
-    <Content Include="Views\UserLog\Index.cshtml" />
-    <Content Include="Views\UserLog\UpdateProfileUser.cshtml" />
+    <Content Include="Views\Review\LeaveReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

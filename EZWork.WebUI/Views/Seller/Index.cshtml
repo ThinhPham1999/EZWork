@@ -58,14 +58,14 @@
                                         <div class="wt-userlistinghold wt-featured">
                                             <span class="wt-featuredtag"><img src="~/Uploads/Photo/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                             <figure class="wt-userlistingimg">
-                                                <img src="@Url.Content(item.EZUser.ImageProfile)" alt="image description" width="200" height="200">
+                                                <img src="~/Uploads/Profile/@(item.EZUser.ImageProfile != null?item.EZUser.ImageProfile :"user-picture.png")" alt="image description" width="200" height="200">
                                             </figure>
                                             <div class="wt-userlistingcontent">
                                                 <div class="wt-contenthead">
                                                     <div class="wt-title">
                                                         <a href="usersingle.html">
                                                             <i class="fa fa-check-circle"></i>
-                                                            @Html.ActionLink(@item.EZUser.UserName, "Detail", new { id = item.SellerId })
+                                                            @Html.ActionLink(@item.EZUser.FullName, "Detail", new { id = item.SellerId })
                                                         </a>
                                                         @if (!String.IsNullOrEmpty(item.CareerTitle))
                                                         {

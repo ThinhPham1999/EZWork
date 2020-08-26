@@ -1,4 +1,4 @@
-﻿@model EZWork.Core.Entities.Seller
+﻿@model EZWork.WebUI.Models.DetailSellerViewModel
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,20 +27,13 @@
                             <div class="row">
                                 <div class="wt-userprofile">
                                     <figure>
-                                        @if (Model.EZUser.ImageProfile == null)
-                                        {
-                                            <img src="~/Uploads/Profile/user-picture.png" alt="img description">
-                                        }
-                                        else
-                                        {
-                                            <img src="@Url.Content(Model.EZUser.ImageProfile)" alt="img description">
-                                        }
+                                        <img src="~/Uploads/Profile/@(Model.Seller.EZUser.ImageProfile != null?Model.Seller.EZUser.ImageProfile :"user-picture.png")">
                                         <div class="wt-userdropdown wt-online">
                                         </div>
                                     </figure>
                                     <div class="wt-title">
-                                        <h3><i class="fa fa-check-circle"></i> @Model.EZUser.FullName</h3>
-                                        <span>@Model.Rate/5 <a class="javascript:void(0);">(@Model.FeedBackCount Feedback)</a> <br>Member since @Model.CreateAt.Month, @Model.CreateAt.Day, @Model.CreateAt.Year <br><a href="javascript:void(0);">@Model.EZUser.UserName</a> <a href="javascript:void(0);" class="wt-reportuser">Report User</a></span>
+                                        <h3><i class="fa fa-check-circle"></i> @Model.Seller.EZUser.FullName</h3>
+                                        <span>@Model.Seller.Rate/5 <a class="javascript:void(0);">(@Model.Seller.FeedBackCount Feedback)</a> <br>Member since @Model.Seller.CreateAt.Month, @Model.Seller.CreateAt.Day, @Model.Seller.CreateAt.Year <br><a href="javascript:void(0);">@Model.Seller.EZUser.FullName</a> <a href="javascript:void(0);" class="wt-reportuser">Report User</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -48,13 +41,13 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
                             <div class="row">
                                 <div class="wt-proposalhead wt-userdetails">
-                                    <h2>@Model.CareerTitle</h2>
+                                    <h2>@Model.Seller.CareerTitle</h2>
                                     <ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
                                         <li>VietNam</li>
                                         <li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
                                     </ul>
                                     <div class="wt-description">
-                                        <p>@Model.Description</p>
+                                        <p>@Model.Seller.Description</p>
                                     </div>
                                 </div>
                                 <div id="wt-statistics" class="wt-statistics wt-profilecounter">
@@ -86,93 +79,70 @@
                 </div>
             </div>
         </div>
-        <!-- User Profile End-->
+
         <!-- User Listing Start-->
         <div class="container">
             <div class="row">
                 <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
-                        <div class="wt-usersingle">
+                        <div class="">
                             @*Rating and comment here*@
-                            <div class="wt-clientfeedback">
-                                <div class="wt-usertitle wt-titlewithselect">
-                                    <h2>Client Feedback</h2>
-                                    <div class="form-group">
-                                        <span class="wt-select">
-                                            <select>
-                                                <option value="Show All">Show All</option>
-                                                <option value="One Page">One Page </option>
-                                                <option value="Two Page">Two Page</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                            <!-- User Listing Start-->
+                            <div class="divComment">
+                                <h2 class="text-center">Comment Form</h2>
+                                <div class="container">
+                                    <form id="commentForm">
+                                        <div class="form-group">
+                                            <label for="comment">Comment:</label>
+                                            <input type="hidden" name="SellerID" value="@Model.Seller.SellerId" />
+                                            <input type="hidden" name="Rate" id="ratingValue" />
+                                            <span class="text-warning">
+                                                <i class="ratingstar far fa-star" data-value="1"></i>
+                                                <i class="ratingstar far fa-star" data-value="2"></i>
+                                                <i class="ratingstar far fa-star" data-value="3"></i>
+                                                <i class="ratingstar far fa-star" data-value="4"></i>
+                                                <i class="ratingstar far fa-star" data-value="5"></i>
+                                            </span>
+                                            <textarea class="form-control" rows="3" id="comment" name="text" style="max-width:55%"></textarea>
+                                        </div>
+                                        <button type="button" class="btn btn-success btnComment">Comment</button>
+                                    </form>
                                 </div>
-                                <div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
-                                    <figure class="wt-userlistingimg">
-                                        <img src="images/client/img-01.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-userlistingcontent">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Themeforest Company</a>
-                                                <h3>Translation and Proof Reading (Multi Language)</h3>
+                                @foreach (var item in Model.Reviews)
+                                {
+                                    var defaultStar = 5 - item.Rate;
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:60px;height:60px" />
+                                                    <p class="text-secondary text-center">@item.TimeStamp</p>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <p>
+                                                        @for (int i = 0; i < defaultStar; i++)
+                                                        {
+                                                            <span class="float-right"><i class="text-warning far fa-star"></i></span>
+                                                        }
+                                                        @for (int i = 0; i < item.Rate; i++)
+                                                        {
+                                                            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                                        }
+
+                                                    </p>
+                                                    <div class="clearfix"></div>
+                                                    <p>@item.Text</p>
+                                                    <p>
+                                                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                                                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <ul class="wt-userlisting-breadcrumb">
-                                                <li><span><i class="fa fa-dollar-sign"></i> Beginner</span></li>
-                                                <li><span><img src="images/flag/img-04.png" alt="img description"> England</span></li>
-                                                <li><span><i class="fas fa-spinner fa-spin"></i> In Progress</span></li>
-                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="wt-userlistinghold wt-userlistingsingle">
-                                    <figure class="wt-userlistingimg">
-                                        <img src="images/client/img-02.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-userlistingcontent">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Videohive Studio</a>
-                                                <h3>Need help translating app stringlist from English to Arabic</h3>
-                                            </div>
-                                            <ul class="wt-userlisting-breadcrumb">
-                                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Intermediate</span></li>
-                                                <li><span><img src="images/flag/img-03.png" alt="img description">  Canada</span></li>
-                                                <li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2017</span></li>
-                                                <li><span class="wt-stars"><span></span></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="wt-description">
-                                        <p>“ Eiusmod tempor incididunt ut labore et dolore magna quis nostrud exercitation ullamco laboris. ”</p>
-                                    </div>
-                                </div>
-                                <div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
-                                    <figure class="wt-userlistingimg">
-                                        <img src="images/client/img-03.jpg" alt="image description">
-                                    </figure>
-                                    <div class="wt-userlistingcontent">
-                                        <div class="wt-contenthead">
-                                            <div class="wt-title">
-                                                <a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Photodune Professionals</a>
-                                                <h3>Blog Post Writing in English Language</h3>
-                                            </div>
-                                            <ul class="wt-userlisting-breadcrumb">
-                                                <li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Professional</span></li>
-                                                <li><span><img src="images/flag/img-02.png" alt="img description"> United States</span></li>
-                                                <li><span><i class="far fa-calendar"></i>  Jun 2017</span></li>
-                                                <li><span class="wt-stars"><span></span></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="wt-description">
-                                        <p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
-                                    </div>
-                                </div>
-                                <div class="wt-btnarea">
-                                    <a href="javascript:void(0);" class="wt-btn">Load More</a>
-                                </div>
+                                }
                             </div>
+                            <!-- User Listing End-->
                         </div>
                     </div>
 
@@ -183,7 +153,7 @@
                                     <h2>My Skills</h2>
                                 </div>
                                 <div class="wt-widgetcontent wt-skillscontent">
-                                    @foreach (var skill in Model.SellerMapSkills)
+                                    @foreach (var skill in Model.Seller.SellerMapSkills)
                                     {
                                         <div class="wt-skillholder" data-percent="@skill.Level%">
                                             <span>PHP <em>@skill.Level%</em></span>
@@ -198,9 +168,9 @@
                                 </div>
                                 <div class="wt-widgetcontent">
                                     <div class="wt-widgettag wt-widgettagvtwo">
-                                        @foreach (var skill in Model.SellerMapSkills)
+                                        @foreach (var skill in Model.Seller.SellerMapSkills)
                                         {
-                                            @Html.ActionLink(skill.Skill.Name, "Index", new { oneSkill = skill.SkillId})
+                                            @Html.ActionLink(skill.Skill.Name, "Index")
                                         }
                                     </div>
                                 </div>
@@ -252,6 +222,97 @@
             </div>
         </div>
         <!-- User Listing End-->
+        <!-- User Profile End-->
+
     </div>
 </main>
 <!--Main End-->
+<script>
+    $('.ratingstar ').hover(function () {
+        $('.ratingstar').addClass("far").removeClass("fas");
+        $(this).addClass("fas").removeClass("far");
+        $(this).prevAll(".ratingstar").addClass("fas").removeClass("far");
+    })
+    $('.ratingstar').click(function () {
+        // debugger;
+        var starValue = $(this).attr('data-value');
+        $('#ratingValue').val(starValue);
+    })
+    $('.btnComment').click(function () {
+        debugger;
+        var starValue = $('#ratingValue').val();
+        if (starValue !== '') {
+            $.ajax({
+                url: '@Url.Action("LeaveReview", "Review")',
+                type: 'post',
+                data: $('#commentForm').serialize(),
+            }).done(function (response) {
+                debugger;
+                if (response.Success) {
+                    addnewComment(response.newReview);
+                } else {
+                    alert(response.Message);
+                }
+            }).fail(function (response) {
+                debugger;
+               // alert(response.Message);
+            })
+        } else {
+            alert('Please Vote rating before leave Comment');
+        }
+    })
+    function addnewComment(newReview) {
+        debugger;
+        var defaultStar = 5 - newReview.Rate;
+        var starHtml = '';
+        for (var i = 0; i < defaultStar; i++)
+        {
+            starHtml += `<span class="float-right"><i class="text-warning far fa-star"></i></span>`;
+        }
+        for (var i = 0; i < newReview.Rate; i++)
+        {
+            starHtml += `<span class="float-right"><i class="text-warning fa fa-star"></i></span>`;
+        } 
+        var html =`<div class="card">
+                      <div class="card-body">
+                           <div class="row">
+                               <div class="col-md-2">
+                                      <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width:60px;height:60px" />
+                                                    <p class="text-secondary text-center">`+ newReview.TimeStamp+ `</p>
+                                     </div>
+                                                <div class="col-md-10">
+                                                    <p>`+ starHtml +`
+                                                    </p>
+                                                    <div class="clearfix"></div>
+                                                    <p>`+ newReview.Text+`</p>
+                                                    <p>
+                                                        <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                                                        <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+        debugger;
+ $('.divComment').append(html);
+    }
+</script>
+
+@*<div class="card card-inner ">
+           <div class="card-body">
+               <div class="row ">
+                   <div class="col-md-2">
+                       <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" width="80px" height="80px" />
+                       <p class="text-secondary text-center">15 Minutes Ago</p>
+                   </div>
+                   <div class="col-md-10">
+                       <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
+                       <p>Lorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsumLorem Ipsum is simply dummyIpsum.</p>
+                       <p>
+                           <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
+                           <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                       </p>
+                   </div>
+               </div>
+           </div>
+    </div>*@

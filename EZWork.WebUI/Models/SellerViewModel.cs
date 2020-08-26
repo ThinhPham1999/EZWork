@@ -18,6 +18,7 @@ namespace EZWork.WebUI.Models
         public string SearchTerm { get; set; }
         public List<SkillViewModel> ViewSkills { get; set; }
         public Pager Pager { get; set; }
+       
     }
 
     public class SkillViewModel{
