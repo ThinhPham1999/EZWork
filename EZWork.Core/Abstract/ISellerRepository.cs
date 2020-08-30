@@ -17,5 +17,6 @@ namespace EZWork.Core.Abstract
         bool UpdateSeller(Seller seller);
         bool DeleteSkill(Seller seller);
         List<Seller> GetAll();
+        void UpdateSkill(List<SellerMapSkill> sellerMapSkills, Seller seller);
     }
 }

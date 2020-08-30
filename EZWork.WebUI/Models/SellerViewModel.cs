@@ -25,4 +25,22 @@ namespace EZWork.WebUI.Models
         public Skill Skill { get; set; }
         public bool IsChecked { get; set; }
     }
+
+    public class BecomeSellerViewModel
+    {
+        public string SellerId { get; set; }
+        public string ShortDescription { get; set; }
+        public string Description { get; set; }
+        public string CareerTitle { get; set; }
+        public List<SellerMapSkill> OwnerSkill { get; set; }
+        public List<Skill> Skills { get; set; }
+    }
+
+    public class BecomeSellerPostView
+    {
+        public string SellerId { get; set; }
+        public string ShortDescription { get; set; }
+        public string Description { get; set; }
+        public List<int> SkillIds { get; set; }
+    }
 }

@@ -1,31 +1,132 @@
-﻿
+﻿@model EZWork.WebUI.Models.BecomeSellerViewModel
+
 @{
-    ViewBag.Title = "BecomeSeller";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>BecomeSeller</h2>
+<div class="form-login" style="width:80%">
+    <h2>@ViewBag.Title</h2>
+    <div class="col-12">
+        @using (Html.BeginForm("BecomeSeller", "Seller", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            <input id="sellerID" name="sellerId" value="@Model.SellerId" hidden readonly />
+            <div class="form-group ">
+                <label for="inputCareer">Career Title</label>
+                <input type="text" name="careerTitle" class="form-control col-12" id="inputCareerTitle" placeholder="" value="@Model.CareerTitle" required>
+            </div>
 
+            <div class="form-group ">
+                <label for="inputShortDesccription">ShortDesccription</label>
+                <input type="text" name="shortDescription" class="form-control col-12" id="inputShortDesccription" placeholder="" value="@Model.ShortDescription" required>
+            </div>
 
-
-<main id="wt-main" class="wt-main wt-haslayout">
-    <div id="wt-sidebarwrapper" class="wt-sidebarwrapper wt-fixednav">
-        12321434
-    </div>
-    <section class="wt-haslayout">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-                <div class="wt-haslayout wt-dbsectionspace"></div>
-                <div class="wt-updatall">
-                    <i class="ti-announcement"></i>
-                    <span>Update all the latest changes made by you, by just clicking on “Save &amp; Continue” button.</span>
-                    <a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
+            <div class="form-group">
+                <label for="inputDesccription">Description</label>
+                <textarea name="description" class="form-control" id="inputDescription" rows="3" required>@Model.Description</textarea>
+            </div>
+            <div class="form-group">
+                <label for="inputSkill">Choose skill</label>
+                <div class="row form-group m-1">
+                    <select id="inputSkill" class="form-control col-sm-8 p-2">
+                        <option selected disabled>Choose...</option>
+                        @foreach (var skill in Model.Skills)
+                        {
+                            <option data-value='{"Id":"@skill.SkillId","Name":"@skill.Name"}'>@skill.Name</option>
+                        }
+                    </select>
+                    <div class="col-sm-2"><input type="number" id="level" class="form-control" value="0" min="0" max="100" /></div>
+                    <button class="btn btn-danger col-sm-2 p-2" type="button" id="AddSkill" value="0">Add</button>
+                </div>
+                <div class="skill">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Skill
+                                </th>
+                                <th>
+                                    Level
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody" id="SkillUser">
+                            @if (Model.OwnerSkill.Count > 0)
+                            {
+                                foreach (var skill in Model.OwnerSkill)
+                                {
+                                    <tr id="@skill.SkillId">
+                                        <td><input type="text" value="@skill.SkillId" id="skill @skill.SkillId" name="skillId" readonly hidden> @skill.Skill.Name </td>
+                                        <td><input type="text" value="@skill.Level" name="level" readonly hidden>@skill.Level</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" onclick="return getbyIDSkill(this, @skill.SkillId)">Edit</button>
+                                            <button type="button" class="btn btn-danger" onclick="DeleleSkill(this)">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"></div>
-        </div>
-    </section>
-    <!-- User Listing End-->
-    <!-- User Profile End-->
-    
-</main>
+            <div class="form-group">
+                <button type="submit" id="Save" class="btn btn-success col-12">Save your profile seller</button>
+            </div>
+            <div class="form-group">
+                <button type="button" id="reset" class="btn btn-primary col-12"><i class="fa fa-facebook"></i> Reset</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#AddSkill").click(function () {
+            createSkill();
+        });
+
+    });
+
+    function checkduplicate(skillId) {
+        if ($("#" + skillId).length) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function createSkill() {
+        var html = '';
+        var skillId;
+        var skillName;
+        skillId = $('#inputSkill').find(":selected").data("value").Id;
+        skillName = $('#inputSkill').find(":selected").data("value").Name;
+        var level = $('#level').val();
+        if (checkduplicate(skillId)) {
+            html += '<tr id = "' + skillId + '">';
+            html += '<td>' + '<input type="text" value="' + skillId + '"id="skill' + skillId + '" name="skillId" readonly hidden>' + skillName + '</td>';
+            html += '<td>' + '<input type="text" value="' + level + '" name="level" readonly hidden>' + level + '</td>';
+            html += '<td><button type="button" class="btn btn-primary" onclick="return getbyIDSkill(this,' + skillId + ')">Edit</button>  <button type="button" class="btn btn-danger" onclick="DeleleSkill(this)">Delete</button></td>';
+            html += '</tr>';
+            $('#SkillUser').append(html);
+        }
+    }
+
+    function DeleleSkill(btn) {
+        if (typeof (btn) == "object") {
+            $(btn).closest("tr").remove();
+        } else {
+            return false;
+        }
+    }
+
+</script>

@@ -69,7 +69,7 @@
                                                         </a>
                                                         @if (!String.IsNullOrEmpty(item.CareerTitle))
                                                         {
-                                                            <h2>Classifieds Posting, Data Entry, Typing</h2>
+                                                            <h2>@item.CareerTitle</h2>
                                                         }
                                                     </div>
                                                 </div>
@@ -87,7 +87,7 @@
                                                             }
                                                         }
                                                     </span>
-                                                    <span class="wt-starcontent">@item.Rate/<sub>5</sub> <em>(@item.FeedBackCount Feedback)</em></span>
+                                                    <span class="wt-starcontent">@(item.Rate ?? 0)/<sub>5</sub> <em>(@item.FeedBackCount Feedback)</em></span>
                                                 </div>
                                             </div>
                                             <div class="wt-description">
@@ -98,7 +98,7 @@
                                                 {
                                                     foreach (var skill in item.SellerMapSkills)
                                                     {
-                                                        @Html.ActionLink(skill.Skill.Name, "Index", new { oneSkill = skill.SkillId})
+                                                        @Html.ActionLink(skill.Skill.Name, "Index", new { oneSkill = skill.SkillId })
                                                     }
                                                 }
                                             </div>

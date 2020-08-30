@@ -82,6 +82,9 @@
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="@Url.Action("BecomeSeller", "Seller")">Become a seller</a>
+                                        </li>
+                                        <li>
                                             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                             {
                                                 @Html.AntiForgeryToken()

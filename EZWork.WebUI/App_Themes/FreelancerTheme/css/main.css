@@ -112,7 +112,6 @@ input[type="color"],
 .uneditable-input {
 	color: #999;
 	outline: none;
-	height: 50px;
 	background:#fff;
 	font-size: 14px;
 	-webkit-box-shadow: none;

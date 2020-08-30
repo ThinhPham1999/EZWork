@@ -58,10 +58,12 @@ namespace EZWork.Core.Repository
         public bool SaveSeller(Seller seller)
         {
             db.Sellers.Add(seller);
+
             return db.SaveChanges() > 0;
         }
         public bool UpdateSeller(Seller seller)
         {
+
             db.Entry(seller).State = EntityState.Modified;
             return db.SaveChanges() > 0;
         }
@@ -70,6 +72,16 @@ namespace EZWork.Core.Repository
         {
             db.Entry(seller).State = EntityState.Deleted;
             return db.SaveChanges() > 0;
+        }
+
+        public void UpdateSkill(List<SellerMapSkill> sellerMapSkills, Seller seller)
+        {
+            db.SellerMapSkills.RemoveRange(db.SellerMapSkills.Where(s => s.SellerId.Equals(seller.SellerId)));
+            foreach(var item in sellerMapSkills)
+            {
+                db.SellerMapSkills.Add(item);
+            }
+            db.SaveChanges();
         }
     }
 }

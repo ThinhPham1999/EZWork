@@ -3,12 +3,14 @@ using EZWork.Core.Entities;
 using EZWork.Core.Repository;
 using EZWork.WebUI.Models;
 using EZWork.Extensions.Extensions;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace EZWork.WebUI.Controllers
 {
@@ -17,6 +19,33 @@ namespace EZWork.WebUI.Controllers
         private ISKillRepository skillRepository;
         private ISellerRepository sellerRepository;
         private ReviewRepository reviewRepository;
+
+
+        private AccountRepository _userManager;
+        public AccountRepository UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<AccountRepository>();
+            }
+            set
+            {
+                _userManager = value;
+            }
+        }
+        private RoleRepository _roleManager;
+        public RoleRepository RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<RoleRepository>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+
         public SellerController()
         {
             skillRepository = new SkillRepository();
@@ -69,10 +98,81 @@ namespace EZWork.WebUI.Controllers
             return View(model);
         }
 
-        public ActionResult BecomeSeller(string id)
+        [Authorize(Roles = "User,Seller")]
+        [HttpGet]
+        public ActionResult BecomeSeller()
         {
-            //var seller = sellerRepository.GetSellerByID(id);
-            return View();
+            string id = User.Identity.GetUserId();  
+            var seller = sellerRepository.GetSellerByID(id);
+            var skills = skillRepository.GetAll();
+            BecomeSellerViewModel becomeSellerViewModel = new BecomeSellerViewModel();
+            becomeSellerViewModel.SellerId = id;
+            if (seller != null)
+            {
+                becomeSellerViewModel.Description = seller.Description;
+                becomeSellerViewModel.ShortDescription = seller.ShortDescription;
+                becomeSellerViewModel.CareerTitle = seller.CareerTitle;
+                becomeSellerViewModel.OwnerSkill = seller.SellerMapSkills.ToList();
+                ViewBag.Title = "Edit your seller info";
+            }
+            else
+            {
+                ViewBag.Title = "Become a seller";
+            }
+            becomeSellerViewModel.Skills = new List<Skill>();
+            becomeSellerViewModel.Skills = skills.ToList();
+            return View(becomeSellerViewModel);
+        }
+
+        [Authorize(Roles = "User,Seller")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult BecomeSeller(int[] skillID, string shortDescription, string description, int[] level, string careerTitle)
+        {
+            string sellerid = User.Identity.GetUserId();
+
+            if (sellerRepository.GetSellerByID(sellerid) == null)
+            {
+                Seller newSeller = new Seller()
+                {
+                    Description = description,
+                    ShortDescription = shortDescription,
+                    SellerId = sellerid,
+                    CreateAt = DateTime.UtcNow,
+                    CareerTitle = careerTitle
+                };
+                var oldUser = UserManager.FindById(sellerid);
+                var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
+                var oldRoleName = RoleManager.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+                UserManager.RemoveFromRoles(sellerid, oldRoleName);
+                UserManager.AddToRoles(sellerid, "Seller");
+
+                sellerRepository.SaveSeller(newSeller);
+            }
+            else
+            {
+                Seller updateSeller = sellerRepository.GetSellerByID(sellerid);
+                updateSeller.CareerTitle = careerTitle;
+                updateSeller.Description = description;
+                updateSeller.ShortDescription = shortDescription;
+                sellerRepository.UpdateSeller(updateSeller);
+            }
+
+            Seller seller = sellerRepository.GetSellerByID(sellerid);
+
+            List<SellerMapSkill> sellerMaps = new List<SellerMapSkill>();
+            for (int i = 0; i < skillID.Length; i++)
+            {
+                sellerMaps.Add(new SellerMapSkill()
+                {
+                    SkillId = skillID[i],
+                    SellerId = sellerid,
+                    Level = level[i]
+                });
+            }
+
+            sellerRepository.UpdateSkill(sellerMaps, seller);
+            return RedirectToAction("BecomeSeller");
         }
     }
 }
