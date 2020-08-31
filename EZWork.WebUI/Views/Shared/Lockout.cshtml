@@ -2,7 +2,15 @@
 
 @{
     ViewBag.Title = "Locked Out";
+    Layout = null;
 }
+@Styles.Render("~/Content/Theme/FreelancerTheme/css")
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
 <hgroup class="title">
     <h3>@ViewBag.Title.</h3>
 </hgroup>

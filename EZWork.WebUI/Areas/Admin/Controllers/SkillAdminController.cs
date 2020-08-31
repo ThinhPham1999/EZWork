@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+  [Authorize(Roles = "Admin")]
     public class SkillAdminController : Controller
     {
         // GET: Admin/Skill

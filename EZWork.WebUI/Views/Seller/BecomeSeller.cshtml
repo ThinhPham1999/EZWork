@@ -55,7 +55,7 @@
                             </tr>
                         </thead>
                         <tbody class="tbody" id="SkillUser">
-                            @if (Model.OwnerSkill.Count > 0)
+                            @if (Model.OwnerSkill !=null && Model.OwnerSkill.Count > 0)
                             {
                                 foreach (var skill in Model.OwnerSkill)
                                 {
