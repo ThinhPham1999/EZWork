@@ -119,7 +119,7 @@ namespace EZWork.WebUI.Controllers
             {
                 ViewBag.Title = "Become a seller";
             }
-            becomeSellerViewModel.Skills = new List<Skill>();
+         //   becomeSellerViewModel.Skills = new List<Skill>();
             becomeSellerViewModel.Skills = skills.ToList();
             return View(becomeSellerViewModel);
         }

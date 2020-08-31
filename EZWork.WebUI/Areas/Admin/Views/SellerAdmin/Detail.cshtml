@@ -1,0 +1,55 @@
+﻿@model EZWork.Core.Entities.Seller
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <span>Detail Seller</span>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Image</label>
+                <img src="~/Uploads/Profile/@(Model.EZUser.ImageProfile??"user-picture.png")" style="width:60px;height:60px" />
+            </div>
+            <div class="form-group">
+                <label>ID</label>
+                <input value="@Model.SellerId" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>FullName</label>
+                <input value="@(Model.EZUser.FullName??"Have not update FullName yet")"  class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>BirthDay</label>
+                <input value="@(Model.EZUser.BirthDay??"Have not update BirthDay yet")"class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input value="@(Model.EZUser.EZAccount.Email??"Have not update Email yet")"class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>PhoneNumber</label>
+                <input value="@(Model.EZUser.EZAccount.PhoneNumber??"Have not update PhoneNumber yet")" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input value="@(Model.Description??"Have not update Description yet")" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>CreateAt</label>
+                <input value="@(Model.EZUser.CreateAt??"Have not update CreateAt yet")" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Close</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+

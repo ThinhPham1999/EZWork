@@ -1,0 +1,83 @@
+﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListSellerViewModel
+@if (Model != null && Model.Sellers != null && Model.Sellers.Count > 0)
+{
+    var index = 1;
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">ID</th>
+                <th scope="col">PhoneNumber</th>
+                <th scope="col">LockoutEnabled</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Sellers)
+            {
+            <tr>
+                <th>@index</th>
+                <th>@item.SellerId</th>
+                <td>@(item.EZUser.EZAccount.PhoneNumber??"Have not update phoneNumber yet")</td>
+                @{ var lockOut = item.EZUser.EZAccount.LockoutEnabled ? "Lock" : "UnLock";}
+                <td>@lockOut</td>
+                <td>
+                    <button id="" data-href="@Url.Action("Detail","SellerAdmin",new { ID=item.SellerId })" class="btn btn-primary createBtn" data-toggle="modal" data-target="#exampleModal">Detail</button>
+                    <button id="" data-href="@Url.Action("LockUser","Account",new { ID=item.SellerId,status="lock" })" class="btn btn-danger lockBtn">Lock Account</button>
+                    <button id="" data-href="@Url.Action("LockUser","Account",new { ID=item.SellerId ,status="unlock" })" class="btn btn-danger lockBtn">UnLock Account</button>
+                </td>
+            </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+
+    if (Model.Pager.EndPage > 1)
+    {
+        <nav>
+            <ul class="pagination">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "SellerAdmin")">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "SellerAdmin", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "SellerAdmin", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "SellerAdmin", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "SellerAdmin", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
+

@@ -1,19 +1,20 @@
 ﻿
-@if (Model != null && Model.EZAccounts!= null && Model.EZAccounts.Count > 0)
+@if (Model != null && Model.EZAccounts != null && Model.EZAccounts.Count > 0)
 {
+    var index = 1;
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Email</th>
-                <th scope="col">LockoutEnabled</th>              
+                <th scope="col">LockoutEnabled</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.EZAccounts)
             {
                 <tr>
-                    <th>@item.Id</th>                
+                    <th>@index</th>
                     <td>@item.Email</td>
                     @{ var lockOut = item.LockoutEnabled ? "Lock" : "UnLock";}
                     <td>@lockOut</td>
@@ -24,6 +25,7 @@
                         <button id="" data-href="@Url.Action("LockUser","Account",new { ID=item.Id ,status="unlock" })" class="btn btn-danger lockBtn">UnLock Account</button>
                     </td>
                 </tr>
+                index++;
             }
         </tbody>
     </table>

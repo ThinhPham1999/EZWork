@@ -1,4 +1,4 @@
-﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListAccountViewModel
+﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListSellerViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -12,7 +12,7 @@
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i>Search</button>
                     <button class="btn btn-outline-secondary " type="button" data-href="" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus "></i>Create</button>
-                    <button class="btn btn-outline-success resetBtn" data-href="@Url.Action("Index","Account")"><i class="fas fa-redo-alt"></i>Reset</button>
+                    <button class="btn btn-outline-success resetBtn" data-href="@Url.Action("Index","SellerAdmin")"><i class="fas fa-redo-alt"></i>Reset</button>
                 </div>
             </div>
         </form>
@@ -46,7 +46,6 @@
             url: $(this).attr("data-href"),
         })
     });
-
     $('.lockBtn').click(function () {
         swal({
             title: "Are you sure?",
@@ -61,7 +60,7 @@
                     url: $(this).attr('data-href'),
                     type: 'post',
                 }).done(function (response) {
-                   debugger;
+                    debugger;
                     if (response.Success) {
                         swal({
                             title: "Delete Success",
@@ -79,4 +78,5 @@
             }
         });
     })
+   
 </script>
