@@ -45,9 +45,11 @@
         <!--Content Wrapper End-->
     </div>
     <!--Wrapper End-->
-  
+
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/Content/Theme/FreelancerTheme/js")
+    @Scripts.Render("~/Content/Theme")
+    @RenderSection("upload",required:false )
 </body>
 
 </html>
