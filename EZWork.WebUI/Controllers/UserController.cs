@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,26 +37,35 @@ namespace EZWork.WebUI.Controllers
             return View("Profile", model);
         }
 
+        [Authorize(Roles = "User,Seller")]
         [HttpPost]
-        public ActionResult UserProfile(UserViewModel model, HttpPostedFileBase image = null)
+        public ActionResult UserProfile(UserViewModel model, HttpPostedFileBase Image = null)
         {
             if (ModelState.IsValid)
             {
-                if (image != null)
+                if (Image != null)
                 {
                     model.ImageProfile = User.Identity.GetUserId();
-                    byte[] ImageData = new byte[image.ContentLength];
-                    System.IO.Directory.CreateDirectory("~/Uploads/Profile");
-                    System.IO.File.Move(image.FileName, model.ImageProfile);
-                    //image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                    byte[] ImageData = new byte[Image.ContentLength];
+                    var fileName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    model.ImageProfile = User.Identity.GetUserId() + fileName;
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Profile/"), model.ImageProfile);
+                    Image.SaveAs(path);
                 }
-                //repository.SaveProduct(product);
-                //TempData["message"] = string.Format("{0} has been saved", product.Name);
-                return RedirectToAction("Index");
+
+                var updateUser = EZUserRepository.GetEZUser(User.Identity.GetUserId());
+                updateUser.ModifierAt = DateTime.Now.ToString();
+                updateUser.BirthDay = model.BirthDay;
+                updateUser.FullName = model.FullName;
+                updateUser.EZAccount.PhoneNumber = model.PhoneNumber;
+                updateUser.ImageProfile = model.ImageProfile;
+
+                EZUserRepository.UpdateEzUser(updateUser);
+
+                return RedirectToAction("UserProfile");
             }
             else
             {
-                //there is something wrong with data value
                 return View(model);
             }
         }
