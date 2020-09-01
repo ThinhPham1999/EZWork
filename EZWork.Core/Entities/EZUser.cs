@@ -23,10 +23,9 @@ namespace EZWork.Core.Entities
         public string UserName { get; set; }
         public virtual EZAccount  EZAccount { get; set; }
         public virtual Seller Seller { get; set; }
-
-        //   public virtual List<Review>  Reviews { get; set; }
+     //   public virtual List<Review>  Reviews { get; set; }
         //  public virtual IList<Comment> Comments { get; set; }
-        // public virtual IList<ReplyComment> ReplyComments { get; set; }l
+        // public virtual IList<ReplyComment> ReplyComments { get; set; }
         //  public virtual IList<Rating> Ratings { get; set; }
     }
 }
