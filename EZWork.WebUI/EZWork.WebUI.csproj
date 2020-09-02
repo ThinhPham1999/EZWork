@@ -170,6 +170,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CareerAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PayerController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SellerAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\SkillAdminController.cs" />
@@ -666,6 +667,7 @@
     <Content Include="Areas\Admin\Views\SellerAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SellerAdmin\Listing.cshtml" />
     <Content Include="Areas\Admin\Views\SellerAdmin\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Payer\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Career.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
