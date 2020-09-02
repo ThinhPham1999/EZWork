@@ -32,5 +32,6 @@ namespace EZWork.Core.Entities
         public virtual IList<SellerMapSkill> SellerMapSkills { get; set; }
         // public virtual IList<Rating> Ratings { get; set; }
         public virtual IList<Review> Reviews { get; set; }
+        public virtual IList<Order> Orders { get; set; }
     }
 }

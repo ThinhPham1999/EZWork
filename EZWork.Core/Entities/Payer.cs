@@ -11,10 +11,13 @@ namespace EZWork.Core.Entities
     {
         [Key]
         public int PayerId { get; set; }
+        [Required]
         [StringLength(100)]
         public string PayerAccountNumber { get; set; }
+        [Required]
         [StringLength(255)]
         public string PayerAccountName { get; set; }
+        [Required]
         [StringLength(255)]
         public string PayerBank { get; set; }
     }

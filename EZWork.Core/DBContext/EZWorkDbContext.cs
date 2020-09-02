@@ -34,6 +34,8 @@ namespace EZWork.Core.DBContext
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Contact_AboutMe> Contact_AboutMes { get; set; }
         public DbSet<Payer> Payers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<CardAccount> CardAccounts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

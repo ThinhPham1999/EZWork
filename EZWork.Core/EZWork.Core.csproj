@@ -84,6 +84,7 @@
     <Compile Include="DBContext\EZWorkDbContext.cs" />
     <Compile Include="DBContext\EZWorkInitializer.cs" />
     <Compile Include="Abstract\IEZUserRepository.cs" />
+    <Compile Include="Entities\CardAccount.cs" />
     <Compile Include="Entities\Career.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Contact_AboutMe.cs" />
@@ -111,6 +112,10 @@
     <Compile Include="Migrations\202008240949504_EditTable_Review.Designer.cs">
       <DependentUpon>202008240949504_EditTable_Review.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009021719353_Add_Order_CardAccount_Payer.cs" />
+    <Compile Include="Migrations\202009021719353_Add_Order_CardAccount_Payer.Designer.cs">
+      <DependentUpon>202009021719353_Add_Order_CardAccount_Payer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccountRepository.cs" />
@@ -136,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008240949504_EditTable_Review.resx">
       <DependentUpon>202008240949504_EditTable_Review.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009021719353_Add_Order_CardAccount_Payer.resx">
+      <DependentUpon>202009021719353_Add_Order_CardAccount_Payer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
