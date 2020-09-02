@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IAccountRepository.cs" />
     <Compile Include="Abstract\ICareerRepository.cs" />
+    <Compile Include="Abstract\IOrderRepository.cs" />
     <Compile Include="Abstract\IPayerRepository.cs" />
     <Compile Include="Abstract\ISellerMapSkillRepository.cs" />
     <Compile Include="Abstract\ISellerRepository.cs" />
@@ -116,11 +117,20 @@
     <Compile Include="Migrations\202009021719353_Add_Order_CardAccount_Payer.Designer.cs">
       <DependentUpon>202009021719353_Add_Order_CardAccount_Payer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009021802130_Add_Status_for_Order.cs" />
+    <Compile Include="Migrations\202009021802130_Add_Status_for_Order.Designer.cs">
+      <DependentUpon>202009021802130_Add_Status_for_Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009021808215_Add_CreateAt_for_Order.cs" />
+    <Compile Include="Migrations\202009021808215_Add_CreateAt_for_Order.Designer.cs">
+      <DependentUpon>202009021808215_Add_CreateAt_for_Order.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccountRepository.cs" />
     <Compile Include="Repository\CareerRepository.cs" />
     <Compile Include="Repository\EZUserRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PayerRepository.cs" />
     <Compile Include="Repository\ReviewRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
@@ -144,6 +154,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009021719353_Add_Order_CardAccount_Payer.resx">
       <DependentUpon>202009021719353_Add_Order_CardAccount_Payer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009021802130_Add_Status_for_Order.resx">
+      <DependentUpon>202009021802130_Add_Status_for_Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009021808215_Add_CreateAt_for_Order.resx">
+      <DependentUpon>202009021808215_Add_CreateAt_for_Order.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

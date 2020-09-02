@@ -19,6 +19,9 @@ namespace EZWork.Core.Entities
         public int OrderId { get; set; }
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
+        [Range(0,2)]
+        public int Status { get; set; }
+        public DateTime CreateAt { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual EZUser EZUser { get; set; }
     }
