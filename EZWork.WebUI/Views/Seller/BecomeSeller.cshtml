@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="form-login" style="width:80%">
-    <h2>@ViewBag.Title</h2>
+<div class="container" style="width:80%">
+    <h2 style="text-align:center;">@ViewBag.Title</h2>
     <div class="col-12">
         @using (Html.BeginForm("BecomeSeller", "Seller", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -63,7 +63,6 @@
                                         <td><input type="text" value="@skill.SkillId" id="skill @skill.SkillId" name="skillId" readonly hidden> @skill.Skill.Name </td>
                                         <td><input type="text" value="@skill.Level" name="level" readonly hidden>@skill.Level</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" onclick="return getbyIDSkill(this, @skill.SkillId)">Edit</button>
                                             <button type="button" class="btn btn-danger" onclick="DeleleSkill(this)">Delete</button>
                                         </td>
                                     </tr>
@@ -80,9 +79,6 @@
             </div>
             <div class="form-group">
                 <button type="submit" id="Save" class="btn btn-success col-12">Save your profile seller</button>
-            </div>
-            <div class="form-group">
-                <button type="button" id="reset" class="btn btn-primary col-12"><i class="fa fa-facebook"></i> Reset</button>
             </div>
         }
     </div>
