@@ -42,12 +42,15 @@ namespace EZWork.Core.Repository
         public int SearchSellerCount(string searchTerm, int[] listSkills)
         {
             var listSeller = db.Sellers.ToList();
-            
+            if (listSkills != null && listSkills.Length > 0)
+            {
+                listSeller = listSeller.Where(s => s.SellerMapSkills.Any(si => listSkills.ToList().Contains(si.SkillId))).ToList();
+            }
+
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 listSeller = listSeller.Where(x => x.EZUser.EZAccount.UserName.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
-
             return listSeller.Count;
         }
 

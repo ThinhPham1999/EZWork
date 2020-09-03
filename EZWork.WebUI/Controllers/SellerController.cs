@@ -84,7 +84,7 @@ namespace EZWork.WebUI.Controllers
             var totalFilterSeller = sellerRepository.SearchSellerCount(searchTerm, Searchskills);
             model.Pager = new Pager(totalFilterSeller, page.Value, pageSize.Value);
             model.SearchTerm = searchTerm ?? "";
-
+            ViewBag.ViewSkill = Searchskills;
             return View(model);
         }
 

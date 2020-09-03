@@ -26,7 +26,7 @@
                                         {
                                             <fieldset>
                                                 <div class="form-group">
-                                                    <input type="text" name="searchTerm" class="form-control" placeholder="Search seller" value="@Model.SearchTerm">
+                                                    <input style="height: 50px;" type="text" name="searchTerm" class="form-control" placeholder="Search seller" value="@Model.SearchTerm">
                                                     <button type="submit" class="wt-searchgbtn">
                                                         <i class="lnr lnr-magnifier"></i>
                                                     </button>
@@ -65,7 +65,7 @@
                                                     <div class="wt-title">
                                                         <a href="usersingle.html">
                                                             <i class="fa fa-check-circle"></i>
-                                                            @Html.ActionLink((item.EZUser.FullName!=null? "item.EZUser.FullName" : "Detail"), "Detail", new { id = item.SellerId })
+                                                            @Html.ActionLink((item.EZUser.UserName != null? item.EZUser.UserName : "Detail"), "Detail", new { id = item.SellerId })
                                                         </a>
                                                         @if (!String.IsNullOrEmpty(item.CareerTitle))
                                                         {
@@ -117,7 +117,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="page-item">
-                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm, Searchskills = ViewBag.ViewSkill})">
                                                             <i class="fas fa-angle-left"></i>
                                                         </a>
                                                     </li>
@@ -126,18 +126,18 @@
                                                 @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                                                 {
                                                     <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
-                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = page, searchTerm = Model.SearchTerm, Searchskills = ViewBag.ViewSkill})">@page</a>
                                                     </li>
                                                 }
                                                 @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                                                 {
                                                     <li class="page-item">
-                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm, Searchskills = ViewBag.ViewSkill})">
                                                             <i class="fas fa-angle-right"></i>
                                                         </a>
                                                     </li>
                                                     <li class="page-item">
-                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                                                        <a class="page-link" href="@Url.Action("Index", "Seller", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm, Searchskills = ViewBag.Searchskills})">
                                                             <i class="fas fa-angle-double-right"></i>
                                                         </a>
                                                     </li>
