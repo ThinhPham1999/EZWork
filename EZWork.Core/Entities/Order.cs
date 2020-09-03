@@ -10,19 +10,23 @@ namespace EZWork.Core.Entities
 {
     public class Order
     {
-        [Column(Order = 0)]
-        public string SellerId { get; set; }
-        [Column(Order = 1)]
-        [ForeignKey("EZUser")]
-        public string EZUserId { get; set; }
         [Key]
         public int OrderId { get; set; }
-        [Column(TypeName = "money")]
+        // [Column(Order = 0)]
+        [ForeignKey("Seller")]
+        public string SellerId { get; set; }
+       // [Column(Order = 1)]
+        [ForeignKey("EZUser")]
+        public string EZUserId { get; set; }
+       
+     //   public int CardId { get; set; }
+        // [Column(TypeName = "money")]
         public decimal Price { get; set; }
         [Range(0,2)]
         public int Status { get; set; }
         public DateTime CreateAt { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual EZUser EZUser { get; set; }
+       // public virtual CardAccount CardAccount { get; set; }
     }
 }

@@ -1,0 +1,101 @@
+﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListInvoiceViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container mt-3">
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" data-statusCode="0" onclick="TabClick(this)">Payment</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" data-statusCode="1" onclick="TabClick(this)">Not Payment</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" data-statusCode="2" onclick="TabClick(this)">Cancel</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="home" class="container tab-pane active">
+            <br>
+            <h3> Payment</h3>
+            <div class="row">
+                <div class="col col-lg-12 divInvoice">
+                    @{ Html.RenderPartial("ListInvoicePartial", Model);}
+                </div>
+            </div>
+        </div>
+        <div id="menu1" class="container tab-pane fade">
+            <br>
+            <h3>Not Payment</h3>
+            <div class="row">
+                <div class="col col-lg-12 divInvoice">
+                </div>
+            </div>
+        </div>
+        <div id="menu2" class="container tab-pane fade">
+            <br>
+            <h3>Cancel</h3>
+            <div class="row">
+                <div class="col col-lg-12 divInvoice">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+    </div>
+</div>
+<script>
+    function TabClick(tab) {
+        debugger;
+        var statuscode = tab.getAttribute("data-statusCode");
+        // alert(statuscode);
+        var searchterm = "";
+        $.ajax({
+            url: '@Url.Action("ListInvoicePartial","InvoiceAdmin")',
+            data: { statusCode: statuscode, searchTerm:searchterm }
+        }).then(function (response) {
+            debugger;
+           // alert('ok');
+            // alert(response);
+            $('.divInvoice').html(response);
+        }).fail(function (error) {
+            alert('fail');
+        })
+    }
+
+    function SearchInvoice(btn) {
+         debugger;
+        alert('ok');
+        $.ajax({
+            url: '@Url.Action("ListInvoicePartial","InvoiceAdmin")',
+            data: $('#formInvoice').serialize()
+        }).then(function (response) {
+           // debugger;
+
+            $('.divInvoice').html(response);
+        }).fail(function (error) {
+            alert('fail');
+        })
+    }
+    function DetailInvoice(btn) {
+        debugger;
+        var id = btn.getAttribute('data-id');
+        $.ajax({
+            url: '@Url.Action("Detail","InvoiceAdmin")',
+            data: { ID: id }
+        }).done(function (response) {
+            //     debugger;
+            $('#exampleModal .modal-dialog').html(response);
+        });
+    };  
+</script>

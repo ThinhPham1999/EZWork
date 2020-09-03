@@ -1,0 +1,44 @@
+﻿@model EZWork.Core.Entities.Order
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <span>Detail Order</span>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>OrderID</label>
+                <input value="@Model.OrderId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>SellerID</label>
+                <input value="@Model.SellerId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>UserID</label>
+                <input value="@Model.EZUserId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input value="@Model.Price" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>CreateAt</label>
+                <input value="@Model.CreateAt" class="form-control" />
+            </div>          
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i> Close</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+

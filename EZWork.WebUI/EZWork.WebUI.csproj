@@ -170,6 +170,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CareerAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InvoiceAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PayerController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SellerAdminController.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Areas\Admin\Models\CareerViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SkillViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListAccountViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ListInvoiceViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListRoleViewModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\ListSellerViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Pager.cs" />
@@ -669,6 +671,9 @@
     <Content Include="Areas\Admin\Views\SellerAdmin\Listing.cshtml" />
     <Content Include="Areas\Admin\Views\SellerAdmin\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Payer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceAdmin\ListInvoicePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\InvoiceAdmin\Detail.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Career.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

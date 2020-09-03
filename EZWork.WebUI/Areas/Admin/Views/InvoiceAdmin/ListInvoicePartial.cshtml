@@ -1,0 +1,101 @@
+﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListInvoiceViewModel
+@if (Model != null && Model.Orders != null && Model.Orders.Count > 0)
+{
+<form id="formInvoice">
+    <div class="input-group">
+        <input hidden value="@Model.Orders[0].Status" name="statusCode"/>
+        <input type="text" class="form-control inputSeach"  placeholder="Search" name="searchTerm" />
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary btnSearch" onclick="SearchInvoice(this)" type="button" ><i class="fas fa-search"></i>Search</button>
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="example-datetime-local-input" class="col-2 col-form-label">Date and time</label>
+        <div class="col-10">
+            <input class="form-control" type="datetime-local" name="datetimePicker" id="example-datetime-local-input">
+        </div>
+    </div>
+</form>
+  
+    
+    var index = 1;
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">UserID</th>
+                <th scope="col">SellerID</th>
+                <th scope="col">Price</th>
+                <th scope="col">CreateAt</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Orders)
+            {
+                <tr>
+                    <th>@index</th>
+                    <th>@item.EZUserId</th>
+                    <td>@item.SellerId</td>
+                    <td>@item.Price</td>
+                    <td>@item.CreateAt</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <button class="btn btn-primary createBtn" data-toggle="modal" onclick="DetailInvoice(this)" data-target="#exampleModal" data-id="@item.OrderId">Detail</button>
+                    </td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+
+    if (Model.Pager.EndPage > 1)
+    {
+        <nav>
+            <ul class="pagination">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "InvoiceAdmin")">
+                            <i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "InvoiceAdmin", new { page = page, searchTerm = Model.SearchTerm})">@page</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm})">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
+

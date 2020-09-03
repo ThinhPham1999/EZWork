@@ -18,45 +18,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         public SellerAdminController()
         {
             sellerRepository = new SellerRepository();
-        }
-        //private AccountRepository _userManager;
-        //public AccountRepository UserManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<AccountRepository>();
-        //    }
-        //    set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
-        //private RoleRepository _roleManager;
-        //public RoleRepository RoleManager
-        //{
-        //    get
-        //    {
-        //        return _roleManager ?? HttpContext.GetOwinContext().Get<RoleRepository>();
-        //    }
-        //    private set
-        //    {
-        //        _roleManager = value;
-        //    }
-        //}
-
-        //public ActionResult Index(string searchTerm, int? page)
-        //{
-        //    {
-        //        int recordSize = 3;
-        //        page = page ?? 1;
-        //        ListAccountViewModel model = new ListAccountViewModel();
-        //        model.SearchTerm = searchTerm;
-        //        model.EZAccounts = SearchEZAccount(searchTerm, page.Value, recordSize);
-        //        var totalRecord = SearchEZAccountCount(searchTerm);
-        //        model.Pager = new Pager(totalRecord, page, recordSize);
-        //        return View(model);
-        //    }
-        //}
+        }     
         public ActionResult Index(string searchTerm,int? page)
         {
             int recordSize = 3;
@@ -73,7 +35,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         [NonAction]
         public List<Seller> SearchEZSeller(string searchTerm, int page, int recordSize)
         {
-            var sellers = sellerRepository.GetAll().ToList();
+ var sellers = sellerRepository.GetAll().ToList();
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 sellers = sellers.Where(x => x.EZUser.FullName.ToLower().Contains(searchTerm.ToLower())).ToList();
@@ -82,7 +44,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
             //  skip = (1    -  1) = 0 * 3 = 0
             //  skip = (2    -  1) = 1 * 3 = 3
             //  skip = (3    -  1) = 2 * 3 = 6
-            return sellers.OrderBy(x => x.CreateAt).Skip(skip).Take(recordSize).ToList();
+            return sellers.OrderBy(x => x.CreateAt).Skip(skip).Take(recordSize).ToList();           
         }
         [NonAction]
         public int SearchEZSellerCount(string searchTerm)
