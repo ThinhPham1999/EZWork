@@ -19,11 +19,12 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         // GET: Admin/InvoiceAdmin
         public ActionResult Index(string searchTerm, int? page, int? statusCode, string datetimePicker)
         {
-            int recordSize = 3;
+            int recordSize = 1;
             page = page ?? 1;
             statusCode = statusCode ?? 0;
             DateTime? time = Convert.ToDateTime(datetimePicker);
             ListInvoiceViewModel model = new ListInvoiceViewModel();
+            model.DateTimePicker = time.Value;
             model.SearchTerm = searchTerm;
             model.Orders = invoiceRepository.SearchInvoice(searchTerm, page.Value, recordSize, statusCode, time).ToList();
             var totalRecord = invoiceRepository.SearchInvoiceCount(searchTerm, statusCode, time);
@@ -34,10 +35,11 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
 
         public ActionResult ListInvoicePartial(string searchTerm, int? page, int? statusCode, string datetimePicker)
         {
-            int recordSize = 3;
+            int recordSize = 1;
             page = page ?? 1;
             DateTime? time = Convert.ToDateTime(datetimePicker);
             ListInvoiceViewModel model = new ListInvoiceViewModel();
+            model.DateTimePicker = time.Value;
             model.SearchTerm = searchTerm;
             model.Orders = invoiceRepository.SearchInvoice(searchTerm, page.Value, recordSize, statusCode, time).ToList();
             var totalRecord = invoiceRepository.SearchInvoiceCount(searchTerm, statusCode, time);

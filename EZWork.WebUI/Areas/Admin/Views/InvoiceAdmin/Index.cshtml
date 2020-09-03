@@ -75,7 +75,7 @@
 
     function SearchInvoice(btn) {
          debugger;
-        alert('ok');
+      //  alert('ok');
         $.ajax({
             url: '@Url.Action("ListInvoicePartial","InvoiceAdmin")',
             data: $('#formInvoice').serialize()
@@ -97,5 +97,21 @@
             //     debugger;
             $('#exampleModal .modal-dialog').html(response);
         });
-    };  
+    };
+    function Pagination(btn) {
+        var searchterm = btn.getAttribute("data-searchTerm");
+        var Page = btn.getAttribute("data-page");
+         $.ajax({
+            url: '@Url.Action("ListInvoicePartial","InvoiceAdmin")',
+             data: {
+                 searchTerm: searchterm,
+                 page:Page
+             }
+        }).then(function (response) {
+           // debugger;
+            $('.divInvoice').html(response);
+        }).fail(function (error) {
+            alert('fail');
+        })
+    }
 </script>
