@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="wt-description">
                                         <p>Hire</p>
-                                        <a href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Send Offer</a>
+                                        <a href="@Url.Action("CreateOrder","Order", new { sellerId = Model.Seller.SellerId})" class="wt-btn">Send Offer</a>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +155,8 @@
                                 <div class="wt-widgetcontent wt-skillscontent">
                                     @foreach (var skill in Model.Seller.SellerMapSkills)
                                     {
-                                        <div class="wt-skillholder" data-percent="@skill.Level%">
-                                            <span>@skill.Skill.Name<em>@skill.Level</em></span>
+                                        <div class="wt-skillholder" data-percent="@(skill.LevelId * 25)%">
+                                            <span>@skill.Skill.Name<em>@skill.Level.Description</em></span>
                                             <div class="wt-skillbarholder"><div class="wt-skillbar"></div></div>
                                         </div>
                                     }

@@ -14,9 +14,11 @@ namespace EZWork.Core.Entities
         public string SellerId { get; set; }
         [Key, Column(Order = 1)]
         public int SkillId { get; set; }
-        public int Level { get; set; }
+        
+        public int LevelId { get; set; }
 
         public virtual Seller Seller { get; set; }
         public virtual Skill Skill { get; set; }
+        public virtual Level Level { get; set; }
     }
 }

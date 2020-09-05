@@ -34,6 +34,7 @@ namespace EZWork.WebUI.Models
         public string CareerTitle { get; set; }
         public List<SellerMapSkill> OwnerSkill { get; set; }
         public List<Skill> Skills { get; set; }
+        public List<Level> Levels { get; set; }
     }
 
     public class BecomeSellerPostView
@@ -42,5 +43,6 @@ namespace EZWork.WebUI.Models
         public string ShortDescription { get; set; }
         public string Description { get; set; }
         public List<int> SkillIds { get; set; }
+        
     }
 }

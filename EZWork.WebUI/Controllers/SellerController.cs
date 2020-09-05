@@ -19,6 +19,7 @@ namespace EZWork.WebUI.Controllers
         private ISKillRepository skillRepository;
         private ISellerRepository sellerRepository;
         private ReviewRepository reviewRepository;
+        private ILevelRepository levelRepository;
 
 
         private AccountRepository _userManager;
@@ -51,6 +52,7 @@ namespace EZWork.WebUI.Controllers
             skillRepository = new SkillRepository();
             sellerRepository = new SellerRepository();
             reviewRepository = new ReviewRepository();
+            levelRepository = new LevelRepository();
         }
 
         public ActionResult Index(string searchTerm, int? page, int? pageSize, int[] Searchskills, int? oneSkill)
@@ -121,6 +123,7 @@ namespace EZWork.WebUI.Controllers
             }
          //   becomeSellerViewModel.Skills = new List<Skill>();
             becomeSellerViewModel.Skills = skills.ToList();
+            becomeSellerViewModel.Levels = levelRepository.GetAll();
             return View(becomeSellerViewModel);
         }
 
@@ -129,6 +132,10 @@ namespace EZWork.WebUI.Controllers
         [HttpPost]
         public ActionResult BecomeSeller(int[] skillID, string shortDescription, string description, int[] level, string careerTitle)
         {
+            if (skillID == null || level == null)
+            {
+                return RedirectToAction("BecomeSeller");
+            }
             string sellerid = User.Identity.GetUserId();
 
             if (sellerRepository.GetSellerByID(sellerid) == null)
@@ -167,7 +174,7 @@ namespace EZWork.WebUI.Controllers
                 {
                     SkillId = skillID[i],
                     SellerId = sellerid,
-                    Level = level[i]
+                    LevelId = level[i]
                 });
             }
 

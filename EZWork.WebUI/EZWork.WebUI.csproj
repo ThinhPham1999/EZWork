@@ -197,6 +197,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CareerViewModel.cs" />
     <Compile Include="Models\DetailSellerViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ReviewViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -745,11 +746,11 @@
     <Content Include="Views\Review\LeaveReview.cshtml" />
     <Content Include="Views\Seller\BecomeSeller.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Order\CreateOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

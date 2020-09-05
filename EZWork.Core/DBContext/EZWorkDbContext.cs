@@ -36,6 +36,7 @@ namespace EZWork.Core.DBContext
         public DbSet<Payer> Payers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<CardAccount> CardAccounts { get; set; }
+        public DbSet<Level> Levels { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
