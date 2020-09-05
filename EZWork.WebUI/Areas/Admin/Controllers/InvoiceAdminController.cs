@@ -19,7 +19,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         // GET: Admin/InvoiceAdmin
         public ActionResult Index(string searchTerm, int? page, int? statusCode, string datetimePicker)
         {
-            int recordSize = 1;
+            int recordSize = 3;
             page = page ?? 1;
             statusCode = statusCode ?? 0;
             DateTime? time = Convert.ToDateTime(datetimePicker);
@@ -35,7 +35,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
 
         public ActionResult ListInvoicePartial(string searchTerm, int? page, int? statusCode, string datetimePicker)
         {
-            int recordSize = 1;
+            int recordSize = 3;
             page = page ?? 1;
             DateTime? time = Convert.ToDateTime(datetimePicker);
             ListInvoiceViewModel model = new ListInvoiceViewModel();
