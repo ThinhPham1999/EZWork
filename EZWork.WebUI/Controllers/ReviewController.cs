@@ -16,8 +16,7 @@ namespace EZWork.WebUI.Controllers
        
         public ReviewController()
         {
-            reviewRepository = new ReviewRepository();
-          
+            reviewRepository = new ReviewRepository();         
         }
 
         // GET: Comment
@@ -54,10 +53,6 @@ namespace EZWork.WebUI.Controllers
                         {
                             json.Data = new { Success = true , newReview= review };               
                         }
-                        //else
-                        //{
-                        //    json.Data = new { Success = false };
-                        //}
                     }                  
                 }            
             }

@@ -14,12 +14,14 @@ namespace EZWork.Core.DBContext
         public EZWorkDbContext()
            : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer<EZWorkDbContext>(new EZWorkInitializer());
+          //  Database.SetInitializer<EZWorkDbContext>(new EZWorkInitializer());           
         }
+
 
 
         public static EZWorkDbContext Create()
         {
+
             return new EZWorkDbContext();
         }
 

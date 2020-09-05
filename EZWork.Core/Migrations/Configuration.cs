@@ -1,5 +1,8 @@
 namespace EZWork.Core.Migrations
 {
+    using EZWork.Core.Entities;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -10,22 +13,31 @@ namespace EZWork.Core.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(EZWork.Core.DBContext.EZWorkDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Roles.Any(r => r.Name == "Admin") || !context.Roles.Any(r => r.Name == "User") || !context.Roles.Any(r => r.Name == "Seller"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Admin" };
+                var role1 = new IdentityRole { Name = "User" };
+                var role2 = new IdentityRole { Name = "Seller" };
+                manager.Create(role);
+            }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            if (!context.Users.Any(u => u.UserName == "phamquochung23121997@gmail.com"))
+            {
+                var store = new UserStore<EZAccount>(context);
+                var manager = new UserManager<EZAccount>(store);
+                var user = new EZAccount { UserName = "phamquochung23121997@gmail.com" };
+                manager.Create(user, "quochung");
+                manager.AddToRole(user.Id, "Admin");
+            }
+            base.Seed(context);
         }
     }
 }
