@@ -140,6 +140,10 @@
     <Compile Include="Migrations\202009050724169_addLevel1.Designer.cs">
       <DependentUpon>202009050724169_addLevel1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009051035409_addOrder_CardAccount.cs" />
+    <Compile Include="Migrations\202009051035409_addOrder_CardAccount.Designer.cs">
+      <DependentUpon>202009051035409_addOrder_CardAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccountRepository.cs" />
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009050724169_addLevel1.resx">
       <DependentUpon>202009050724169_addLevel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009051035409_addOrder_CardAccount.resx">
+      <DependentUpon>202009051035409_addOrder_CardAccount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

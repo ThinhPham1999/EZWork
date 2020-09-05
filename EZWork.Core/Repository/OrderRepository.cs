@@ -21,8 +21,9 @@ namespace EZWork.Core.Repository
 
         public void Add(Order order, CardAccount card)
         {
+            order.CardAccount = card;
             db.Entry(order).State = EntityState.Added;
-            db.Entry(card).State = EntityState.Added;
+            //db.Entry(card).State = EntityState.Added;
             db.SaveChanges();
         }
 

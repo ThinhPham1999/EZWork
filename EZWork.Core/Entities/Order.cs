@@ -18,8 +18,6 @@ namespace EZWork.Core.Entities
        // [Column(Order = 1)]
         [ForeignKey("EZUser")]
         public string EZUserId { get; set; }
-       
-     //   public int CardId { get; set; }
         // [Column(TypeName = "money")]
         public decimal Price { get; set; }
         [Range(0,2)]
@@ -27,6 +25,7 @@ namespace EZWork.Core.Entities
         public DateTime CreateAt { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual EZUser EZUser { get; set; }
-       // public virtual CardAccount CardAccount { get; set; }
+        [Required]
+        public virtual CardAccount CardAccount { get; set; }
     }
 }

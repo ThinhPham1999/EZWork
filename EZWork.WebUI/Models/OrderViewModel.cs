@@ -16,6 +16,7 @@ namespace EZWork.WebUI.Models
         public string SellerId { get; set; }
         public string UserId { get; set; }
         [Range(0, Int32.MaxValue)]
+        [Display(Name = "Price(VND)")]
         public decimal Price { get; set; } 
     }
 }
