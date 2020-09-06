@@ -15,11 +15,13 @@ namespace EZWork.WebUI.Controllers
     {
         private ISellerRepository sellerRepository;
         private IOrderRepository orderRepository;
+        private IEZUserRepository eZUserRepository;
 
         public OrderController()
         {
             sellerRepository = new SellerRepository();
             orderRepository = new OrderRepository();
+            eZUserRepository = new EZUserRepository();
         }
 
         [HttpGet]
@@ -41,6 +43,9 @@ namespace EZWork.WebUI.Controllers
         [Authorize(Roles = "User,Seller")]
         public ActionResult CreateOrder(OrderViewModel model)
         {
+            string id = User.Identity.GetUserId();
+            var user = eZUserRepository.GetEZUser(id);
+            
             Order order = new Order()
             {
                 SellerId = model.SellerId,
@@ -57,6 +62,15 @@ namespace EZWork.WebUI.Controllers
             };
             orderRepository.Add(order, cardAccount);
             return RedirectToAction("Detail","Seller", new { id = model.SellerId });
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User,Seller")]
+        public ActionResult GetAllOrder()
+        {
+            string id = User.Identity.GetUserId();
+            var orders = orderRepository.FindByUserId(id);
+            return View(orders);
         }
 
 
@@ -86,7 +100,6 @@ namespace EZWork.WebUI.Controllers
                         default:
                             break;
                     }
-                    
                 }
             }
             return result;

@@ -23,7 +23,6 @@ namespace EZWork.Core.Repository
         {
             order.CardAccount = card;
             db.Entry(order).State = EntityState.Added;
-            //db.Entry(card).State = EntityState.Added;
             db.SaveChanges();
         }
 
@@ -66,6 +65,13 @@ namespace EZWork.Core.Repository
         public IList<Order> GetAll()
         {
             return db.Orders.ToList();
+        }
+
+        public IList<Order> FindByUserId(string userid)
+        {
+            var user = db.EZUsers.Find(userid);
+            var orders = user.Orders;
+            return orders.ToList();
         }
     }
 }

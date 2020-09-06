@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
-  [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class SkillAdminController : Controller
     {
         // GET: Admin/Skill
@@ -69,7 +69,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         public JsonResult GetbyID(int id)
         {
             var item = skillRepository.Find(id);
-            SkillViewModel skillView =  new SkillViewModel()
+            SkillViewModel skillView = new SkillViewModel()
             {
                 CareerId = item.Career.CareerId,
                 CareerName = item.Career.Name,
@@ -93,7 +93,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 CareerId = skillView.CareerId
             };
             skillRepository.Update(updateSkill);
-            return Json(0 , JsonRequestBehavior.AllowGet);
+            return Json(0, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

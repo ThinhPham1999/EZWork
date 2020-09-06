@@ -15,6 +15,7 @@ namespace EZWork.Core.Abstract
         IList<Order> FindByName(string name);
         void Edit(Order order);
         IList<Order> GetAll();
+        IList<Order> FindByUserId(string userid);
         void Dispose();
     }
 }
