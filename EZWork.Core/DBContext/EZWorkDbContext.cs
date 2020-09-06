@@ -1,5 +1,4 @@
 ﻿using EZWork.Core.Entities;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace EZWork.Core.DBContext
         public EZWorkDbContext()
            : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer<EZWorkDbContext>(new EZWorkInitializer());
+          //  Database.SetInitializer<EZWorkDbContext>(new EZWorkInitializer());           
         }
 
 
@@ -24,7 +23,7 @@ namespace EZWork.Core.DBContext
             return new EZWorkDbContext();
         }
 
-        public DbSet<EZUser> EZUsers { get; set; }
+        public DbSet<EZUser>  EZUsers{ get; set; }
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<Career> Careers { get; set; }
         public DbSet<Skill> Skills { get; set; }
@@ -42,35 +41,6 @@ namespace EZWork.Core.DBContext
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-        }
-        private class EZWorkInitializer : DropCreateDatabaseAlways<EZWorkDbContext>
-        {
-            protected override void Seed(EZWorkDbContext context)
-            {
-
-                if (!context.Roles.Any(r => r.Name == "Admin") || !context.Roles.Any(r => r.Name == "User") || !context.Roles.Any(r => r.Name == "Seller"))
-                {
-                    var store = new RoleStore<IdentityRole>(context);
-                    var manager = new RoleManager<IdentityRole>(store);
-                    var role = new IdentityRole { Name = "Admin" };
-                    var role1 = new IdentityRole { Name = "User" };
-                    var role2 = new IdentityRole { Name = "Seller" };
-                    manager.Create(role);
-                    manager.Create(role1);
-                    manager.Create(role2);
-                }
-
-                if (!context.Users.Any(u => u.UserName == "phamquochung23121997@gmail.com"))
-                {
-                    var store = new UserStore<EZAccount>(context);
-                    var manager = new UserManager<EZAccount>(store);
-                    var user = new EZAccount {Email= "phamquochung23121997@gmail.com", UserName = "phamquochung23121997@gmail.com" };
-                    manager.Create(user, "quochung");
-                    manager.AddToRole(user.Id, "Admin");
-                }
-               // base.Seed(context);
-                base.Seed(context);
-            }
         }
     }
 }
