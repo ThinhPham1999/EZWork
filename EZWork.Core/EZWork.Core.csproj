@@ -85,6 +85,7 @@
     <Compile Include="Abstract\ISellerRepository.cs" />
     <Compile Include="Abstract\ISKillRepository.cs" />
     <Compile Include="DBContext\EZWorkDbContext.cs" />
+    <Compile Include="DBContext\EZWorkInitializer.cs" />
     <Compile Include="Abstract\IEZUserRepository.cs" />
     <Compile Include="Entities\CardAccount.cs" />
     <Compile Include="Entities\Career.cs" />

@@ -68,13 +68,12 @@ namespace EZWork.WebUI.Controllers
                 _roleManager = value;
             }
         }
-      
+        [AllowAnonymous]
         [ChildActionOnly]
         public  ActionResult PartialHeader() {
             var name=User.Identity.Name;
-            var IsAdminrole = User.IsInRole("Admin");
             PartialHeaderViewModel model = new PartialHeaderViewModel();
-            if (!string.IsNullOrEmpty(name)&& !IsAdminrole) {
+            if (!string.IsNullOrEmpty(name)) {
                 model.EZAccount = UserManager.FindByEmail(name);
                 if (!UserManager.FindByEmail(name).EmailConfirmed) {
                     ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
@@ -126,7 +125,7 @@ namespace EZWork.WebUI.Controllers
             var user = await UserManager.FindByEmailAsync(model.Email);
             var adminRole = await RoleManager.FindByNameAsync("Admin");
             IdentityUserRole isAdmin = null;
-            if (user!=null && adminRole != null)
+            if (adminRole != null)
             {
                 isAdmin = (IdentityUserRole)user.Roles.Where(x => x.RoleId.Equals(adminRole.Id)).FirstOrDefault();
             }
