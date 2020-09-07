@@ -11,6 +11,7 @@ namespace EZWork.Core.Abstract
     {
         void UpdateEzUser(EZUser eZUser);
 
-        EZUser GetEZUser(string id);
+        EZUser GetEZUserByID(string id);
+        bool InsertEZUser(EZUser eZUser);
     }
 }

@@ -44,7 +44,7 @@ namespace EZWork.WebUI.Controllers
         public ActionResult CreateOrder(OrderViewModel model)
         {
             string id = User.Identity.GetUserId();
-            var user = eZUserRepository.GetEZUser(id);
+            var user = eZUserRepository.GetEZUserByID(id);
             
             Order order = new Order()
             {

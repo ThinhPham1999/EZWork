@@ -22,5 +22,16 @@ namespace EZWork.Core.Repository
            var review= db.Reviews.Where(x => x.SellerID == sellerID && x.ReviewerID == reviewerID).SingleOrDefault();
             return review != null ? true : false;
         }
+        public decimal GetAverageRate(string ID)
+        {
+            var listFeedback = db.Reviews.Where(p => p.SellerID == ID).ToList();
+            var rate = listFeedback.Sum(x => x.Rate);
+            return Math.Round((decimal)rate / listFeedback.Count(), 2);
+        }
+        public int GetFeedbackCount(string ID)
+        {
+            var count = db.Reviews.Where(p => p.SellerID == ID).ToList().Count();
+            return count;
+        }
     }
 }

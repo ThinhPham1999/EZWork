@@ -10,5 +10,7 @@ namespace EZWork.WebUI.Models
     {
         public Seller Seller { get; set; }
         public List<Review> Reviews { get; set; }
+        //public decimal AverageStars { get; set; }
+        //public int FeedbackCounts { get; set; }
     }
 }
