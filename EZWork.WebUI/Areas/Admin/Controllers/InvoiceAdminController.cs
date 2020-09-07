@@ -26,6 +26,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
             ListInvoiceViewModel model = new ListInvoiceViewModel();
             model.DateTimePicker = time.Value;
             model.SearchTerm = searchTerm;
+            model.StatusCode = statusCode.Value;
             int totalRecord = 0;
             if (statusCode == 1)
             {
@@ -51,10 +52,12 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
         {
             int recordSize = 1;
             page = page ?? 1;
+            statusCode = statusCode ?? 1;
             DateTime? time = Convert.ToDateTime(datetimePicker);
             ListInvoiceViewModel model = new ListInvoiceViewModel();
             model.DateTimePicker = time.Value;
             model.SearchTerm = searchTerm;
+            model.StatusCode = statusCode.Value;
             int totalRecord = 0;
             if (statusCode == 1)
             {

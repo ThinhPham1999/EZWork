@@ -12,5 +12,6 @@ namespace EZWork.WebUI.Areas.Admin.ViewModels
         public string SearchTerm { get; set; }
         public Pager Pager { get; set; }
         public DateTime DateTimePicker { get; set; }
+        public int StatusCode { get; set; }
     }
 }

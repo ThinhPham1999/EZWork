@@ -56,13 +56,13 @@
                 @if (Model.Pager.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="1" onclick="Pagination(this)">
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm"  data-statuscode="@Model.StatusCode" data-page="1" onclick="Pagination(this)">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
                     </li>
                     <li class="page-item">
                         @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm })*@
-                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@(Model.Pager.CurrentPage - 1)"  onclick="Pagination(this)">
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-statuscode="@Model.StatusCode" data-page="@(Model.Pager.CurrentPage - 1)"  onclick="Pagination(this)">
                             <i class="fas fa-angle-left"></i>
                         </a>
                     </li>
@@ -72,20 +72,20 @@
                 {
             <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
                 @*href="@Url.Action("Index", "InvoiceAdmin", new { page = page, searchTerm = Model.SearchTerm })*@
-                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@page" onclick="Pagination(this)">@page</a>
+                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-statuscode="@Model.StatusCode" data-page="@page" onclick="Pagination(this)">@page</a>
             </li>
                 }
                 @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
             <li class="page-item">
                 @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm })*@
-                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@(Model.Pager.CurrentPage + 1)" onclick="Pagination(this)">
+                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-statuscode="@Model.StatusCode" data-page="@(Model.Pager.CurrentPage + 1)" onclick="Pagination(this)">
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="page-item">
                 @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm })"*@
-                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@Model.Pager.TotalPages" onclick="Pagination(this)">
+                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-statuscode="@Model.StatusCode" data-page="@Model.Pager.TotalPages" onclick="Pagination(this)">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </li>
