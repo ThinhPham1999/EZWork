@@ -77,15 +77,13 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <span>My Profile</span>
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="@Url.Action("BecomeSeller", "Seller")">Become a seller</a>
                                         </li>
                                         <li>
                                             <a href="@Url.Action("UserProfile", "User")">My Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("GetAllOrder", "Order")">See your payment</a>
                                         </li>
                                         <li>
                                             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))

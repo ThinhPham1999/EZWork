@@ -27,9 +27,9 @@ namespace EZWork.Core.Repository
           return db.Orders.ToList();
         }
 
-        public IEnumerable<Order> SearchInvoice(string searchTerm, int page, int recordSize,int? statusCode,DateTime? time)
+        public IEnumerable<Order> SearchInvoiceNotPay(string searchTerm, int page, int recordSize,int? statusCode,DateTime? time)
         {
-            var orders = db.Orders.ToList();
+            var orders = db.Orders.Where(o => o.Status == 0).ToList();
             if (statusCode.HasValue) {
                 orders = orders.Where(x => x.Status == statusCode.Value).ToList();
             }
@@ -47,9 +47,9 @@ namespace EZWork.Core.Repository
             return orders.OrderBy(x => x.CreateAt).Skip(skip).Take(recordSize).ToList();        
         }
 
-        public int SearchInvoiceCount(string searchTerm, int? statusCode, DateTime? time)
+        public int SearchInvoiceCountNotPay(string searchTerm, int? statusCode, DateTime? time)
         {
-            var orders = db.Orders.ToList();
+            var orders = db.Orders.Where(o => o.Status == 0).ToList();
             if (statusCode.HasValue)
             {
                 orders = orders.Where(x => x.Status == statusCode.Value).ToList();
@@ -57,6 +57,88 @@ namespace EZWork.Core.Repository
             if (!string.IsNullOrEmpty(searchTerm))
             {
               //  Consider FullName of Seller
+                orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
+            }
+            if (time.HasValue)
+            {
+                orders = orders.Where(x => x.CreateAt.CompareTo(time.Value) > 0).ToList();
+            }
+            return orders.Count();
+        }
+
+        public IEnumerable<Order> SearchInvoicePaied(string searchTerm, int page, int recordSize, int? statusCode, DateTime? time)
+        {
+            var orders = db.Orders.Where(o => o.Status == 1).ToList();
+            if (statusCode.HasValue)
+            {
+                orders = orders.Where(x => x.Status == statusCode.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
+            }
+            if (time.HasValue)
+            {
+                orders = orders.Where(x => x.CreateAt.CompareTo(time.Value) > 0).ToList();
+            }
+            var skip = (page - 1) * recordSize;
+            //  skip = (1    -  1) = 0 * 3 = 0
+            //  skip = (2    -  1) = 1 * 3 = 3
+            //  skip = (3    -  1) = 2 * 3 = 6
+            return orders.OrderBy(x => x.CreateAt).Skip(skip).Take(recordSize).ToList();
+        }
+
+        public int SearchInvoiceCountPaied(string searchTerm, int? statusCode, DateTime? time)
+        {
+            var orders = db.Orders.Where(o => o.Status == 1).ToList();
+            if (statusCode.HasValue)
+            {
+                orders = orders.Where(x => x.Status == statusCode.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                //  Consider FullName of Seller
+                orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
+            }
+            if (time.HasValue)
+            {
+                orders = orders.Where(x => x.CreateAt.CompareTo(time.Value) > 0).ToList();
+            }
+            return orders.Count();
+        }
+
+        public IEnumerable<Order> SearchInvoiceCancel(string searchTerm, int page, int recordSize, int? statusCode, DateTime? time)
+        {
+            var orders = db.Orders.Where(o => o.Status == 2).ToList();
+            if (statusCode.HasValue)
+            {
+                orders = orders.Where(x => x.Status == statusCode.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
+            }
+            if (time.HasValue)
+            {
+                orders = orders.Where(x => x.CreateAt.CompareTo(time.Value) > 0).ToList();
+            }
+            var skip = (page - 1) * recordSize;
+            //  skip = (1    -  1) = 0 * 3 = 0
+            //  skip = (2    -  1) = 1 * 3 = 3
+            //  skip = (3    -  1) = 2 * 3 = 6
+            return orders.OrderBy(x => x.CreateAt).Skip(skip).Take(recordSize).ToList();
+        }
+
+        public int SearchInvoiceCountCancel(string searchTerm, int? statusCode, DateTime? time)
+        {
+            var orders = db.Orders.Where(o => o.Status == 2).ToList();
+            if (statusCode.HasValue)
+            {
+                orders = orders.Where(x => x.Status == statusCode.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                //  Consider FullName of Seller
                 orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
             }
             if (time.HasValue)
