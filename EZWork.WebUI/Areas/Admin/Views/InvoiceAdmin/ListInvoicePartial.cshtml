@@ -23,8 +23,8 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">UserID</th>
-                <th scope="col">SellerID</th>
+                <th scope="col">User</th>
+                <th scope="col">Seller</th>
                 <th scope="col">Price</th>
                 <th scope="col">CreateAt</th>
                 <th scope="col">Status</th>
@@ -35,8 +35,8 @@
             {
                 <tr>
                     <th>@index</th>
-                    <th>@item.EZUserId</th>
-                    <td>@item.SellerId</td>
+                    <th>@item.EZUser.UserName</th>
+                    <td>@item.Seller.EZUser.UserName</td>
                     <td>@item.Price</td>
                     <td>@item.CreateAt</td>
                     <td>@item.Status</td>
