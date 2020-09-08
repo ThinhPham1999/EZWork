@@ -4,8 +4,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
-
 <div class="container mt-3">
     <br>
     <!-- Nav tabs -->
@@ -87,6 +85,7 @@
             alert('fail');
         })
     }
+
     function DetailInvoice(btn) {
         debugger;
         var id = btn.getAttribute('data-id');
@@ -98,6 +97,19 @@
             $('#exampleModal .modal-dialog').html(response);
         });
     };
+
+    function ConfirmInvoice(btn) {
+        debugger;
+        var id = btn.getAttribute('data-id');
+        $.ajax({
+            url: '@Url.Action("Action","InvoiceAdmin")',
+            data: { ID: id }
+        }).done(function (response) {
+            //     debugger;
+            $(btn).closest('tr').remove();
+        });
+    };
+
     function Pagination(btn) {
         var searchterm = btn.getAttribute("data-searchTerm");
         var Page = btn.getAttribute("data-page");

@@ -34,8 +34,7 @@ namespace EZWork.Core.Repository
 
         public void Edit(Order order)
         {
-            var editOrder = db.Orders.Find(order.OrderId);
-            if (editOrder != null)
+            if (order != null)
             {
                 db.Entry(order).State = EntityState.Modified;
             }

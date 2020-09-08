@@ -1,23 +1,23 @@
 ﻿@model EZWork.WebUI.Areas.Admin.ViewModels.ListInvoiceViewModel
 @if (Model != null && Model.Orders != null && Model.Orders.Count > 0)
 {
-<form id="formInvoice">
-    <div class="input-group">
-        <input hidden value="@Model.Orders[0].Status" name="statusCode"/>
-        <input type="text" class="form-control inputSeach"  placeholder="Search" name="searchTerm" value="@Model.SearchTerm"/>
-        <div class="input-group-append">
-            <button class="btn btn-outline-primary btnSearch" onclick="SearchInvoice(this)" type="button" ><i class="fas fa-search"></i>Search</button>
+    <form id="formInvoice">
+        <div class="input-group">
+            <input hidden value="@Model.Orders[0].Status" name="statusCode" />
+            <input type="text" class="form-control inputSeach" placeholder="Search" name="searchTerm" value="@Model.SearchTerm" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary btnSearch" onclick="SearchInvoice(this)" type="button"><i class="fas fa-search"></i>Search</button>
+            </div>
         </div>
-    </div>
-    <div class="input-group">
-        <label for="example-datetime-local-input" class="col-2 col-form-label">Date and time</label>
-        <div class="col-10">
-            <input class="form-control" type="datetime-local" name="datetimePicker" value="@Model.DateTimePicker" id="example-datetime-local-input">
+        <div class="input-group">
+            <label for="example-datetime-local-input" class="col-2 col-form-label">Date and time</label>
+            <div class="col-10">
+                <input class="form-control" type="datetime-local" name="datetimePicker" value="@Model.DateTimePicker" id="example-datetime-local-input">
+            </div>
         </div>
-    </div>
-</form>
-  
-    
+    </form>
+
+
     var index = 1;
     <table class="table">
         <thead>
@@ -42,6 +42,10 @@
                     <td>@item.Status</td>
                     <td>
                         <button class="btn btn-primary createBtn" data-toggle="modal" onclick="DetailInvoice(this)" data-target="#exampleModal" data-id="@item.OrderId">Detail</button>
+                        @if (item.Status == 0)
+                        {
+                            <button class="btn btn-success" onclick="ConfirmInvoice(this)" data-id="@item.OrderId">Confirm</button>
+                        }
                     </td>
                 </tr>
                 index++;
@@ -62,7 +66,7 @@
                     </li>
                     <li class="page-item">
                         @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage - 1, searchTerm = Model.SearchTerm })*@
-                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@(Model.Pager.CurrentPage - 1)"  onclick="Pagination(this)">
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@(Model.Pager.CurrentPage - 1)" onclick="Pagination(this)">
                             <i class="fas fa-angle-left"></i>
                         </a>
                     </li>
@@ -70,25 +74,25 @@
 
                 @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                 {
-            <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
-                @*href="@Url.Action("Index", "InvoiceAdmin", new { page = page, searchTerm = Model.SearchTerm })*@
-                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@page" onclick="Pagination(this)">@page</a>
-            </li>
+                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                        @*href="@Url.Action("Index", "InvoiceAdmin", new { page = page, searchTerm = Model.SearchTerm })*@
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@page" onclick="Pagination(this)">@page</a>
+                    </li>
                 }
                 @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
-            <li class="page-item">
-                @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm })*@
-                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@(Model.Pager.CurrentPage + 1)" onclick="Pagination(this)">
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="page-item">
-                @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm })"*@
-                <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@Model.Pager.TotalPages" onclick="Pagination(this)">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
+                    <li class="page-item">
+                        @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.CurrentPage + 1, searchTerm = Model.SearchTerm })*@
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@(Model.Pager.CurrentPage + 1)" onclick="Pagination(this)">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        @*href="@Url.Action("Index", "InvoiceAdmin", new { page = Model.Pager.TotalPages, searchTerm = Model.SearchTerm })"*@
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="@Model.Pager.TotalPages" onclick="Pagination(this)">
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
                 }
             </ul>
         </nav>

@@ -12,10 +12,13 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
     public class InvoiceAdminController : Controller
     {
         private readonly IInvoiceRepository invoiceRepository;
+        private readonly IOrderRepository orderRepository;
         public InvoiceAdminController()
         {
             invoiceRepository = new InvoiceRepository();
+            orderRepository = new OrderRepository();
         }
+
         // GET: Admin/InvoiceAdmin
         public ActionResult Index(string searchTerm, int? page, int? statusCode, string datetimePicker)
         {
@@ -49,7 +52,7 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
 
         public ActionResult ListInvoicePartial(string searchTerm, int? page, int? statusCode, string datetimePicker)
         {
-            int recordSize = 1;
+            int recordSize = 4;
             page = page ?? 1;
             DateTime? time = Convert.ToDateTime(datetimePicker);
             ListInvoiceViewModel model = new ListInvoiceViewModel();
@@ -75,12 +78,33 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
             return PartialView(model);
             // return View();
         }
-        public ActionResult Detail(int? ID){
-            if (!ID.HasValue) {
+
+        public ActionResult Detail(int? ID)
+        {
+            if (!ID.HasValue)
+            {
                 HttpNotFound();
             }
             var invoice = invoiceRepository.Detail(ID.Value);
             return PartialView(invoice);
+        }
+
+        public JsonResult Action(int? ID)
+        {
+            JsonResult json = new JsonResult();
+            //json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            var order = orderRepository.FindById(ID.Value);
+            if (order != null)
+            {
+                order.Status = 1;
+                orderRepository.Edit(order);
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data = new { Success = false };
+            }
+            return json;
         }
     }
 }
