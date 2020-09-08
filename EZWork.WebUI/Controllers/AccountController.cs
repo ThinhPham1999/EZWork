@@ -13,6 +13,7 @@ using EZWork.Core.Entities;
 using EZWork.Core.Repository;
 using EZWork.Core.DBContext;
 using Microsoft.AspNet.Identity.EntityFramework;
+using EZWork.Core.Abstract;
 
 namespace EZWork.WebUI.Controllers
 {
@@ -22,7 +23,8 @@ namespace EZWork.WebUI.Controllers
         private SignInRepository _signInManager;
         private AccountRepository _userManager;
         private RoleRepository _roleManager;
-        private EZWorkDbContext db = new EZWorkDbContext();
+        private  IEZUserRepository ezUserRepository;
+       // private EZWorkDbContext db = new EZWorkDbContext();
         public AccountController()
         {
         }
@@ -32,6 +34,7 @@ namespace EZWork.WebUI.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
             RoleManager = roleManager;
+            ezUserRepository = new EZUserRepository();
         }
 
         public SignInRepository SignInManager
@@ -78,7 +81,8 @@ namespace EZWork.WebUI.Controllers
                 if (!UserManager.FindByEmail(name).EmailConfirmed) {
                     ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
                 }
-                model.EZUser = db.EZUsers.Find((UserManager.FindByEmail(name).Id.ToLower()));
+                ezUserRepository = ezUserRepository ?? new EZUserRepository();
+                model.EZUser = ezUserRepository.GetEZUserByID((UserManager.FindByEmail(name).Id.ToLower()));
             }
             return PartialView("_PartialHeader", model);
         }
@@ -125,7 +129,7 @@ namespace EZWork.WebUI.Controllers
             var user = await UserManager.FindByEmailAsync(model.Email);
             var adminRole = await RoleManager.FindByNameAsync("Admin");
             IdentityUserRole isAdmin = null;
-            if (adminRole != null)
+            if (user!=null && adminRole != null)
             {
                 isAdmin = (IdentityUserRole)user.Roles.Where(x => x.RoleId.Equals(adminRole.Id)).FirstOrDefault();
             }
@@ -211,18 +215,21 @@ namespace EZWork.WebUI.Controllers
                 var account = new EZAccount { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(account, model.Password);
                 var user = await UserManager.FindByEmailAsync(model.Email);
+                var username = model.Email.Split('@').ToArray() ;
                 await UserManager.SetLockoutEnabledAsync(user.Id,false);
                 if (RoleManager.FindByName("User") == null) {
                   await  RoleManager.CreateAsync(new IdentityRole("User"));
                 }
                 if (result.Succeeded)
                 {
-                    db.EZUsers.Add(new EZUser
+                    var ezUser= new EZUser
                     {
                         Id = user.Id,
                         CreateAt = DateTime.Now.ToString(),
-                    });
-                    db.SaveChanges();
+                        UserName = username[0].ToString()
+                    } ;
+                    ezUserRepository = ezUserRepository ?? new EZUserRepository();
+                    var res=  ezUserRepository.InsertEZUser(ezUser);
                     var currentUser = await UserManager.FindByEmailAsync(model.Email);
                     var roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

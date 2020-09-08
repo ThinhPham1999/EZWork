@@ -15,7 +15,7 @@ namespace EZWork.WebUI.Models
     public class ListSellerViewModel
     {
         public List<Seller> ViewSellers { get; set; }
-        public string SearchTerm { get; set; }
+        public string SearchTerm { get; set; }     
         public List<SkillViewModel> ViewSkills { get; set; }
         public Pager Pager { get; set; }
        

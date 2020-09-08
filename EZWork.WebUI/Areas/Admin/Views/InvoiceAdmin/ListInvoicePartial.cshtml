@@ -60,7 +60,7 @@
                 @if (Model.Pager.CurrentPage > 1)
                 {
                     <li class="page-item">
-                        <a class="page-link" data-searchTerm="@Model.SearchTerm" data-page="1" onclick="Pagination(this)">
+                        <a class="page-link" data-searchTerm="@Model.SearchTerm"  data-statuscode="@Model.StatusCode" data-page="1" onclick="Pagination(this)">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
                     </li>

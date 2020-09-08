@@ -19,7 +19,7 @@ namespace EZWork.Core.Repository
             db = new EZWorkDbContext();
         }
 
-        public EZUser GetEZUser(string id)
+        public EZUser GetEZUserByID(string id)
         {
             var user = db.EZUsers.Find(id);
             return user;
@@ -30,5 +30,11 @@ namespace EZWork.Core.Repository
             db.Entry(eZUser).State = EntityState.Modified;
             db.SaveChanges();
         }
+        public bool InsertEZUser(EZUser eZUser) {
+            db.EZUsers.Add(eZUser);
+           return  db.SaveChanges()>0;
+        }
+
+       
     }
 }

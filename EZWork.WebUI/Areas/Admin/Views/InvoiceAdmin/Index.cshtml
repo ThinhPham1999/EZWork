@@ -111,13 +111,17 @@
     };
 
     function Pagination(btn) {
+      //  alert('ok');
         var searchterm = btn.getAttribute("data-searchTerm");
         var Page = btn.getAttribute("data-page");
+        debugger;
+        var statuscode = btn.getAttribute("data-statuscode");
          $.ajax({
             url: '@Url.Action("ListInvoicePartial","InvoiceAdmin")',
              data: {
                  searchTerm: searchterm,
-                 page:Page
+                 page: Page,
+                 statusCode: statuscode
              }
         }).then(function (response) {
            // debugger;

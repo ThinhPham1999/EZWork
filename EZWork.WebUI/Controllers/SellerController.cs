@@ -65,6 +65,7 @@ namespace EZWork.WebUI.Controllers
                 Searchskills = new int[] { oneSkill.Value };
                 oneSkill = null;
             }
+          
             model.SearchTerm = searchTerm;
             model.ViewSellers = sellerRepository.SearchSeller(searchTerm, page.Value, pageSize.Value, Searchskills);
             model.ViewSkills = new List<SkillViewModel>();
@@ -97,6 +98,8 @@ namespace EZWork.WebUI.Controllers
             DetailSellerViewModel model = new DetailSellerViewModel();
             model.Seller = sellerRepository.GetSellerByID(id);
             model.Reviews = reviewRepository.GetReviewsByID(id);
+         //   model.AverageStars = reviewRepository.GetAverageRate(id);
+          //  model.FeedbackCounts = reviewRepository.GetFeedbackCount(id);
             return View(model);
         }
 

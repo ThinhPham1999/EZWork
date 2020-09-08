@@ -26,7 +26,7 @@ namespace EZWork.WebUI.Controllers
         {
             var model = new UserViewModel();
             string id = User.Identity.GetUserId();
-            var EZuser = EZUserRepository.GetEZUser(id);
+            var EZuser = EZUserRepository.GetEZUserByID(id);
             model.FullName = EZuser.FullName;
             model.Gender = EZuser.Gender?? "";
             model.PhoneNumber = EZuser.EZAccount.PhoneNumber;
@@ -43,7 +43,7 @@ namespace EZWork.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var updateUser = EZUserRepository.GetEZUser(User.Identity.GetUserId());
+                var updateUser = EZUserRepository.GetEZUserByID(User.Identity.GetUserId());
                 if (Image != null)
                 {
                     model.ImageProfile = User.Identity.GetUserId();

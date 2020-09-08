@@ -80,11 +80,12 @@ namespace EZWork.Core.Repository
         public void UpdateSkill(List<SellerMapSkill> sellerMapSkills, Seller seller)
         {
             db.SellerMapSkills.RemoveRange(db.SellerMapSkills.Where(s => s.SellerId.Equals(seller.SellerId)));
-            foreach(var item in sellerMapSkills)
+            foreach (var item in sellerMapSkills)
             {
                 db.SellerMapSkills.Add(item);
             }
             db.SaveChanges();
         }
+       
     }
 }

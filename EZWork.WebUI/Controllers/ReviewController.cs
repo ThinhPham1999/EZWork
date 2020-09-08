@@ -13,11 +13,11 @@ namespace EZWork.WebUI.Controllers
     public class ReviewController : Controller
     {
         private ReviewRepository reviewRepository;
-       
+        private SellerRepository sellerRepository;
         public ReviewController()
         {
             reviewRepository = new ReviewRepository();
-          
+            sellerRepository = new SellerRepository();
         }
 
         // GET: Comment
@@ -36,6 +36,7 @@ namespace EZWork.WebUI.Controllers
             {
                 review.Text = model.Text;
                 review.SellerID = model.SellerID;
+             
                 if (model.SellerID.Equals(reviewerID))
                 {
                     json.Data = new { Success = false, Message = "You can not review yourself" };
@@ -45,13 +46,19 @@ namespace EZWork.WebUI.Controllers
                         json.Data = new { Success = false, Message = "You can comment only one" };
                     }
                     else {
+                        
                         review.ReviewerID = User.Identity.GetUserId();
                         //Lưu ý chỗ này
                         review.TimeStamp = DateTime.Now;
                         review.Rate = Convert.ToInt32(model.Rate);
+                        
                         var result = reviewRepository.LeaveComment(review);
                         if (result)
                         {
+                            var seller = sellerRepository.GetSellerByID(model.SellerID);
+                            seller.FeedBackCount = reviewRepository.GetFeedbackCount(model.SellerID);
+                            seller.Rate = reviewRepository.GetAverageRate(model.SellerID);
+                            sellerRepository.UpdateSeller(seller);
                             json.Data = new { Success = true , newReview= review };               
                         }
                         //else
