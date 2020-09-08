@@ -32,7 +32,19 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @*@Html.DisplayFor(modelItem => item.Status)*@
+            @if (item.Status == 0)
+            {
+                <label>Đang chờ</label>
+            }
+            @if (item.Status == 1)
+            {
+                <label>Đã thanh toán</label>
+            }
+            @if (item.Status == 1)
+            {
+                <label>Đã hủy</label>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreateAt)
