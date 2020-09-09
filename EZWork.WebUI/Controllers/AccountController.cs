@@ -74,15 +74,21 @@ namespace EZWork.WebUI.Controllers
         [AllowAnonymous]
         [ChildActionOnly]
         public  ActionResult PartialHeader() {
-            var name=User.Identity.Name;
+            var name = User.Identity.Name;
+            HttpContext.Session.Clear();
             PartialHeaderViewModel model = new PartialHeaderViewModel();
-            if (!string.IsNullOrEmpty(name)) {
+            if (!string.IsNullOrEmpty(name))
+            {
                 model.EZAccount = UserManager.FindByEmail(name);
-                if (!UserManager.FindByEmail(name).EmailConfirmed) {
-                    ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
+                if (model.EZAccount != null)
+                {
+                    ezUserRepository = ezUserRepository ?? new EZUserRepository();
+                    model.EZUser = ezUserRepository.GetEZUserByID((UserManager.FindByEmail(name).Id.ToLower()));
+                    if (!UserManager.FindByEmail(name).EmailConfirmed)
+                    {
+                        ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
+                    }
                 }
-                ezUserRepository = ezUserRepository ?? new EZUserRepository();
-                model.EZUser = ezUserRepository.GetEZUserByID((UserManager.FindByEmail(name).Id.ToLower()));
             }
             return PartialView("_PartialHeader", model);
         }
