@@ -92,14 +92,21 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
             return PartialView(invoice);
         }
 
-        public JsonResult Action(int? ID)
+        public JsonResult Action(int? ID, int? statusCode)
         {
             JsonResult json = new JsonResult();
-            //json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             var order = orderRepository.FindById(ID.Value);
             if (order != null)
             {
-                order.Status = 1;
+                if (statusCode.Value == 1)
+                {
+                    order.Status = 1;
+                }
+                if (statusCode.Value == 2)
+                {
+                    order.Status = 2;
+                }
                 orderRepository.Edit(order);
                 json.Data = new { Success = true };
             }

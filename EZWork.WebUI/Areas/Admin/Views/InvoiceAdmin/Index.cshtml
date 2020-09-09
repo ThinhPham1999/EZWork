@@ -23,7 +23,6 @@
     <div class="tab-content">
         <div id="home" class="container tab-pane active">
             <br>
-            <h3> Payment</h3>
             <div class="row">
                 <div class="col col-lg-12 divInvoice">
                     @{ Html.RenderPartial("ListInvoicePartial", Model);}
@@ -98,15 +97,19 @@
         });
     };
 
-    function ConfirmInvoice(btn) {
+    function InvoiceAction(btn) {
         debugger;
         var id = btn.getAttribute('data-id');
+        var statuscode = btn.getAttribute('data-statuscode');
         $.ajax({
             url: '@Url.Action("Action","InvoiceAdmin")',
-            data: { ID: id }
-        }).done(function (response) {
-            //     debugger;
-            $(btn).closest('tr').remove();
+            data: { ID: id, statusCode: statuscode },
+            success: function (result) {
+                $(btn).closest('tr').remove();
+            },
+            error: function (errormessage) {
+                alert('failed');
+            }
         });
     };
 

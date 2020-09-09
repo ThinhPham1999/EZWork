@@ -16,12 +16,14 @@ namespace EZWork.WebUI.Controllers
         private ISellerRepository sellerRepository;
         private IOrderRepository orderRepository;
         private IEZUserRepository eZUserRepository;
+        private readonly IPayerRepository payerRepository;
 
         public OrderController()
         {
             sellerRepository = new SellerRepository();
             orderRepository = new OrderRepository();
             eZUserRepository = new EZUserRepository();
+            payerRepository = new PayerRepository();
         }
 
         [HttpGet]
@@ -61,7 +63,7 @@ namespace EZWork.WebUI.Controllers
                 CardName = model.CardName
             };
             orderRepository.Add(order, cardAccount);
-            return RedirectToAction("Detail","Seller", new { id = model.SellerId });
+            return RedirectToAction("ResultPayer", "Seller");
         }
 
         [HttpGet]
@@ -73,6 +75,11 @@ namespace EZWork.WebUI.Controllers
             return View(orders);
         }
 
+        public ActionResult ResultPayer()
+        {
+            var payer = payerRepository.GetPayer(1);
+            return View(payer);
+        }
 
         [NonAction]
         public decimal CalculatePrice(Seller seller)

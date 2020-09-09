@@ -44,7 +44,8 @@
                         <button class="btn btn-primary createBtn" data-toggle="modal" onclick="DetailInvoice(this)" data-target="#exampleModal" data-id="@item.OrderId">Detail</button>
                         @if (item.Status == 0)
                         {
-                            <button class="btn btn-success" onclick="ConfirmInvoice(this)" data-id="@item.OrderId">Confirm</button>
+                            <button class="btn btn-success" onclick="InvoiceAction(this)" data-id="@item.OrderId" data-statuscode="1">Confirm</button>
+                            <button class="btn btn-danger" onclick="InvoiceAction(this)" data-id="@item.OrderId" data-statuscode="2">Cancel</button>
                         }
                     </td>
                 </tr>

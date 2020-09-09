@@ -1,0 +1,36 @@
+﻿@model EZWork.Core.Entities.Payer
+
+@{
+    ViewBag.Title = "ResultPayer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h4>Xin hãy chuyển tiền vào tài khoản này</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PayerAccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayerAccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayerAccountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayerAccountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayerBank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayerBank)
+        </dd>
+    </dl>
+</div>

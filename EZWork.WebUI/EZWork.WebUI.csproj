@@ -748,6 +748,7 @@
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Order\CreateOrder.cshtml" />
     <Content Include="Views\Order\GetAllOrder.cshtml" />
+    <Content Include="Views\Order\ResultPayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
