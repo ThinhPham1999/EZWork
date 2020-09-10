@@ -22,6 +22,8 @@ namespace EZWork.Core.DBContext
                 var role1 = new IdentityRole { Name = "User" };
                 var role2 = new IdentityRole { Name = "Seller" };
                 manager.Create(role);
+                manager.Create(role1);
+                manager.Create(role2);
             }
 
             if (!context.Users.Any(u => u.UserName == "phamquochung23121997@gmail.com"))
