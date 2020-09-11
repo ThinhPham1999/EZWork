@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class InvoiceAdminController : Controller
     {
         private readonly IInvoiceRepository invoiceRepository;

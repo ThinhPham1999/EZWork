@@ -75,7 +75,7 @@ namespace EZWork.WebUI.Controllers
         [ChildActionOnly]
         public  ActionResult PartialHeader() {
             var name = User.Identity.Name;
-            HttpContext.Session.Clear();
+          //  HttpContext.Session.Clear();
             PartialHeaderViewModel model = new PartialHeaderViewModel();
             if (!string.IsNullOrEmpty(name))
             {
@@ -84,7 +84,9 @@ namespace EZWork.WebUI.Controllers
                 {
                     ezUserRepository = ezUserRepository ?? new EZUserRepository();
                     model.EZUser = ezUserRepository.GetEZUserByID((UserManager.FindByEmail(name).Id.ToLower()));
-                    if (!UserManager.FindByEmail(name).EmailConfirmed)
+                    var adminRole =  RoleManager.FindByName("Admin");
+                   var isAdmin = model.EZAccount.Roles.Where(x => x.RoleId.Equals(adminRole.Id)).FirstOrDefault();
+                    if (!UserManager.FindByEmail(name).EmailConfirmed && isAdmin ==null)
                     {
                         ViewBag.Message = "You have not confirm your Email yet . Please click <a href='/Account/SendEmail' style='color:yellow'>Here</a> to confirm Email";
                     }

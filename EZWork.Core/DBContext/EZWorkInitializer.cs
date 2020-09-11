@@ -34,6 +34,10 @@ namespace EZWork.Core.DBContext
                 manager.Create(user, "quochung");
                 manager.AddToRole(user.Id, "Admin");
             }
+            context.Levels.Add(new Level { Description = "Fresher" });
+            context.Levels.Add(new Level { Description = "Junior" });
+            context.Levels.Add(new Level { Description = "Senior" });
+            context.Levels.Add(new Level { Description = "Engineer" });
             base.Seed(context);
         }
     }
