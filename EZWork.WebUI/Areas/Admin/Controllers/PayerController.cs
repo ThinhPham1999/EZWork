@@ -9,6 +9,7 @@ using EZWork.Core.Repository;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PayerController : Controller
     {
         private IPayerRepository payerRepository;

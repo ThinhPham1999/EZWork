@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SellerAdminController : Controller
     {
         private ISellerRepository sellerRepository;
