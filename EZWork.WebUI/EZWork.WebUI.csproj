@@ -424,7 +424,6 @@
     <Content Include="App_Themes\FreelancerTheme\images\flag\img-03.png" />
     <Content Include="App_Themes\FreelancerTheme\images\flag\img-04.png" />
     <Content Include="App_Themes\FreelancerTheme\images\flag\img-05.png" />
-    <Content Include="App_Themes\FreelancerTheme\images\flogo.png" />
     <Content Include="App_Themes\FreelancerTheme\images\followers\img-01.jpg" />
     <Content Include="App_Themes\FreelancerTheme\images\followers\img-02.jpg" />
     <Content Include="App_Themes\FreelancerTheme\images\followers\img-03.jpg" />
