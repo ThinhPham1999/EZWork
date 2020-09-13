@@ -698,6 +698,8 @@
     <Content Include="Uploads\Photo\img-08.png" />
     <Content Include="Uploads\Photo\img-09.png" />
     <Content Include="Uploads\Photo\img-10.png" />
+    <Content Include="Uploads\Photo\logo.png" />
+    <Content Include="Uploads\Photo\logo1.png" />
     <Content Include="Uploads\Profile\default.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
