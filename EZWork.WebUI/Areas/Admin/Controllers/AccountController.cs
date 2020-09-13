@@ -10,7 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.Owin.Security;
 namespace EZWork.WebUI.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
@@ -174,6 +174,20 @@ namespace EZWork.WebUI.Areas.Admin.Controllers
                 json.Data = new { Success = false };
             }
             return json;
+        }
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home",new { area=""});
         }
 
     }

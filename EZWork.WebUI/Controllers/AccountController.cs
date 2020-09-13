@@ -72,10 +72,16 @@ namespace EZWork.WebUI.Controllers
             }
         }
         [AllowAnonymous]
-        [ChildActionOnly]
+         [ChildActionOnly]
         public  ActionResult PartialHeader() {
             var name = User.Identity.Name;
-          //  HttpContext.Session.Clear();
+            var cook = Request.Cookies[".AspNet.ApplicationCookie"];
+           
+            //if (Request.Cookies[".AspNet.ApplicationCookie"] != null)
+            //{
+            //    Response.Cookies[".AspNet.ApplicationCookie"].Expires = DateTime.Now.AddDays(-1);
+            //}
+
             PartialHeaderViewModel model = new PartialHeaderViewModel();
             if (!string.IsNullOrEmpty(name))
             {
