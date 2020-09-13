@@ -1,16 +1,17 @@
 ﻿@using Microsoft.AspNet.Identity
 @model EZWork.WebUI.Models.PartialHeaderViewModel
-    @if (ViewBag.Message != null) { 
-<div class="col-12 ">
-    <div class="wt-jobalerts">
-        <div class="alert alert-primary alert-dismissible fade show">
-            <span> @Html.Raw(ViewBag.Message)</span>
-            @*<a href="javascript:void(0)" class="wt-alertbtn primary">View</a>*@
-            <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close" style="float:right"></i></a>
+@if (ViewBag.Message != null)
+{
+    <div class="col-12 ">
+        <div class="wt-jobalerts">
+            <div class="alert alert-primary alert-dismissible fade show">
+                <span> @Html.Raw(ViewBag.Message)</span>
+                @*<a href="javascript:void(0)" class="wt-alertbtn primary">View</a>*@
+                <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close" style="float:right"></i></a>
+            </div>
         </div>
     </div>
-</div>
-    }
+}
 
 <!-- Header Start -->
 <header id="wt-header" class="wt-header wt-haslayout">
@@ -18,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <strong class="wt-logo"><a href="index-2.html"><img src="~/App_Themes/FreelancerTheme/images/logo.png" alt="company logo here"></a></strong>
+                    <strong class="wt-logo"><a href="index-2.html"><img style="margin-top: -10%" src="~/Uploads/Photo/logo1.png" alt="company logo here" width="100"></a></strong>
                     <div class="wt-rightarea">
                         <nav id="wt-nav" class="wt-nav navbar-expand-lg">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,21 +27,6 @@
                             </button>
                             <div class="collapse navbar-collapse wt-navigation" id="navbarNav">
                                 <ul class="navbar-nav">
-                                    <li class="menu-item-has-children page_item_has_children">
-                                        <a href="javascript:void(0);">Browse Jobs</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="joblisting.html">Job Listing</a>
-                                            </li>
-                                            <li class="current-menu-item">
-                                                <a href="jobsingle.html">Job Single</a>
-                                            </li>
-                                            <li>
-
-                                                <a href="jobproposal.html">Job Proposal</a>
-                                            </li>
-                                        </ul>
-                                    </li>
                                     <li class="menu-item-has-children page_item_has_children">
                                         <a href="javascript:void(0);">View Freelancers</a>
                                         <ul class="sub-menu">
@@ -58,7 +44,7 @@
                             //var claim = claims.SingleOrDefault(m => m.Type == "FullName");
                             <div class="wt-userlogedin">
                                 <figure class="wt-userimg">
-                                    <img src="~/Uploads/Profile/@(Model.EZUser.ImageProfile!=null?Model.EZUser.ImageProfile:"user-picture.png")" >
+                                    <img src="~/Uploads/Profile/@(Model.EZUser.ImageProfile!=null?Model.EZUser.ImageProfile:"default.jpg")">
                                     @*<img src="~/App_Themes/FreelancerTheme/images/user-img.jpg" alt="image description">*@
                                 </figure>
                                 <div class="wt-username">
@@ -112,11 +98,11 @@
 
                                         <li>
                                             @Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    }
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        }
                     </div>
                 </div>
             </div>
