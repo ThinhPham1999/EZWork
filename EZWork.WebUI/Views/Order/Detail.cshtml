@@ -1,0 +1,56 @@
+﻿@model EZWork.Core.Entities.Order
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+        <h4>Order</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Seller.EZUser.FullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seller.EZUser.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Seller.EZUser.EZAccount.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seller.EZUser.EZAccount.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Seller.EZUser.EZAccount.PhoneNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seller.EZUser.EZAccount.PhoneNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Seller.ShortDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seller.ShortDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateAt)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateAt)
+            </dd>
+        </dl>
+        <p>
+            @Html.ActionLink("Back to List", "GetAllOrder", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+

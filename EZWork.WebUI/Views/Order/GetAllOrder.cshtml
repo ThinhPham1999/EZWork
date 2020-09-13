@@ -5,49 +5,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Seller.EZUser.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateAt)
-        </th>
-    </tr>
+<div class="container">
+    <table class="table">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seller.EZUser.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Status)*@
-            @if (item.Status == 0)
-            {
-                <label>Đang chờ</label>
-            }
-            @if (item.Status == 1)
-            {
-                <label>Đã thanh toán</label>
-            }
-            @if (item.Status == 1)
-            {
-                <label>Đã hủy</label>
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateAt)
-        </td>
-    </tr>
-}
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Seller.EZUser.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateAt)
+            </th>
+            <th>
 
-</table>
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seller.EZUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Status)*@
+                    @if (item.Status == 0)
+                    {
+                        <label>Đang chờ</label>
+                    }
+                    @if (item.Status == 1)
+                    {
+                        <label>Đã thanh toán</label>
+                    }
+                    @if (item.Status == 2)
+                    {
+                        <label>Đã hủy</label>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    @if (item.Status == 1)
+                    {@Html.ActionLink("Detail", "Detail", "Order", new { ID = item.OrderId }, new { @class = "btn btn-success" })}
+                </td>
+            </tr>
+        }
+    </table>
+</div>

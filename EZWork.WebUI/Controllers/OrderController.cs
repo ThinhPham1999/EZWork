@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using EZWork.Core.Repository;
 using EZWork.Core.Abstract;
 using EZWork.Core.Entities;
+using EZWork.Extensions.Extensions;
 
 namespace EZWork.WebUI.Controllers
 {
@@ -34,10 +35,11 @@ namespace EZWork.WebUI.Controllers
             OrderViewModel orderViewModel = new OrderViewModel();
             var seller = sellerRepository.GetSellerByID(sellerId);
             decimal Price = CalculatePrice(seller);
-
+            bool check = orderRepository.IsExistedOrder(sellerId, User.Identity.GetUserId());
             orderViewModel.UserId = User.Identity.GetUserId();
             orderViewModel.SellerId = sellerId;
             orderViewModel.Price = Price;
+            orderViewModel.Existed = check;
             return View(orderViewModel);
         }
 
@@ -63,7 +65,7 @@ namespace EZWork.WebUI.Controllers
                 CardName = model.CardName
             };
             orderRepository.Add(order, cardAccount);
-            return RedirectToAction("ResultPayer", "Seller");
+            return RedirectToAction("ResultPayer", "Order");
         }
 
         [HttpGet]
@@ -111,6 +113,16 @@ namespace EZWork.WebUI.Controllers
             }
             return result;
         }
-        
+
+        [Authorize(Roles = "User,Seller")]
+        public ActionResult Detail(int? ID)
+        {
+            if (!ID.HasValue)
+            {
+                HttpNotFound();
+            }
+            var invoice = orderRepository.FindById(ID.Value);
+            return PartialView(invoice);
+        }
     }
 }

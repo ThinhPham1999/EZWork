@@ -16,6 +16,9 @@ namespace EZWork.Core.Abstract
         void Edit(Order order);
         IList<Order> GetAll();
         IList<Order> FindByUserId(string userid);
+        bool IsExistedOrder(string sellerID, string userid);
+        IEnumerable<Order> SearchOrder(string searchTerm, int page, int recordSize, int? statusCode, DateTime? time, string userid);
+        int SearchOrderCount(string searchTerm, int? statusCode, DateTime? time, string userid);
         void Dispose();
     }
 }

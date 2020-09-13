@@ -72,5 +72,52 @@ namespace EZWork.Core.Repository
             var orders = user.Orders;
             return orders.ToList();
         }
+
+        public bool IsExistedOrder(string sellerID, string userid)
+        {
+            var review = db.Orders.Where(x => x.SellerId.Equals(sellerID) && x.EZUserId.Equals(userid)).SingleOrDefault();
+            return review != null ? true : false;
+        }
+
+        public IEnumerable<Order> SearchOrder(string searchTerm, int page, int recordSize, int? statusCode, DateTime? time, string userid)
+        {
+            var orders = db.Orders.Where(o => o.EZUserId.Equals(userid)).ToList();
+            if (statusCode.HasValue)
+            {
+                orders = orders.Where(x => x.Status == statusCode.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
+            }
+            if (time.HasValue)
+            {
+                orders = orders.Where(x => x.CreateAt.CompareTo(time.Value) > 0).ToList();
+            }
+            var skip = (page - 1) * recordSize;
+            //  skip = (1    -  1) = 0 * 3 = 0
+            //  skip = (2    -  1) = 1 * 3 = 3
+            //  skip = (3    -  1) = 2 * 3 = 6
+            return orders.OrderBy(x => x.CreateAt).Skip(skip).Take(recordSize).ToList();
+        }
+
+        public int SearchOrderCount(string searchTerm, int? statusCode, DateTime? time, string userid)
+        {
+            var orders = db.Orders.Where(o => o.EZUserId.Equals(userid)).ToList();
+            if (statusCode.HasValue)
+            {
+                orders = orders.Where(x => x.Status == statusCode.Value).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                //  Consider FullName of Seller
+                orders = orders.Where(x => x.Price.ToString().Contains(searchTerm)).ToList();
+            }
+            if (time.HasValue)
+            {
+                orders = orders.Where(x => x.CreateAt.CompareTo(time.Value) > 0).ToList();
+            }
+            return orders.Count();
+        }
     }
 }
