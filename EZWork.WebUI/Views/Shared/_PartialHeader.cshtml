@@ -44,7 +44,7 @@
                             //var claim = claims.SingleOrDefault(m => m.Type == "FullName");
                             <div class="wt-userlogedin">
                                 <figure class="wt-userimg">
-                                    <img src="~/Uploads/Profile/@(Model.EZUser.ImageProfile!=null?Model.EZUser.ImageProfile:"default.jpg")">
+                                    <img src="~/Uploads/Profile/@(Model.EZUser.ImageProfile!=null?Model.EZUser.ImageProfile:"user-picture.png")">
                                     @*<img src="~/App_Themes/FreelancerTheme/images/user-img.jpg" alt="image description">*@
                                 </figure>
                                 <div class="wt-username">
@@ -91,7 +91,6 @@
                                 <div class="collapse navbar-collapse wt-navigation" id="navbarNav">
                                     <ul class="navbar-nav">
                                         <li class="menu-item-has-children page_item_has_children">
-
                                             @Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
                                         </li>
                                         <li class="menu-item-has-children page_item_has_children">

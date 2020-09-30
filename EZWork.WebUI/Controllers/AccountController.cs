@@ -74,7 +74,7 @@ namespace EZWork.WebUI.Controllers
         [AllowAnonymous]
          [ChildActionOnly]
         public  ActionResult PartialHeader() {
-            var name = User.Identity.Name;
+                var name = User.Identity.Name;
             var cook = Request.Cookies[".AspNet.ApplicationCookie"];
            
             //if (Request.Cookies[".AspNet.ApplicationCookie"] != null)

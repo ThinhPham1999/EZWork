@@ -60,6 +60,7 @@ namespace EZWork.WebUI.Controllers
             page = page ?? 1;
             pageSize = pageSize ?? 3;
             ListSellerViewModel model = new ListSellerViewModel();
+          //  var user = Session["User"];
             if (oneSkill != null)
             {
                 Searchskills = new int[] { oneSkill.Value };

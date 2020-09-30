@@ -239,7 +239,7 @@
         $('#ratingValue').val(starValue);
     })
     $('.btnComment').click(function () {
-        debugger;
+       // debugger;
         var starValue = $('#ratingValue').val();
         if (starValue !== '') {
             $.ajax({
@@ -247,14 +247,14 @@
                 type: 'post',
                 data: $('#commentForm').serialize(),
             }).done(function (response) {
-                debugger;
+              //  debugger;
                 if (response.Success) {
                     addnewComment(response.newReview);
                 } else {
                     alert(response.Message);
                 }
             }).fail(function (response) {
-                debugger;
+                //debugger;
                // alert(response.Message);
             })
         } else {
@@ -262,7 +262,7 @@
         }
     })
     function addnewComment(newReview) {
-        debugger;
+       // debugger;
         var defaultStar = 5 - newReview.Rate;
         var starHtml = '';
         for (var i = 0; i < defaultStar; i++)
@@ -293,7 +293,7 @@
                                             </div>
                                         </div>
                                     </div>`;
-        debugger;
+       // debugger;
  $('.divComment').append(html);
     }
 </script>
